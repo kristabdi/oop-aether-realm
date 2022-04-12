@@ -4,11 +4,23 @@ public class Deck {
     //stack of cards
     private Stack<Card> cardInDeck;
 
-    Card showThreeCards(gameWIndow) {
+    public Deck() {
+        cardInDeck = new Stack<Card>();
+    }
+
+    // Misal cardnya diinisiasi dari gamestate, tinggal push terus ke Deck
+    public void putCardToDeck(Card card) {
+        if (cardInDeck.size() < MAX_STACK_SIZE) {
+            cardInDeck.push(card);
+        }
+    }
+
+    public Card showThreeCards(gameWIndow) {
         // nampilin 3 kartu ke layar,
         //return satu buah kartu yang dipilih, kembaliin 2 sisanya ke deck
     }
-    void putBack(){
+    
+    public void putBack(Card card){
         //bisa dimanfaatin sama showthreecards
     }
 
