@@ -1,5 +1,7 @@
 import javax.swing.*;  
 
+
+//UDAH MAIN GINI DOANG. GK NAMBAH
 public class FirstSwingExample {  
     public static void main(String[] args) {  
         //CREATE GAMESTATE AND GAMEWINDOW
@@ -8,7 +10,5 @@ public class FirstSwingExample {
         //INITIATE GAMEWINDOW AND SHOW
         gameWindow.initiate(gameState);
         gameWindow.show();
-
-        //baru begin whatever you want to do
     }
 }  

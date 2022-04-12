@@ -1,7 +1,8 @@
 import javax.swing.*;  
 
 public class HandleEvent{
-    //semua yang ada disini STATIC. isinya fungsi2 yang dipanggil kalo ada event. urutannya UPDATE GAMESTATE, UPDATE GAMEWINDOW, RERENDER
+    // semua yang ada disini STATIC. isinya fungsi2 yang dipanggil kalo ada event. urutannya UPDATE GAMESTATE, UPDATE GAMEWINDOW, RERENDER
+    // penggunaan method2 dari class apapun atribut adri gamestate itu kepakenya di fungsi2 disini
     public static void addButtonButtonOnClick(GameWindow gameWindow, GameState gameState, JLabel label){
         // kalo di panggil, maka akan muncul button baru di gameWindow dan gameState di update, trus update label
         //UPDATE GAMESTATE
