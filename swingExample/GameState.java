@@ -1,6 +1,7 @@
 import javax.swing.*;  
 public class GameState{
     private int temp = 1;
+    
     //getter setter
     public int getTemp(){
         return temp;

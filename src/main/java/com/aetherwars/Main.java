@@ -1,6 +1,6 @@
 public class Main {
     //create main
-    public static cycle = 0;
+    public static int cycle = 0;
     public static void main(String[] args) {
         //create windows
         //create gamestate

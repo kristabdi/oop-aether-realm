@@ -1,4 +1,3 @@
-// public static int MAX_LEVEL = 10
 
 public class Card {
     private String nama;
@@ -50,12 +49,12 @@ public class SpellCard extends Card{
     private int durasi;
     private int Exp;
 
-    abstract public void activate(CharacterCard targetCard);
+    public void activate(CharacterCard targetCard);
 }
 
 public class SpellCardPTN extends SpellCard{
     public int healthAdded; // dan teman2nya
-    public void activate(CharacterCard targetCard); //buff
+    public void activate(CharacterCard targetCard); //buff 
 }
 
 
