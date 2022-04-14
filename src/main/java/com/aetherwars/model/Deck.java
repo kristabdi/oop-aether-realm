@@ -15,7 +15,7 @@ public class Deck {
         }
     }
 
-    public Card showThreeCards(gameWIndow) {
+    public Card showThreeCards(gameWindow) {
         // nampilin 3 kartu ke layar,
         //return satu buah kartu yang dipilih, kembaliin 2 sisanya ke deck
     }
@@ -24,4 +24,5 @@ public class Deck {
         //bisa dimanfaatin sama showthreecards
     }
 
+    // Kristo : butuh getSize deck biar ngecek player masih bisa main apa engga
 }

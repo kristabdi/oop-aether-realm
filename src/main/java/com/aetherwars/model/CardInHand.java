@@ -34,4 +34,6 @@ public class CardInHand {
         // gameState.board.putCard(atau apalah)(cardFromHand, idxBoard);
     }
 
+    // cardInHand.removeByCard(card);
+    // Kristo : player butuh fungsi buat ngehapus suatu card dari cardInHand dengan ngecek kalo ada maka dihapus
 }
