@@ -1,36 +1,22 @@
+
 public class Main {
     //create main
-    public static int cycle = 0;
+    
     public static void main(String[] args) {
-        //create windows
-        //create gamestate
+        //CREATE GAMESTATE HANDLEEVENT GAMEWINDOW
+        // get all cards
+        List<Card> allCards = new ArrayList<Card>();
+        // ini list ini dengan card yg legal
         
-        //setup windows based on current gamestate
-      
-        while(gameState.checkIsEnd()){
-            // draw
-            draw(gameState, gameWindow);
-            // plan
-            plan(gameState, gameWindow);
-            // attack
-            attack(gameState, gameWindow);
-            // end
-            cycle += 1;
-        }
-    }
-    public static void draw(GameState gameState, GameWindow gameWindow){
-        if(turn % 2 == 0){
-            gameState.player1.draw(gameWindow);
-        }
-        else{
-            gameWindow.player2.draw(gameWindow);
-        }
+        // create gamestate
+        GameState gameState = new GameState(allCards);
+
+        // create gamewindow
+        GameWindow gameWindow = new GameWindow();
+
+        gameWindow.initiate(gameState);
+        gameWindow.show();
 
     }
-    public static void plan(GameState gameState, GameWindow gameWindow){
 
-    }
-    public static void attack(GameState gameState, GameWindow gameWindow){
-
-    }
 }
