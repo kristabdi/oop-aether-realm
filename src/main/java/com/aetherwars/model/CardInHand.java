@@ -10,7 +10,7 @@ public class CardInHand {
         selectedCardInHandIndex = -1;
     }
 
-    public void putCardToHand(GameState gameState, Card cardFromDeck){
+    public void putCardToHand(Card cardFromDeck){
         // Memasukkan kartu dari deck yang dipilih ke tangan
         // Kalau size udah Max, nanti fase draw di pass aja
         if(cardInHand.size() < MAX_CARD_IN_HAND){
@@ -19,20 +19,24 @@ public class CardInHand {
         }
     }
 
-    public Card removeCardFromHand(GameState gameState, int idx){
+    public Card removeCardFromHand(int idx){
         // Memindahkan kartu dari tangan, mengembalikan kartu yang dipilih
         // Idx engga mungkin salah karena pake GUI
         Card cardToBeRemoved = cardInHand.get(idx);
-        cardInHand.remove(idx); // Method remove arraylist udah mindahin elemen ke kiri
+        if (cardToBeRemoved != null){
+            cardInHand.remove(idx);
+            // cardToBeRemoved.cardOnHover(gameState);
+        }
         return cardToBeRemoved;
     }
 
-    public void putCardToBoard(GameState gameState, int idxBoard, Card cardFromHand){
-        // Memindahkan kartu dari tangan ke board
-        // Idx engga mungkin salah karena pake GUI
-        // I.S. IdxBoard sudah ada, jadi udah klik slot di board, baru fungsi ini dipanggil, kartu dari hand disimpan dulu
-        // gameState.board.putCard(atau apalah)(cardFromHand, idxBoard);
-    }
+    // Ngga usah pake ini, nanti di gameState yang manggil method ini trus naruh ke board
+    // public void putCardToBoard(GameState gameState, int idxBoard, Card cardFromHand){
+    //     // Memindahkan kartu dari tangan ke board
+    //     // Idx engga mungkin salah karena pake GUI
+    //     // I.S. IdxBoard sudah ada, jadi udah klik slot di board, baru fungsi ini dipanggil, kartu dari hand disimpan dulu
+    //     // gameState.board.putCard(atau apalah)(cardFromHand, idxBoard);
+    // }
 
     // cardInHand.removeByCard(card);
     // Kristo : player butuh fungsi buat ngehapus suatu card dari cardInHand dengan ngecek kalo ada maka dihapus

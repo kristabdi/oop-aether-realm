@@ -10,18 +10,26 @@ public class Deck {
 
     // Misal cardnya diinisiasi dari gamestate, tinggal push terus ke Deck
     public void putCardToDeck(Card card) {
+        // Memasukkan card ke Deck
         if (cardInDeck.size() < MAX_STACK_SIZE) {
             cardInDeck.push(card);
         }
     }
 
-    public Card showThreeCards(gameWindow) {
-        // nampilin 3 kartu ke layar,
-        //return satu buah kartu yang dipilih, kembaliin 2 sisanya ke deck
+    public ArrayList<Card> showThreeCards() {
+        // Return sebuah ArrayList yang berisi 3 kartu teratas atau sisa kartu dari Deck yang <= 3
+        ArrayList<Card> threeCards = new ArrayList<Card>();
+        int i = 0;
+        while (i < 3 && cardInDeck.size() > 0) {
+            Card card = cardInDeck.pop();
+            threeCards.add(card);
+            i++;
+        }
+        return threeCards;
     }
-    
-    public void putBack(Card card){
-        //bisa dimanfaatin sama showthreecards
+
+    public int getDeckSize() {
+        return cardInDeck.size();
     }
 
     // Kristo : butuh getSize deck biar ngecek player masih bisa main apa engga
