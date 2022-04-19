@@ -4,7 +4,8 @@ public class GameState {
 
     // attribut
     private Integer turn;
-    private String phase;
+    // using enum for phase
+    private Phase phase;
 
     private Player player1;
     private Player player2;
@@ -15,15 +16,39 @@ public class GameState {
 
     // UMUM
     public GameState() {
+        this.turn = 1;
+        this.phase = Phase.DRAW;
+        this.player1 = new Player();
+        this.player2 = new Player();
     }
     public int getTurn() {
         return this.turn;
     }
-    public String getPhase(){
+    public Phase getPhase(){
         return this.phase;
     }
     public void nextPhase(){
         // ganti phase, add ngelakuin modifikasi data di game state yg dibutuhkan (misal cleaning seletedCardInHand sama OnBoard. baru kepikiran itu)
+        switch (this.phase){
+            case DRAW:
+                this.phase = Phase.PLAN;
+                break;
+            case PLAN:
+                this.phase = Phase.ATTACK;
+                break;
+            case ATTACK:
+                this.phase = Phase.END;
+                break;
+            case END:
+                this.phase = Phase.DRAW;
+                if(this.turn === 1){
+                    this.turn = 2;
+                }
+                else{
+                    this.turn = 1;
+                }
+                break;
+        }
     }
     public List<Card> getCardInHand(Integer player){
         // return card in hand
@@ -31,7 +56,10 @@ public class GameState {
     public Card getCardOnBoard(Integer player, Integer idx){
         // return card on board
     }
-
+    public Boolean isGameOver(){
+        // mengecek apakah deck salah satu pemain sudah habis. kalo sudah return true
+        return false;
+    }
 
     // HELPER SAAT PHASE DRAW
     public List<Card> getThreeCardFromDeck(Integer player){
@@ -60,4 +88,11 @@ public class GameState {
     }
     // HELPER SAAT PHASE END
 
+}
+
+enum Phase {
+    DRAW,
+    PLAN,
+    ATTACK,
+    END
 }
