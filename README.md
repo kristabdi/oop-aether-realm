@@ -29,3 +29,8 @@ Other sources for "random" images are:
 - https://cdn.wccftech.com/wp-content/uploads/2021/06/nvidia-geforce-rtx-3080-ti-product-gallery-photo-003-scaled.jpg
 - https://twitter.com/GGumiliar
 - https://dota2.fandom.com/wiki/Spectre
+
+
+[diagram kelas](https://drive.google.com/file/d/1vat_Ur7TOl5faOtZrBOmsC4Aa8Aq0uFS/view?usp=sharing)
+
+[laporan](https://docs.google.com/document/d/1i3tagVf9fNLOSwBPqsu5vt8tsr--wyF79AuTamf-B4E/edit?usp=sharing)
