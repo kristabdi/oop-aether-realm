@@ -7,10 +7,35 @@ public class Board {
         this.cardBoard = new Card[5];
         this.fillingIndicator = new int[]{0,0,0,0,0};
         this.filled =0;
-
     }
 
-    public addCard(Card c){
+    public Board(Card[] cardBoard, int[] int fillingIndicator, int filled){
+        this.filled = filled;
+        this.cardBoard = new Card[5];
+        this.fillingIndicator = new int[5];
+        int i =0;
+        while(i<5){
+            if(fillingIndicator[i]==1){
+                this.cardBoard[i]=cardBoard[this.filled-filled];
+            }
+            this.fillingIndicator[i]=fillingIndicator[i];
+            i++;
+            filled--;
+        }
+    }
+
+    public Card getCardBoardByIdx(int idx){
+        if(this.fillingIndicator[idx]!=0){
+            return this.cardBoard[idx];
+        }else{
+            throw CardBoardNoneException();
+        }
+    }
+    public int getFilled(){
+        return this.filled;
+    }
+
+    public void addCard(Card c){
         //cek dah penuh belum
         //kalo belum
         //cari index pertama yang kosong
@@ -32,7 +57,14 @@ public class Board {
         }
     }
 
-    public popCard(int index){
+    //asumsi input selalu benar
+    //exception di atas
+    public void addCardById(int id,Card c){
+        this.fillingIndicator[id]=1;
+        this.filled++;
+        this.cardBoard[id]=c;
+    }
+    public int popCard(int index){
         //ngambil kartu dari index ke-index
         //ubah indikator index ke-index -> 0
         //kurangi filled -1

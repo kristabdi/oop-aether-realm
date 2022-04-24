@@ -10,6 +10,7 @@ public class Player {
     private int selectedCardInHandIndex;
     private CardInHand cardInHand;
     private ArrayList<CharacterCard> summonedCard;
+    private Board cardOnBoard;
 
     Player() {
         this.name = "Player 1";
@@ -20,9 +21,10 @@ public class Player {
         this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
         this.summonedCard = new ArrayList<>();
+        this.cardOnBoard = new Board();
     }
 
-    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand, ArrayList<CharacterCard> summonedCard) {
+    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand, ArrayList<CharacterCard> summonedCard, Board cardOnBoard) {
         this.name = name;
         this.mana = mana;
         this.maxMana = 10;
@@ -31,6 +33,7 @@ public class Player {
         this.selectedCardInHandIndex = selectedCardInHandIndex;
         this.cardInHand = cardInHand;
         this.summonedCard = summonedCard;
+        this.cardOnBoard = cardOnBoard;
     }
 
     // Getter Setter
@@ -129,5 +132,17 @@ public class Player {
     // }
     public void cardInHandOnClick(int idx){
 
+    }
+
+    public Card getCardOnBoard(int idx){
+        return this.cardOnBoard.getCardBoardByIdx(idx);
+    }
+
+    public int getBoardFilled(){
+        return cardOnBoard.getFilled();
+    }
+
+    public void addCardToBoard(Integer idx, Card card){
+        this.cardOnBoard.addCardById(idx,card);
     }
 }

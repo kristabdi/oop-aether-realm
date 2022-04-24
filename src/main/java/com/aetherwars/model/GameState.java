@@ -55,10 +55,17 @@ public class GameState {
     }
     public Card getCardOnBoard(Integer player, Integer idx){
         // return card on board
+        if(player==1){
+            return player1.getCardOnBoard(idx);
+        }else{
+            return player2.getCardOnBoard(idx);
+        }
     }
     public Boolean isGameOver(){
         // mengecek apakah deck salah satu pemain sudah habis. kalo sudah return true
-        return false;
+        if(player1.getBoardFilled()==0 || player2.getBoardFilled()==0){
+            return true;
+        }else return false;
     }
 
     // HELPER SAAT PHASE DRAW
@@ -75,9 +82,15 @@ public class GameState {
     // HELPER SAAT PHASE PLAN
     public void addCardToBoard(Integer player, Integer idxBoard, Card card){
         // add card ke board player 1 atau player 2
+        if(player==1){
+            player1.addCardToBoard(idxBoard,card);
+        }else{
+            player2m.addCardToBoard(idxBoard,card);
+        }
     }
     public void cardOnBoardGotSpelled(Integer player, Integer idxBoard, Integer spellCardIdx){
         // mengenai spell ke card on board
+        //masi bingung :(
     }
     public void removeCardFromHand(Integer player, Integer idxCardInHand){
         // remove card dari hand player 1 atau player 2
