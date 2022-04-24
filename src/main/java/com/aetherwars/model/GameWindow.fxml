@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="173.0" layoutY="140.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="398.4" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="45.6" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" style="-fx-border-style: solid;" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="2.0" layoutY="12.0" prefHeight="34.0" prefWidth="218.0" text="DRAW" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: orange; -fx-border-style: solid;" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" layoutX="96.0" layoutY="16.0" prefHeight="48.0" prefWidth="220.0" text="PLAN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" layoutX="96.0" layoutY="26.0" prefHeight="48.0" prefWidth="220.0" style="-fx-border-style: solid;" text="ATTACK" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" layoutX="96.0" layoutY="16.0" prefHeight="48.0" prefWidth="220.0" style="-fx-border-style: solid;" text="END" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button layoutX="87.0" layoutY="11.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="220.0" text="&gt;&gt;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="258.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="258.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox layoutX="144.0" layoutY="70.0" prefHeight="256.8" prefWidth="450.4" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox layoutX="4.0" layoutY="-22.0" prefHeight="178.4" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="170.0" prefWidth="132.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../../../resources/com/aetherwars/card/image/character/Creeper.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="170.0" prefWidth="132.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Button contentDisplay="TOP" layoutX="23.0" layoutY="38.0" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../../resources/com/aetherwars/card/image/character/Ender%20Dragon.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="170.0" prefWidth="132.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../../resources/com/aetherwars/card/image/character/Warden.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="170.0" prefWidth="132.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../../resources/com/aetherwars/card/image/character/Ghast.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="170.0" prefWidth="132.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../../resources/com/aetherwars/card/image/character/Wither%20Skeleton.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="258.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button layoutX="260.0" layoutY="188.0" mnemonicParsing="false" prefHeight="236.0" prefWidth="189.0" style="-fx-background-color: gray; -fx-border-style: solid;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                 <graphic>
+                                    <ImageView fitHeight="227.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/com/aetherwars/card/image/character/Creeper.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="258.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox layoutX="105.0" layoutY="116.0" prefHeight="288.0" prefWidth="488.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="368.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox layoutX="104.0" layoutY="79.0" prefHeight="277.6" prefWidth="368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <TextArea prefHeight="277.6" prefWidth="184.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <TextArea prefHeight="277.6" prefWidth="184.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="120.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox layoutX="-11.0" layoutY="-4.0" prefHeight="277.6" prefWidth="120.0" AnchorPane.leftAnchor="0.0">
+                                             <children>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <TextArea layoutX="-62.0" layoutY="-46.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TextArea AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
