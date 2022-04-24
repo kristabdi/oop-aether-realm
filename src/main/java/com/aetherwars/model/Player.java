@@ -9,24 +9,28 @@ public class Player {
     private Deck deck;
     private int selectedCardInHandIndex;
     private CardInHand cardInHand;
-    private ArrayList<SummonedCard> cardInBoard;
+    private ArrayList<CharacterCard> summonedCard;
 
     Player() {
-        this.name = "Steve";
+        this.name = "Player 1";
         this.mana = 1;
         this.maxMana = 10;
         this.health = 80;
         this.deck = new Deck();
         this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
+        this.summonedCard = new ArrayList<>();
     }
 
-    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand) {
+    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand, ArrayList<CharacterCard> summonedCard) {
         this.name = name;
         this.mana = mana;
+        this.maxMana = 10;
+        this.health = 80;
         this.deck = deck;
         this.selectedCardInHandIndex = selectedCardInHandIndex;
         this.cardInHand = cardInHand;
+        this.summonedCard = summonedCard;
     }
 
     // Getter Setter
@@ -44,13 +48,13 @@ public class Player {
     }
 
     public void setMana(int mana) {
-        // At the beginning of turn, mana = turn
         if (mana <= maxMana) {
             this.mana = mana;
         }
     }
 
     public void resetMana(int turn) {
+        // At the beginning of turn, mana = turn
         if (turn <= maxMana) {
             this.mana = turn;
         } else {
@@ -64,11 +68,21 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        // Used if attacked
         this.health = health;
     }
 
     public Boolean isDead() {
         return (health <= 0 || deck.getSize() == 0);
+    }
+
+    public int getPlayerDeckSize() {
+        return (this.deck.getSize());
+    }
+
+    public Boolean isVulnerable() {
+        // Method to check if player can be attacked directly
+        return (this.summonedCard.size() <= 0);
     }
 
     public void draw(GameWindow gameWindow){
@@ -79,6 +93,10 @@ public class Player {
 
     public void removeCardInHand(Card card) {
         cardInHand.removeByCard(card);
+    }
+
+    public void removeSummonedCard(CharacterCard card) {
+        summonedCard.remove(card);
     }
 
     public void boardOnClick(){

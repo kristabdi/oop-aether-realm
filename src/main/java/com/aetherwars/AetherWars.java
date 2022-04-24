@@ -13,20 +13,58 @@ import javafx.stage.Stage;
 
 import com.aetherwars.model.Type;
 import com.aetherwars.model.Character;
+import com.aetherwars.model.Card;
 import com.aetherwars.util.CSVReader;
 
 public class AetherWars extends Application {
   private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
+  private static final String SPELL_MORPH_CSV_FILE_PATH = "card/data/spell_morph.csv";
+  private static final String SPELL_PTN_CSV_FILE_PATH = "card/data/spell_ptn.csv";
+  private static final String SPELL_SWAP_CSV_FILE_PATH = "card/data/spell_swap.csv";
+
 
   public void loadCards() throws IOException, URISyntaxException {
-    File characterCSVFile = new File(getClass().getResource(CHARACTER_CSV_FILE_PATH).toURI());
-    CSVReader characterReader = new CSVReader(characterCSVFile, "\t");
-    characterReader.setSkipHeader(true);
-    List<String[]> characterRows = characterReader.read();
-    for (String[] row : characterRows) {
-      Character c = new Character(row[1], row[3], Type.valueOf(row[2]));
-      System.out.println(c);
-    }
+      File characterCSVFile = new File(getClass().getResource(CHARACTER_CSV_FILE_PATH).toURI());
+      CSVReader Reader = new CSVReader(characterCSVFile, "\t");
+      Reader.setSkipHeader(true);
+      List<String[]> Rows = Reader.read();
+      for (String[] row : Rows) {
+        CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
+        System.out.println(c);
+      }
+  }
+
+  public void loadSpellMorph() throws IOException, URISyntaxException {
+      File CSVFile = new File(getClass().getResource(SPELL_MORPH_CSV_FILE_PATH).toURI());
+      CSVReader Reader = new CSVReader(CSVFile, "\t");
+      Reader.setSkipHeader(true);
+      List<String[]> Rows = Reader.read();
+      for (String[] row : Rows) {
+        // CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
+        // System.out.println(c);
+      }
+  }
+
+  public void loadSpellPtn() throws IOException, URISyntaxException {
+      File CSVFile = new File(getClass().getResource(SPELL_PTN_CSV_FILE_PATH).toURI());
+      CSVReader Reader = new CSVReader(CSVFile, "\t");
+      Reader.setSkipHeader(true);
+      List<String[]> Rows = Reader.read();
+      for (String[] row : Rows) {
+        // CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
+        // System.out.println(c);
+      }
+  }
+
+  public void loadSpellSwap() throws IOException, URISyntaxException {
+      File CSVFile = new File(getClass().getResource(SPELL_SWAP_CSV_FILE_PATH).toURI());
+      CSVReader Reader = new CSVReader(CSVFile, "\t");
+      Reader.setSkipHeader(true);
+      List<String[]> Rows = Reader.read();
+      for (String[] row : Rows) {
+        // CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
+        // System.out.println(c);
+      }
   }
 
   @Override
