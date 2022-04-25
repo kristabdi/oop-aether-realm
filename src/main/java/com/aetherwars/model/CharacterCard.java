@@ -169,6 +169,7 @@ public class CharacterCard extends Card {
         }
     }
 
+    // yang dicomment untuk isolated testing swapspell
     // public void attack(CharacterCard victim) {
     //     // trus kurangin health dari victim sebanyak finalAttack
     //     if (victim.getHealth() - getFinalAttack() <= 0) {
@@ -185,9 +186,44 @@ public class CharacterCard extends Card {
     // }
 
     // public int getFinalAttack() {
-    //     // integer finalAttack =  attackku berdasarkan attack asli + buff, 
-
+    //     // integer finalAttack =  attackku berdasarkan attack asli + buff,
     // }
+
+    public void attack(CharacterCard victim) {
+        // trus kurangin health dari victim sebanyak finalAttack
+        if (victim.getHealth() - getFinalAttack() <= 0) {
+            // Karakter musuh mati, dapat EXp
+            victim.setHealth(0);
+            addExp(victim.getLevel());
+            int thisHealth = this.getHealth() - victim.getFinalAttack();
+            if (thisHealth <= 0) {
+                this.setHealth(0);
+                victim.addExp(this.getLevel());
+            } else {
+                this.setHealth(thisHealth);
+            }
+        } else {
+            victim.setHealth(victim.getHealth() - getFinalAttack());
+        }
+    }
+
+    public void attackPlayer(Player other) {
+        if (other.isVulnerable()) {
+            int otherHealth = other.getHealth() - getFinalAttack();
+            if (otherHealth > 0) {
+                other.setHealth(otherHealth);
+            } else {
+                other.setHealth(0);
+                // end game call method
+            }
+        }
+    }
+
+
+    public int getFinalAttack() {
+        // integer finalAttack =  attackku berdasarkan attack asli + buff, 
+        return 1;
+    }
     // public int getFinalHealth() {
     //     // integer finalHealth = healthku berdasarkan health asli + buff, 
     // }

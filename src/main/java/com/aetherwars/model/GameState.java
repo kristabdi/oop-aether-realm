@@ -41,7 +41,7 @@ public class GameState {
                 break;
             case END:
                 this.phase = Phase.DRAW;
-                if(this.turn === 1){
+                if(this.turn == 1){
                     this.turn = 2;
                 }
                 else{
@@ -100,7 +100,7 @@ public class GameState {
         
     }
     // HELPER SAAT PHASE END
-
+    // butuh method untuk endgame saat salah satu player mati
 }
 
 enum Phase {

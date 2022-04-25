@@ -138,6 +138,12 @@ public class Player {
     //     // Card buffer = ...
     //     // buffer.cardOnHover(gameWindow);
     // }
+    public void useManaForExp(CharacterCard card, int mana) {
+        if (this.mana > 0) {
+            addExp(mana);
+            this.setMana(this.mana - mana);
+        }
+    }
 
     public void attack(CharacterCard player, CharacterCard other) {
         player.attack(other);
