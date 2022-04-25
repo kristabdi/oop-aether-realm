@@ -167,14 +167,30 @@ public class CharacterCard extends Card {
             // Karakter musuh mati, dapat EXp
             victim.setHealth(0);
             addExp(victim.getLevel());
+            int thisHealth = this.getHealth() - victim.getFinalAttack();
+            if (thisHealth <= 0) {
+                this.setHealth(0);
+                victim.addExp(this.getLevel());
+            } else {
+                this.setHealth(thisHealth);
+            }
         } else {
             victim.setHealth(victim.getHealth() - getFinalAttack());
         }
     }
 
-    public void attackPlayer(Player player) {
-        //  Jika tidak ada karakter di board lawan
+    public void attackPlayer(Player other) {
+        if (other.isVulnerable()) {
+            int otherHealth = other.getHealth() - getFinalAttack();
+            if (otherHealth > 0) {
+                other.setHealth(otherHealth);
+            } else {
+                other.setHealth(0);
+                // end game call method
+            }
+        }
     }
+
 
     public int getFinalAttack() {
         // integer finalAttack =  attackku berdasarkan attack asli + buff, 
