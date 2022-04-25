@@ -10,6 +10,14 @@ public abstract class SpellCard extends Card {
 
     abstract void activate(SummonedCard targetCard);
 
+    public SpellCard(String name, String type, String description, int mana, int durasi, int exp, String imagepath) {
+        super(name, type, description);
+        this.mana = mana;
+        this.durasi = durasi;
+        this.exp = exp;
+        this.imagepath = imagepath;
+    }
+
     public String getSpellMana() {
         return mana;
     }
