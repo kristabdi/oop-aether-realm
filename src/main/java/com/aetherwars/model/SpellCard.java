@@ -5,6 +5,14 @@ public abstract class SpellCard extends Card {
     private int duration;
     private int exp;
     private String imagepath;
+
+    SpellCard(String name, String type, String description, int mana, int duration, int exp, String imagepath) {
+        super(name, type, description);
+        this.mana = mana;
+        this.duration = duration;
+        this.exp = exp;
+        this.imagepath = imagepath;
+    }
     
     abstract void execute(SummonedCard s);
 

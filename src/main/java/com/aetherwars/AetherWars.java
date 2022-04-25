@@ -85,6 +85,9 @@ public class AetherWars extends Application {
 
     try {
       this.loadCards();
+      this.loadSpellMorph();
+      this.loadSpellPtn();
+      this.loadSpellSwap();
       text.setText("Minecraft: Aether Wars!");
     } catch (Exception e) {
       text.setText("Failed to load cards: " + e);
