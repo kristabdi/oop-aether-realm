@@ -110,12 +110,17 @@ public class Player {
         //kalau karakter: cek apakah board yg diklik kosong, kalau kosong panggil addCardToBoard
         //kalau spell: cek apakah board yg diklik itu ada isinya, kalau ada, panggil spellnya.activate(card di board yg diklik)
     }
-    public void addCardToBoard(GameWindow gameWindow, Card newCard){
+    public void addCardToBoard(GameWindow gameWindow, Card card){
         // mirip addcard inhand
         //  aku mau dia nambah card di index ke 'selctedCardInHand' ke board, abis itu delete card di hand di index 'selectedCardInHand', trus selectedCardInHand brubah jadi -1
         //update GUI cardInHand sama cardOnBoard
         //kalau spell:
-        //
+        if (cardInHand.isCardinHand(card)) {
+            if (card.getType().equals("Character")) {
+                cardOnBoard.addCard(card);
+                removeCardInHand(card);
+            }
+        }
     }
     public void addCardInHand(GameWindow gameWindow, Card newCard){
         //ngupdate cardInHand

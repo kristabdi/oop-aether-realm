@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.aetherwars.model.Type;
-import com.aetherwars.model.Character;
+import com.aetherwars.model.CharacterCard;
 import com.aetherwars.model.Card;
 import com.aetherwars.util.CSVReader;
 

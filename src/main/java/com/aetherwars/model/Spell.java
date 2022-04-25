@@ -1,3 +1,3 @@
 public interface Spell {
-    void execute(SummonedCard s);
+    void execute(CharacterCard s);
 }

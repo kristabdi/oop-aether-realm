@@ -30,6 +30,15 @@ public class CardInHand {
         return cardToBeRemoved;
     }
 
+    public Boolean isCardinHand(Card card) {
+        for (Card cardHand : cardInHand) {
+            if (cardHand.getName() == card.getName() && cardHand.getType() == card.getType() && cardHand.getDescription() == card.getDescription()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Ngga usah pake ini, nanti di gameState yang manggil method ini trus naruh ke board
     // public void putCardToBoard(GameState gameState, int idxBoard, Card cardFromHand){
     //     // Memindahkan kartu dari tangan ke board
