@@ -117,6 +117,9 @@ public class Player {
         //kalau spell:
         if (cardInHand.isCardinHand(card)) {
             if (card.getType().equals("Character")) {
+                if (this.mana >= card.getMana()) {
+                    this.mana -= card.getMana();
+                }
                 cardOnBoard.addCard(card);
                 removeCardInHand(card);
             }
@@ -135,6 +138,11 @@ public class Player {
     //     // Card buffer = ...
     //     // buffer.cardOnHover(gameWindow);
     // }
+
+    public void attack(CharacterCard player, CharacterCard other) {
+        player.attack(other);
+    }
+
     public void cardInHandOnClick(int idx){
 
     }

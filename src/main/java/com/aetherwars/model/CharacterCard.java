@@ -4,6 +4,7 @@ public class CharacterCard extends Card {
     private int health;
     private int healthUp;
     private int attackUp;
+    private int mana;
     private int exp;
     private int level;
     private int maxExp;
@@ -35,20 +36,40 @@ public class CharacterCard extends Card {
         return attack;
     }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getHealthUp() {
         return healthUp;
     }
 
+    public void setHealthUp(int healthUp) {
+        this.healthUp = healthUp;
+    }
+
     public int getAttackUp() {
         return attackUp;
     }
 
+    public void setAttackUp(int attackUp) {
+        this.attackUp = attackUp;
+    }
+
     public int getExp() {
         return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 
     public int getLevel() {
@@ -65,6 +86,18 @@ public class CharacterCard extends Card {
 
     public Type getAttribute() {
         return attribute;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+    
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public int getMaxExp() {
+        return maxExp;
     }
 
     public List<SpellCard> getActiveSpells() {

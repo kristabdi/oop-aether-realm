@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Card {
-    private String nama;
+    private String name;
     private String description;
     private String type; //character atau spell
 
