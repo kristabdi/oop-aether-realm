@@ -20,8 +20,8 @@ public class CharacterCard extends Card {
     private String imgPath;
     private Type attribute;
     private List<SpellCard> activeSpells;
-    private int attackModifier;
-    private int healthModifier;
+    private int attackBuff;
+    private int healthBuff;
 
     CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp) {
         super(name, "Character", description);
@@ -36,8 +36,8 @@ public class CharacterCard extends Card {
         this.level = 1;
         this.maxExp = 1;
         this.activeSpells = new ArrayList<>();
-        this.attackModifier = 0;
-        this.healthModifier = 0;
+        this.attackBuff = 0;
+        this.healthBuff = 0;
     }
 
     // Getter
@@ -110,16 +110,18 @@ public class CharacterCard extends Card {
         return maxExp;
     }
 
-    public void removeSpellsEndDuration() {
+    public void updateSpellsEndDuration() {
         for (int i = 0; i < activeSpells.size(); i++) {
-            if (activeSpells.get(i).getSpellDuration() == 1) {
+            int duration = activeSpells.get(i).getSpellDuration();
+            if (duration == 1) {
                 activeSpells.remove(i);
+            } else if (activeSpells.get(i).getSpellDuration() > 1) {
+                activeSpells.get(i).setSpellDuration(duration - 1);
             }
         }
     }
 
     public List<SpellCard> getActiveSpells() {
-        removeSpellsEndDuration();
         return this.activeSpells;
     }
 
@@ -210,32 +212,55 @@ public class CharacterCard extends Card {
         if (this.getActiveSpells().size() > 0) {
             // Iterasi satu-satu cek apakah dia Potion Spell
             for (int i = 0; i < this.getActiveSpells().size(); i++) {
-                if ((this.getActiveSpells().get(i) instanceof PotionSpell) && (((PotionSpell)this.getActiveSpells().get(i)).getHealthModifier() > 0)) {
-                    
+                int healthPotion = ((PotionSpell)this.getActiveSpells().get(i)).getHealthModifier();
+                if ((this.getActiveSpells().get(i) instanceof PotionSpell) && (healthPotion > 0)) {
+                    // cek dulu kalo attackReceived melebihi atau sama dengan remainingHealth
+                    if (attackReceived >= healthPotion) {
+                        // maka attackReceived -= remainingHealth
+                        attackReceived -= healthPotion;
+                        // remainingHealth = 0
+                        ((PotionSpell)this.getActiveSpells().get(i)).decreaseRemainingHealth(healthPotion);
+                        // remove spell ini
+                        this.getActiveSpells().remove(i);
+                    } else {
+                        // kalo kurang, maka remainingHealth = remainingHealth - attackReceived
+                        ((PotionSpell)this.getActiveSpells().get(i)).decreaseRemainingHealth(attackReceived);
+                        // attackReceived = 0
+                        attackReceived = 0;
+                    }
                 }
             }
         } 
+        if (attackReceived > 0) {
+            // Cek apakah health character Card jadi 0
+            if (this.getHealth() - attackReceived <= 0) {
+                // Jika ya, maka health = 0
+                this.setHealth(0);
+            } else {
+                // Jika tidak, maka health -= attackReceived
+                this.setHealth(this.getHealth() - attackReceived);
+            }
+        }
     }
 
     public void attack(CharacterCard victim) {
         // trus kurangin health dari victim sebanyak finalAttack
         if (victim.getFinalHealth() - getFinalAttack() <= 0) {
             // Karakter musuh mati, dapat EXp
-            victim.setHealth(0);
-            addExp(victim.getLevel());
+            victim.decreaseHealth(this.getFinalAttack());
+            this.addExp(victim.getLevel());
 
             // Victim serang balik
-            int thisHealth = this.getFinalHealth() - victim.getFinalAttack();
+            this.decreaseHealth(victim.getFinalAttack());
+            int thisHealth = this.getFinalHealth();
             if (thisHealth <= 0) {
-                this.setHealth(0);
                 victim.addExp(this.getLevel());
-            } else {
-                this.setHealth(thisHealth);
             }
         } else {
-            victim.setHealth(victim.getFinalHealth() - getFinalAttack());
+            victim.decreaseHealth(this.getFinalAttack());
         }
     }
+
     public Integer attackPlayer(Integer otherHealth) {
         /* 
             pada suatu hari hiduplah sebuah player. player memiliki health. Tiba-tiba, health tersebut di get oleh GameState
@@ -252,7 +277,7 @@ public class CharacterCard extends Card {
     }
     
 
-    public void setAttackModifier() {
+    public void setAttackBuff() {
         //  iterate active spells that spell is potion, then add attack modifier sum
         int temp = 0;
         for (int i = 0; i < activeSpells.size(); i++) {
@@ -260,25 +285,25 @@ public class CharacterCard extends Card {
                 temp += ((PotionSpell) activeSpells.get(i)).getAttackModifier();
             }
         }
-        this.attackModifier = temp;
+        this.attackBuff = temp;
     }
 
-    public void setHealthModifier() {
+    public void setHealthBuff() {
         int temp = 0;
         for (int i = 0; i < activeSpells.size(); i++) {
             if (activeSpells.get(i) instanceof PotionSpell) {
                 temp += ((PotionSpell) activeSpells.get(i)).getHealthModifier();
             }
         }
-        this.healthModifier = temp;
+        this.healthBuff = temp;
     }
 
     public int getFinalAttack() {
-        return this.attack + this.attackModifier;
+        return this.attack + this.attackBuff;
 
     }
     public int getFinalHealth() {
-        return this.health + this.healthModifier;
+        return this.health + this.healthBuff;
     }
 
     public boolean isDead() {

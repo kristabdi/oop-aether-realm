@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
 
@@ -16,7 +17,8 @@ public class AetherWars extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AetherWars.class.getResource("GameWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
-        stage.setTitle("Hello!");
+        stage.getIcons().add(new Image("https://w7.pngwing.com/pngs/426/500/png-transparent-minecraft-survivalcraft-mob-creeper-skeleton-creeper-s-video-game-grass-survival.png"));
+        stage.setTitle("Aether Realm");
         stage.setScene(scene);
         stage.show();
     }

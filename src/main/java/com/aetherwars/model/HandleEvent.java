@@ -7,7 +7,7 @@ public class HandleEvent{
     }
 
     public static String onButtonClick(){
-        gameState.changeWord();
-        return(gameState.getWord());
+        gameState.nextPhase();
+        return(gameState.getPhase().name());
     }
 }

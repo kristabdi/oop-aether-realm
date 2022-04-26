@@ -76,6 +76,7 @@ public class GameState {
                 this.phase = Phase.END;
                 break;
             case END:
+            //tambahin update board
                 this.phase = Phase.DRAW;
                 if(this.turn == 1){
                     this.turn = 2;
@@ -105,8 +106,8 @@ public class GameState {
         }
     }
     public Boolean isGameOver(){
-        // mengecek apakah deck salah satu pemain sudah habis. kalo sudah return true
-        if(player1.getBoardFilled()==0 || player2.getBoardFilled()==0){
+        // mengecek apakah deck salah satu pemain sudah habis. kalo sudah return true. 
+        if(player1.getPlayerDeckSize() == 0 || player2.getPlayerDeckSize() == 0 || player1.getHealth() <= 0 || player2.getHealth() <= 0){
             return true;
         }else return false;
     }
@@ -120,9 +121,16 @@ public class GameState {
     }
     public Boolean spellInBuffer(){
         // mengembalikan true, jika bufferSelectedCardInHand bertipe spell
+        return (this.selectedCardInHand instanceof SpellCard);
     }
     public void selectAttacker(int index){
-    // buat nyimpen informasi siapa yg jadi attacker (board indeks ke berapa)
+    // nyimpen SelectedCardOnBoard sebagai kartu di board lawan yang dipilih
+    if(this.turn == 1){
+        this.selectedCardOnBoard = this.player2.getCardOnBoard(index);
+    }
+    else{
+        this.selectedCardInHand = this.player1.getCardOnBoard(index);
+    }
 
     } 
     // HELPER SAAT PHASE DRAW
@@ -137,14 +145,20 @@ public class GameState {
     public void addCardInHand(Card card){
         // add card ke hand player 1 atau player 2
         if(this.turn == 1){
-            player1.addCardInHand(card);
+            player1.addCardToCardInHand(card);
         }
         else{
-            player2.addCardInHand(card);
+            player2.addCardToCardInHand(card);
         }
     }
-    public void addCardToDeck(Integer player, Card card){
-        // add card ke deck player 1 atau player 2
+    public void addCardToDeck(Card card){
+        // add card ke deck player 1 atau player 2 berdasarkan current turn
+        if(this.turn == 1){
+            player1.addCardToDeck(card);
+        }
+        else{
+            player2.addCardToDeck(card);
+        }
     }
 
     // HELPER SAAT PHASE PLAN
@@ -162,6 +176,12 @@ public class GameState {
         //masi bingung :(
         // minta ke player lawan, 
             // butuh cardOnBoardGotSpelled(lokasi card di board, lokasi spell card in hand)
+        if(this.turn == 1){
+            player1.useSpellOnCard((CharacterCard)this.selectedCardOnBoard,(SpellCard) this.selectedCardInHand);
+        }
+        else{
+            player2.useSpellOnCard((CharacterCard)this.selectedCardOnBoard,(SpellCard) this.selectedCardInHand);
+        }
     }
     public void removeCardFromHand(Integer cardIdx){
         // remove card dari hand player 1 atau player 2
@@ -172,18 +192,22 @@ public class GameState {
         }
     }
     // HELPER SAAT PHASE ATTACK
-    public void attack(Integer playerAttacker, Integer idxBoardAttacker, Integer idxBoardVictim){
+    public void attack(Integer idxBoardAttacker){
         // get card yg attacker sama victim
-        if(playerAttacker==1){
-            Card attacker = player1.getCardOnBoard(idxBoardAttacker);
-            Card victim = player2.getCardOnBoard(idxBoardVictim);
-            // attack
-            player1.attack((CharacterCard)attacker,(CharacterCard)victim);
-        }else{
+        // melakukan peng attackan berdasarkan turn saat ini, selectedCardOnBoard. jadi player pada turn saat ini, akan mengattack selectedCardOnBoard.
+        if(this.turn == 1){
             Card attacker = player2.getCardOnBoard(idxBoardAttacker);
-            Card victim = player1.getCardOnBoard(idxBoardVictim);
             // attack
-            player2.attack((CharacterCard)attacker,(CharacterCard)victim);
+            if(player1.isVulnerable()){
+                // attack player langsung
+                player1.decreaseMyHealthBasedOnCardAttackStats((CharacterCard) attacker);
+            }
+            else{
+                // kalo board yg diklik valid(ada card disitu), dan dia belum nge attack, brarti bisa attack.
+                // kalo gk, do nothing
+            }
+        }else{
+            // attack dilakukan oleh player 2
         }
     }
     // HELPER SAAT PHASE END
