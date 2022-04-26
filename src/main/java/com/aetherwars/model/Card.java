@@ -1,13 +1,13 @@
+
 import java.util.ArrayList;
 import java.util.List;
-
 public class Card {
     private String name;
     private String description;
     private String type; //character atau spell
 
     Card(String name, String type, String description) {
-        this.nama = name;
+        this.name = name;
         this.type = type;
         this.description = description;
     };

@@ -1,4 +1,5 @@
-import javax.smartcardio.Card;
+// import javax.smartcardio.Card;
+
 
 public abstract class SpellCard extends Card {
     private int mana;
@@ -14,11 +15,11 @@ public abstract class SpellCard extends Card {
         this.imagepath = imagepath;
     }
     
-    abstract void execute(SummonedCard s);
+    abstract void execute(CharacterCard s);
 
-    abstract void activate(SummonedCard targetCard);
+    // abstract void activate(CharacterCard targetCard);
 
-    public String getSpellMana() {
+    public int getSpellMana() {
         return mana;
     }
 
@@ -26,7 +27,7 @@ public abstract class SpellCard extends Card {
         this.mana = mana;
     }
 
-    public String getSpellDuration() {
+    public int getSpellDuration() {
         return duration;
     }
 
@@ -34,7 +35,7 @@ public abstract class SpellCard extends Card {
         this.duration = duration;
     }
 
-    public String getEXP() {
+    public int getEXP() {
         return exp;
     }
 

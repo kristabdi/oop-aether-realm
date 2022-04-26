@@ -1,5 +1,12 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+// import com.aetherwars.model.Type;
 
 public class CharacterCard extends Card {
+    public enum Type {
+        OVERWORLD, END, NETHER
+    };
     private int attack;
     private int health;
     private int healthUp;
@@ -109,7 +116,7 @@ public class CharacterCard extends Card {
         return this.getActiveSpells().size() > 0;
     }
 
-    public void addSpell(Spell s) {
+    public void addSpell(SpellCard s) {
         this.activeSpells.add(s);
     }
 
@@ -143,7 +150,7 @@ public class CharacterCard extends Card {
         int health = this.health + (this.getLevel() - 1) * this.healthUp;
     }
 
-    public int getMultiplierAttack(CharacterCard victim) {
+    public double getMultiplierAttack(CharacterCard victim) {
         int vic = victim.getAttribute().ordinal();
         int attacker = this.getAttribute().ordinal();
         if (attacker == vic) return 1;
@@ -165,6 +172,26 @@ public class CharacterCard extends Card {
             return 0.5;
         }
     }
+
+    // yang dicomment untuk isolated testing swapspell
+    // public void attack(CharacterCard victim) {
+    //     // trus kurangin health dari victim sebanyak finalAttack
+    //     if (victim.getHealth() - getFinalAttack() <= 0) {
+    //         // Karakter musuh mati, dapat EXp
+    //         victim.setHealth(0);
+    //         addExp(victim.getLevel());
+    //     } else {
+    //         victim.setHealth(victim.getHealth() - getFinalAttack());
+    //     }
+    // }
+
+    // public void attackPlayer(Player player) {
+    //     //  Jika tidak ada karakter di board lawan
+    // }
+
+    // public int getFinalAttack() {
+    //     // integer finalAttack =  attackku berdasarkan attack asli + buff,
+    // }
 
     public void attack(CharacterCard victim) {
         // trus kurangin health dari victim sebanyak finalAttack
@@ -204,6 +231,9 @@ public class CharacterCard extends Card {
     public int getFinalHealth() {
         return this.health + this.healthModifier;
     }
+    // public int getFinalHealth() {
+    //     // integer finalHealth = healthku berdasarkan health asli + buff, 
+    // }
 
     public void reduceHealth(int damage){
         // reduce buff dulu, baru recude health asli.
@@ -215,5 +245,5 @@ public class CharacterCard extends Card {
 
      // buat priorityQueue of Tupple of Buff
     // buff berisi, duration, hp, attack
-    private PriorityQueue<Tupple<Integer, Integer, Integer>> buffPriorityQueue;
+    // private PriorityQueue<Tupple<Integer, Integer, Integer>> buffPriorityQueue;
 }
