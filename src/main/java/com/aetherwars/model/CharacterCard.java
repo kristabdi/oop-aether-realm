@@ -11,9 +11,8 @@ public class CharacterCard extends Card {
     private String imgPath;
     private Type attribute;
     private List<SpellCard> activeSpells;
-
-    // private boolean isSwapActive;
-    // private int swapDuration;
+    private int attackModifier;
+    private int healthModifier;
 
     CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp) {
         super(name, "Character", description);
@@ -28,6 +27,8 @@ public class CharacterCard extends Card {
         this.level = 1;
         this.maxExp = 1;
         this.activeSpells = new ArrayList<>();
+        this.attackModifier = 0;
+        this.healthModifier = 0;
     }
 
     // Getter
@@ -102,6 +103,10 @@ public class CharacterCard extends Card {
 
     public List<SpellCard> getActiveSpells() {
         return this.activeSpells;
+    }
+
+    public Boolean isHaveSpell() {
+        return this.getActiveSpells().size() > 0;
     }
 
     public void addSpell(Spell s) {
@@ -193,11 +198,11 @@ public class CharacterCard extends Card {
 
 
     public int getFinalAttack() {
-        // integer finalAttack =  attackku berdasarkan attack asli + buff, 
+        return this.attack + this.attackModifier;
 
     }
     public int getFinalHealth() {
-        // integer finalHealth = healthku berdasarkan health asli + buff, 
+        return this.health + this.healthModifier;
     }
 
     public void reduceHealth(int damage){
