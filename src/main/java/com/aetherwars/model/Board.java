@@ -62,7 +62,7 @@ public class Board {
         int i;
         for(i=0;i<5;i++){
             if(this.fillingIndicator[i]==0){
-                this.cardBoard[i].updateSpellsDuration();
+                this.cardBoard[i].updateSpellsEndDuration();
             }
         }
     }
