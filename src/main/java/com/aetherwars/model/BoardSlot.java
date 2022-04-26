@@ -37,7 +37,7 @@ public class BoardSlot {
         return isFilled;
     }
 
-    public void setEmptiness(boolean b){
+    public void setFilling(boolean b){
         isFilled = b;
     }
 }

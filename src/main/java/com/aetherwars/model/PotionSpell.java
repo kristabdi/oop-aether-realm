@@ -15,6 +15,10 @@ public class PotionSpell extends SpellCard implements Spell, Potion {
         this.remainingHealth -= decrease;
     }
 
+    public void setRemainingHealth(int remainingHealth) {
+        this.remainingHealth = remainingHealth;
+    }
+
     public int getAttackModifier() {
         return attackModifier;
     }

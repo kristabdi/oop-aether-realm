@@ -31,7 +31,7 @@ public abstract class SpellCard extends Card {
         return duration;
     }
 
-    public void setSpellduration(int duration) {
+    public void setSpellDuration(int duration) {
         this.duration = duration;
     }
 

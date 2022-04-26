@@ -155,6 +155,18 @@ public class Player {
         this.cardOnBoard.addCardById(idx,(CharacterCard)card);
     }
 
+    public void addCardToCardInHand(Card card) {
+        this.cardInHand.putCardToHand(card);
+    }
+    public void addCardToDeck(Card card){
+        
+    }
+    // public void attackPlayerDirectly(Player enemy, int cardAttack){
+        
+    // }
+    public void decreaseMyHealthBasedOnCardAttackStats(CharacterCard card) {
+        this.health -= card.getFinalAttack();
+    }
     // public void updateBoard() {
     //     // iterate board to set attack modifier, health modifier, etc
     //     cardOnBoard.update();

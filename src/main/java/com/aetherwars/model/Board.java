@@ -42,7 +42,7 @@ public class Board {
     public void addCardById(int id,CharacterCard c){
         this.cardBoard[id].setCard(c);
         this.filled++;
-        this.cardBoard[id].setEmptiness(true);
+        this.cardBoard[id].setFilling(true);
     }
 
     public CharacterCard popCard(int index){
@@ -50,7 +50,7 @@ public class Board {
         //ubah indikator index ke-index -> 0
         //kurangi filled -1
         //return kartu pada index ke-index
-        this.cardBoard[index].setEmptiness(false);
+        this.cardBoard[index].setFilling(false);
         this.filled--;
         return this.cardBoard[index].getCard();
     }
@@ -59,7 +59,14 @@ public class Board {
         int i;
         for(i=0;i<5;i++){
             if(this.cardBoard[i].isFilled()){
-                this.cardBoard[i].getCard().updateSpellsDuration();
+                if(this.cardBoard[i].getCard().getFinalHealth()>0){
+                    this.cardBoard[i].getCard().updateSpellsEndDuration();
+                    this.cardBoard[i].getCard().setAttackBuff();
+                    this.cardBoard[i].getCard().setHealthBuff();
+                    this.cardBoard[i].setAttack(false);
+                }else{
+                    this.cardBoard[i].setFilling(false);
+                }
             }
         }
     }
