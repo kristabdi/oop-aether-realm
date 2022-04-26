@@ -1,25 +1,191 @@
 package com.aetherwars.model;
 
+import java.util.List;
+
+// public class GameState {
+//     //punya catatan global yg gabakal keganti
+//     // list semua kartu yg mungkin
+
+//     // attribut
+//     private String word;
+
+//     // UMUM
+//     public GameState() {
+//         this.word = "abcdef";
+//     }
+//     public String getWord(){
+//         return this.word;
+//     }
+//     public void changeWord(){
+//         if(this.word.equals("abcdef")){
+//             this.word = "ini yg baru";
+//         }
+//         else{
+//             this.word = "abcdef";
+//         }
+//     }
+// }
+
+
 public class GameState {
     //punya catatan global yg gabakal keganti
     // list semua kartu yg mungkin
 
     // attribut
-    private String word;
+    private Integer turn;
+    // using enum for phase
+    private Phase phase;
+
+    private Player player1;
+    private Player player2;
+
+    // buffer. sapatau butuh
+    public Card selectedCardInHand;
+    public Card selectedCardOnBoard;
+
+    public enum Phase {
+        DRAW,
+        PLAN,
+        ATTACK,
+        END
+    }
 
     // UMUM
     public GameState() {
-        this.word = "abcdef";
+        this.turn = 1;
+        this.phase = Phase.DRAW;
+        this.player1 = new Player();
+        this.player2 = new Player();
     }
-    public String getWord(){
-        return this.word;
+    public int getTurn() {
+        return this.turn;
     }
-    public void changeWord(){
-        if(this.word.equals("abcdef")){
-            this.word = "ini yg baru";
+    public Phase getPhase(){
+        return this.phase;
+    }
+    public void nextPhase(){
+        // ganti phase, add ngelakuin modifikasi data di game state yg dibutuhkan (misal cleaning seletedCardInHand sama OnBoard. baru kepikiran itu)
+        switch (this.phase){
+            case DRAW:
+                this.phase = Phase.PLAN;
+                break;
+            case PLAN:
+                this.phase = Phase.ATTACK;
+                break;
+            case ATTACK:
+                this.phase = Phase.END;
+                break;
+            case END:
+                this.phase = Phase.DRAW;
+                if(this.turn == 1){
+                    this.turn = 2;
+                }
+                else{
+                    this.turn = 1;
+                }
+                break;
+        }
+    }
+    public List<Card> getCardInHand(){
+        // return card in hand
+        if(this.turn == 1){
+            return player1.getCardInHandPlayer();
         }
         else{
-            this.word = "abcdef";
+            return player2.getCardInHandPlayer();
+        }
+
+    }
+    public Card getCardOnBoard(Integer idx){
+        // return card on board
+        if(this.turn == 1){
+            return player1.getCardOnBoard(idx);
+        }else{
+            return player2.getCardOnBoard(idx);
         }
     }
+    public Boolean isGameOver(){
+        // mengecek apakah deck salah satu pemain sudah habis. kalo sudah return true
+        if(player1.getBoardFilled()==0 || player2.getBoardFilled()==0){
+            return true;
+        }else return false;
+    }
+    public void setSelectedCardInHand(Integer index){
+        if(this.turn == 1){
+            this.selectedCardInHand = player1.getCardInHandPlayer().get(index);
+        }
+        else{
+            this.selectedCardInHand = player2.getCardInHandPlayer().get(index);
+        }
+    }
+    public Boolean spellInBuffer(){
+        // mengembalikan true, jika bufferSelectedCardInHand bertipe spell
+    }
+    public void selectAttacker(int index){
+    // buat nyimpen informasi siapa yg jadi attacker (board indeks ke berapa)
+
+    } 
+    // HELPER SAAT PHASE DRAW
+    public List<Card> getThreeCardFromDeck(Integer player){
+        // ngasi 3 buah kartu dari deck player 1 ataupun player 2. sementara asumsi kalo udah di get 3 dari deck, deck langsung berkurang 3. tapi masih tergantung implementasi dari Deck
+        if(player==1){
+            return player1.draw();
+        }else{
+            return player2.draw();
+        }
+    }
+    public void addCardInHand(Card card){
+        // add card ke hand player 1 atau player 2
+        if(this.turn == 1){
+            player1.addCardInHand(card);
+        }
+        else{
+            player2.addCardInHand(card);
+        }
+    }
+    public void addCardToDeck(Integer player, Card card){
+        // add card ke deck player 1 atau player 2
+    }
+
+    // HELPER SAAT PHASE PLAN
+    public void addCardToBoard(Integer idxBoard){
+        // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand
+        if(this.turn == 1){
+            player1.addCardToBoard(idxBoard,this.selectedCardInHand);
+        }else{
+            player2.addCardToBoard(idxBoard,this.selectedCardInHand);
+        }
+    }
+    public void cardOnBoardGotSpelled(Integer idxBoard){
+        //berdasarkan turn dan buffer selectedCardInHand
+        // mengenai spell ke card on board
+        //masi bingung :(
+        // minta ke player lawan, 
+            // butuh cardOnBoardGotSpelled(lokasi card di board, lokasi spell card in hand)
+    }
+    public void removeCardFromHand(Integer cardIdx){
+        // remove card dari hand player 1 atau player 2
+        if(this.turn == 1){
+            player1.removeCardInHand(cardIdx);
+        }else{
+            player2.removeCardInHand(cardIdx);
+        }
+    }
+    // HELPER SAAT PHASE ATTACK
+    public void attack(Integer playerAttacker, Integer idxBoardAttacker, Integer idxBoardVictim){
+        // get card yg attacker sama victim
+        if(playerAttacker==1){
+            Card attacker = player1.getCardOnBoard(idxBoardAttacker);
+            Card victim = player2.getCardOnBoard(idxBoardVictim);
+            // attack
+            player1.attack((CharacterCard)attacker,(CharacterCard)victim);
+        }else{
+            Card attacker = player2.getCardOnBoard(idxBoardAttacker);
+            Card victim = player1.getCardOnBoard(idxBoardVictim);
+            // attack
+            player2.attack((CharacterCard)attacker,(CharacterCard)victim);
+        }
+    }
+    // HELPER SAAT PHASE END
+    // butuh method untuk endgame saat salah satu player mati
 }

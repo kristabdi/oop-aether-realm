@@ -1,4 +1,4 @@
-package com.aetherwars.model;
+package com.aetherwars.model; // ini false error
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
