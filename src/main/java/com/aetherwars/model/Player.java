@@ -9,24 +9,31 @@ public class Player {
     private Deck deck;
     private int selectedCardInHandIndex;
     private CardInHand cardInHand;
-    private ArrayList<SummonedCard> cardInBoard;
+    private ArrayList<CharacterCard> summonedCard;
+    private Board cardOnBoard;
 
     Player() {
-        this.name = "Steve";
+        this.name = "Player 1";
         this.mana = 1;
         this.maxMana = 10;
         this.health = 80;
         this.deck = new Deck();
         this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
+        this.summonedCard = new ArrayList<>();
+        this.cardOnBoard = new Board();
     }
 
-    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand) {
+    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand, ArrayList<CharacterCard> summonedCard, Board cardOnBoard) {
         this.name = name;
         this.mana = mana;
+        this.maxMana = 10;
+        this.health = 80;
         this.deck = deck;
         this.selectedCardInHandIndex = selectedCardInHandIndex;
         this.cardInHand = cardInHand;
+        this.summonedCard = summonedCard;
+        this.cardOnBoard = cardOnBoard;
     }
 
     // Getter Setter
@@ -44,13 +51,13 @@ public class Player {
     }
 
     public void setMana(int mana) {
-        // At the beginning of turn, mana = turn
         if (mana <= maxMana) {
             this.mana = mana;
         }
     }
 
     public void resetMana(int turn) {
+        // At the beginning of turn, mana = turn
         if (turn <= maxMana) {
             this.mana = turn;
         } else {
@@ -64,11 +71,21 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        // Used if attacked
         this.health = health;
     }
 
     public Boolean isDead() {
         return (health <= 0 || deck.getSize() == 0);
+    }
+
+    public int getPlayerDeckSize() {
+        return (this.deck.getSize());
+    }
+
+    public Boolean isVulnerable() {
+        // Method to check if player can be attacked directly
+        return (this.summonedCard.size() <= 0);
     }
 
     public void draw(GameWindow gameWindow){
@@ -81,6 +98,10 @@ public class Player {
         cardInHand.removeByCard(card);
     }
 
+    public void removeSummonedCard(CharacterCard card) {
+        summonedCard.remove(card);
+    }
+
     public void boardOnClick(){
         // kalo boardnya di klik,
         // if selectedCardInHandIndex = -1, do nothing
@@ -89,12 +110,20 @@ public class Player {
         //kalau karakter: cek apakah board yg diklik kosong, kalau kosong panggil addCardToBoard
         //kalau spell: cek apakah board yg diklik itu ada isinya, kalau ada, panggil spellnya.activate(card di board yg diklik)
     }
-    public void addCardToBoard(GameWindow gameWindow, Card newCard){
+    public void addCardToBoard(GameWindow gameWindow, Card card){
         // mirip addcard inhand
         //  aku mau dia nambah card di index ke 'selctedCardInHand' ke board, abis itu delete card di hand di index 'selectedCardInHand', trus selectedCardInHand brubah jadi -1
         //update GUI cardInHand sama cardOnBoard
         //kalau spell:
-        //
+        if (cardInHand.isCardinHand(card)) {
+            if (card.getType().equals("Character")) {
+                if (this.mana >= card.getMana()) {
+                    this.mana -= card.getMana();
+                }
+                cardOnBoard.addCard(card);
+                removeCardInHand(card);
+            }
+        }
     }
     public void addCardInHand(GameWindow gameWindow, Card newCard){
         //ngupdate cardInHand
@@ -109,7 +138,30 @@ public class Player {
     //     // Card buffer = ...
     //     // buffer.cardOnHover(gameWindow);
     // }
+    public void useManaForExp(CharacterCard card, int mana) {
+        if (this.mana > 0) {
+            addExp(mana);
+            this.setMana(this.mana - mana);
+        }
+    }
+
+    public void attack(CharacterCard player, CharacterCard other) {
+        player.attack(other);
+    }
+
     public void cardInHandOnClick(int idx){
 
+    }
+
+    public Card getCardOnBoard(int idx){
+        return this.cardOnBoard.getCardBoardByIdx(idx);
+    }
+
+    public int getBoardFilled(){
+        return cardOnBoard.getFilled();
+    }
+
+    public void addCardToBoard(Integer idx, Card card){
+        this.cardOnBoard.addCardById(idx,card);
     }
 }

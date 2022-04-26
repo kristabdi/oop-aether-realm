@@ -41,7 +41,7 @@ public class GameState {
                 break;
             case END:
                 this.phase = Phase.DRAW;
-                if(this.turn === 1){
+                if(this.turn == 1){
                     this.turn = 2;
                 }
                 else{
@@ -55,18 +55,36 @@ public class GameState {
     }
     public Card getCardOnBoard(Integer player, Integer idx){
         // return card on board
+        if(player==1){
+            return player1.getCardOnBoard(idx);
+        }else{
+            return player2.getCardOnBoard(idx);
+        }
     }
     public Boolean isGameOver(){
         // mengecek apakah deck salah satu pemain sudah habis. kalo sudah return true
-        return false;
+        if(player1.getBoardFilled()==0 || player2.getBoardFilled()==0){
+            return true;
+        }else return false;
     }
 
     // HELPER SAAT PHASE DRAW
     public List<Card> getThreeCardFromDeck(Integer player){
         // ngasi 3 buah kartu dari deck player 1 ataupun player 2. sementara asumsi kalo udah di get 3 dari deck, deck langsung berkurang 3. tapi masih tergantung implementasi dari Deck
+        if(player==1){
+            return player1.draw();
+        }else{
+            return player2.draw();
+        }
     }
     public void addCardInHand(Integer player, Card card){
         // add card ke hand player 1 atau player 2
+        if(player == 1){
+            player1.addCardInHand(card);
+        }
+        else{
+            player2.addCardInHand(card);
+        }
     }
     public void addCardToDeck(Integer player, Card card){
         // add card ke deck player 1 atau player 2
@@ -75,19 +93,43 @@ public class GameState {
     // HELPER SAAT PHASE PLAN
     public void addCardToBoard(Integer player, Integer idxBoard, Card card){
         // add card ke board player 1 atau player 2
+        if(player==1){
+            player1.addCardToBoard(idxBoard,card);
+        }else{
+            player2.addCardToBoard(idxBoard,card);
+        }
     }
     public void cardOnBoardGotSpelled(Integer player, Integer idxBoard, Integer spellCardIdx){
         // mengenai spell ke card on board
+        //masi bingung :(
+        // minta ke player lawan, 
+            // butuh cardOnBoardGotSpelled(lokasi card di board, lokasi spell card in hand)
     }
-    public void removeCardFromHand(Integer player, Integer idxCardInHand){
+    public void removeCardFromHand(Integer player, Integer cardIdx){
         // remove card dari hand player 1 atau player 2
+        if(player==1){
+            player1.removeCardFromHand(cardIdx);
+        }else{
+            player2.removeCardFromHand(cardIdx);
+        }
     }
     // HELPER SAAT PHASE ATTACK
     public void attack(Integer playerAttacker, Integer idxBoardAttacker, Integer idxBoardVictim){
-        
+        // get card yg attacker sama victim
+        if(playerAttacker==1){
+            Card attacker = player1.getCardOnBoard(idxBoardAttacker);
+            Card victim = player2.getCardOnBoard(idxBoardVictim);
+            // attack
+            player1.attack(attacker,victim);
+        }else{
+            Card attacker = player2.getCardOnBoard(idxBoardAttacker);
+            Card victim = player1.getCardOnBoard(idxBoardVictim);
+            // attack
+            player2.attack(attacker,victim);
+        }
     }
     // HELPER SAAT PHASE END
-
+    // butuh method untuk endgame saat salah satu player mati
 }
 
 enum Phase {

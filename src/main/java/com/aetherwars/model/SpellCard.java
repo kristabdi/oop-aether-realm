@@ -1,16 +1,25 @@
-import javax.smartcardio.Card;
+// import javax.smartcardio.Card;
+
 
 public abstract class SpellCard extends Card {
     private int mana;
-    private int durasi;
+    private int duration;
     private int exp;
     private String imagepath;
-    // private Spell spell;
-    abstract void execute(SummonedCard s);
 
-    abstract void activate(SummonedCard targetCard);
+    SpellCard(String name, String type, String description, int mana, int duration, int exp, String imagepath) {
+        super(name, type, description);
+        this.mana = mana;
+        this.duration = duration;
+        this.exp = exp;
+        this.imagepath = imagepath;
+    }
+    
+    abstract void execute(CharacterCard s);
 
-    public String getSpellMana() {
+    // abstract void activate(CharacterCard targetCard);
+
+    public int getSpellMana() {
         return mana;
     }
 
@@ -18,15 +27,15 @@ public abstract class SpellCard extends Card {
         this.mana = mana;
     }
 
-    public String getSpellDurasi() {
-        return durasi;
+    public int getSpellDuration() {
+        return duration;
     }
 
-    public void setSpellDurasi(int durasi) {
-        this.durasi = durasi;
+    public void setSpellduration(int duration) {
+        this.duration = duration;
     }
 
-    public String getEXP() {
+    public int getEXP() {
         return exp;
     }
 
