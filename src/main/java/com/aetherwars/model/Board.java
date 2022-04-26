@@ -11,22 +11,7 @@ public class Board {
         this.filled =0;
     }
 
-    public Board(CharacterCard[] cardBoard, int[]fillingIndicator, int filled){
-        this.filled = filled;
-        this.cardBoard = new CharacterCard[5];
-        this.fillingIndicator = new int[5];
-        int i =0;
-        while(i<5){
-            if(fillingIndicator[i]==1){
-                this.cardBoard[i]=cardBoard[this.filled-filled];
-            }
-            this.fillingIndicator[i]=fillingIndicator[i];
-            i++;
-            filled--;
-        }
-    }
-
-    public Card getCardBoardByIdx(int idx){
+    public CharacterCard getCardBoardByIdx(int idx){
         // ASUMSI INDEX NYA BENER. KALO GK BENER, RUSAK SUMPAH
         // Alternatif: Kalo di board kosong, buttonnya di disable untuk indeks itu, jadi ga bakal salah
         // if(this.fillingIndicator[idx]!=0){
@@ -51,9 +36,7 @@ public class Board {
             }
             //karna sudah cek kepenuhan
             //mentok i di idx 4 dan pasti dapet yang indexNone
-            this.cardBoard[i]=c;
-            this.fillingIndicator[i]=1;
-            this.filled++;
+            addCardById(i,c);
         }
     }
 
@@ -64,6 +47,7 @@ public class Board {
         this.filled++;
         this.cardBoard[id]=c;
     }
+
     public CharacterCard popCard(int index){
         //ngambil kartu dari index ke-index
         //ubah indikator index ke-index -> 0
@@ -72,5 +56,18 @@ public class Board {
         this.fillingIndicator[index]=0;
         this.filled--;
         return this.cardBoard[index];
+    }
+
+    public void updateBoard(){
+        int i;
+        for(i=0;i<5;i++){
+            if(this.fillingIndicator[i]==0){
+                this.cardBoard[i].updateSpellsDuration();
+            }
+        }
+    }
+
+    public boolean isCardBoardEmpty(int idx){
+        return this.fillingIndicator[idx]==0;
     }
 }
