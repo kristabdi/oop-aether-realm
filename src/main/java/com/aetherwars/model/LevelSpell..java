@@ -4,7 +4,7 @@ public class LevelSpell extends SpellCard implements Spell {
     private int levelModifier;
 
     LevelSpell(String name, String type, String description, int mana, int levelModifier) {
-        super(name, type, description, 0, 0, "");
+        super(name, type, description, mana, 0, "");
         this.levelModifier = levelModifier;
     }
 

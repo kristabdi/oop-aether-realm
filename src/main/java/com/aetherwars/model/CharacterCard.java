@@ -108,7 +108,16 @@ public class CharacterCard extends Card {
         return maxExp;
     }
 
+    public void removeSpellsEndDuration() {
+        for (int i = 0; i < activeSpells.size(); i++) {
+            if (activeSpells.get(i).getDuration() == 1) {
+                activeSpells.remove(i);
+            }
+        }
+    }
+
     public List<SpellCard> getActiveSpells() {
+        removeSpellsEndDuration();
         return this.activeSpells;
     }
 
@@ -223,6 +232,26 @@ public class CharacterCard extends Card {
         }
     }
 
+    public void setAttackModifier() {
+        //  iterate active spells that spell is potion, then add attack modifier sum
+        int temp = 0;
+        for (int i = 0; i < activeSpells.size(); i++) {
+            if (activeSpells.get(i).getType() == Type.POTION) {
+                temp += activeSpells.get(i).getAttackModifier();
+            }
+        }
+        this.attackModifier = temp;
+    }
+
+    public void setHealthModifier() {
+        int temp = 0;
+        for (int i = 0; i < activeSpells.size(); i++) {
+            if (activeSpells.get(i).getType() == Type.POTION) {
+                temp += activeSpells.get(i).getHealthModifier();
+            }
+        }
+        this.healthModifier = temp;
+    }
 
     public int getFinalAttack() {
         return this.attack + this.attackModifier;
@@ -230,13 +259,6 @@ public class CharacterCard extends Card {
     }
     public int getFinalHealth() {
         return this.health + this.healthModifier;
-    }
-    // public int getFinalHealth() {
-    //     // integer finalHealth = healthku berdasarkan health asli + buff, 
-    // }
-
-    public void reduceHealth(int damage){
-        // reduce buff dulu, baru recude health asli.
     }
 
     public boolean isDead() {

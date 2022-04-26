@@ -175,4 +175,9 @@ public class Player {
         //kalau karakter: cek apakah board yg diklik kosong, kalau kosong panggil addCardToBoard
         //kalau spell: cek apakah board yg diklik itu ada isinya, kalau ada, panggil spellnya.activate(card di board yg diklik)
     }
+
+    public void updateBoard() {
+        // iterate board to set attack modifier, health modifier, etc
+        board.update();
+    }
 }
