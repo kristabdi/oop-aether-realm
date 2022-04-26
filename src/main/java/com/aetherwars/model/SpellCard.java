@@ -4,14 +4,12 @@
 public abstract class SpellCard extends Card {
     private int mana;
     private int duration;
-    private int exp;
     private String imagepath;
 
-    SpellCard(String name, String type, String description, int mana, int duration, int exp, String imagepath) {
+    SpellCard(String name, String type, String description, int mana, int duration, String imagepath) {
         super(name, type, description);
         this.mana = mana;
         this.duration = duration;
-        this.exp = exp;
         this.imagepath = imagepath;
     }
     
@@ -33,14 +31,6 @@ public abstract class SpellCard extends Card {
 
     public void setSpellduration(int duration) {
         this.duration = duration;
-    }
-
-    public int getEXP() {
-        return exp;
-    }
-
-    public void setEXP(int exp) {
-        this.exp = exp;
     }
 
     public String getImagePath() {

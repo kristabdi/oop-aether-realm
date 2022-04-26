@@ -4,8 +4,8 @@ public class PotionSpell extends SpellCard implements Spell {
     private int remainingAttack;
     private int remainingHealth;
 
-    public PotionSpell(String name, String type, String description, int mana, int durasi, int exp, String imagepath, int attackModifier, int healthModifier) {
-        super(name, type, description, mana, durasi, exp, imagepath);
+    public PotionSpell(String name, String type, String description, int mana, int durasi, String imagepath, int attackModifier, int healthModifier) {
+        super(name, type, description, mana, durasi, imagepath);
         this.attackModifier = attackModifier;
         this.healthModifier = healthModifier;
         this.remainingAttack = attackModifier;

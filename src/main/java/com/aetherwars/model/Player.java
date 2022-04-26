@@ -102,14 +102,6 @@ public class Player {
         summonedCard.remove(card);
     }
 
-    public void boardOnClick(){
-        // kalo boardnya di klik,
-        // if selectedCardInHandIndex = -1, do nothing
-        // if selectedCardInHandIndex != -1,
-        // cek kartu in hand yg diklik itu spell atau character,
-        //kalau karakter: cek apakah board yg diklik kosong, kalau kosong panggil addCardToBoard
-        //kalau spell: cek apakah board yg diklik itu ada isinya, kalau ada, panggil spellnya.activate(card di board yg diklik)
-    }
     public void addCardToBoard(GameWindow gameWindow, Card card){
         // mirip addcard inhand
         //  aku mau dia nambah card di index ke 'selctedCardInHand' ke board, abis itu delete card di hand di index 'selectedCardInHand', trus selectedCardInHand brubah jadi -1
@@ -125,19 +117,7 @@ public class Player {
             }
         }
     }
-    public void addCardInHand(GameWindow gameWindow, Card newCard){
-        //ngupdate cardInHand
-        // jangan lupa di bind ke fungsi, on hover sama on click
-        gameWindow.cardInHandButton.OnHover.addActionListener(e -> {
-            newCard.cardOnHover(gameWindow);
-        });
-    }
-    // public void cardInHandOnHover(int idx){
-    //     //dari index, dapetin card yg sedang di hover
-    //     // pass itu ke method card on Hover
-    //     // Card buffer = ...
-    //     // buffer.cardOnHover(gameWindow);
-    // }
+
     public void useManaForExp(CharacterCard card, int mana) {
         if (this.mana > 0) {
             addExp(mana);
@@ -145,12 +125,15 @@ public class Player {
         }
     }
 
-    public void attack(CharacterCard player, CharacterCard other) {
-        player.attack(other);
+    public void useSpellOnCard(CharacterCard card, SpellCard spell) {
+        if (this.mana >= spell.getSpellMana()) {
+            this.setMana(this.mana - spell.getSpellMana());
+            spell.execute(card);
+        }
     }
 
-    public void cardInHandOnClick(int idx){
-
+    public void attack(CharacterCard player, CharacterCard other) {
+        player.attack(other);
     }
 
     public Card getCardOnBoard(int idx){
@@ -163,5 +146,33 @@ public class Player {
 
     public void addCardToBoard(Integer idx, Card card){
         this.cardOnBoard.addCardById(idx,card);
+    }
+
+    // public void cardInHandOnClick(int idx){
+
+    // }
+
+    // public void cardInHandOnHover(int idx){
+    //     //dari index, dapetin card yg sedang di hover
+    //     // pass itu ke method card on Hover
+    //     // Card buffer = ...
+    //     // buffer.cardOnHover(gameWindow);
+    // }
+
+    public void addCardInHand(GameWindow gameWindow, Card newCard){
+        //ngupdate cardInHand
+        // jangan lupa di bind ke fungsi, on hover sama on click
+        gameWindow.cardInHandButton.OnHover.addActionListener(e -> {
+            newCard.cardOnHover(gameWindow);
+        });
+    }
+
+    public void boardOnClick(){
+        // kalo boardnya di klik,
+        // if selectedCardInHandIndex = -1, do nothing
+        // if selectedCardInHandIndex != -1,
+        // cek kartu in hand yg diklik itu spell atau character,
+        //kalau karakter: cek apakah board yg diklik kosong, kalau kosong panggil addCardToBoard
+        //kalau spell: cek apakah board yg diklik itu ada isinya, kalau ada, panggil spellnya.activate(card di board yg diklik)
     }
 }
