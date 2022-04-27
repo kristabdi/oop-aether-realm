@@ -15,8 +15,13 @@ public class LevelSpell extends SpellCard implements Spell {
         setSpellMana((int)Math.ceil(s.getLevel()/2));
         int newLevel = s.getLevel() + this.levelModifier;
         if (newLevel >= 1) {
+            if (newLevel > 10) {
+                newLevel = 10;
+            }
             s.setLevel(newLevel);
-            s.setExp(0);
+        } else {
+            s.setLevel(1);
         }
+        s.setExp(0);
     }
 }
