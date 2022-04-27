@@ -19,6 +19,33 @@ public class GameWindow {
         String teks = HandleEvent.onButtonClick();
         player1_CharD.setText(teks);
         // player1_CharD.setText("ini yang baru");
-        }
+    }
+
+    @FXML
+    protected void onCardInHand1Click(){
+        HandleEvent.onInHandClick(1);
+    }
+
+    @FXML
+    protected void onCardInHand2Click(){
+        HandleEvent.onInHandClick(2);
+    }
+
+    @FXML
+    protected void onCardInHand3Click(){
+        HandleEvent.onInHandClick(3);
+    }
+
+    @FXML
+    protected void onCardInHand4Click(){
+        HandleEvent.onInHandClick(4);
+    }
+
+    @FXML
+    protected void onCardInHand5Click(){
+        HandleEvent.onInHandClick(5);
+    }
+
+
         
 }

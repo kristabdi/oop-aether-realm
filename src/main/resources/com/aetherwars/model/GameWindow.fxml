@@ -281,7 +281,7 @@ fx:controller="com.aetherwars.model.GameWindow">
                                             <children>
                                                 <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="cardInHand1" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note&#10;" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <Button fx:id="cardInHand1" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note&#10;" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#onCardInHand1Click">
                                                             <graphic>
                                                                 <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
@@ -294,7 +294,7 @@ fx:controller="com.aetherwars.model.GameWindow">
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="cardInHand2" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <Button fx:id="cardInHand2" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#onCardInHand2Click">
                                                             <graphic>
                                                                 <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                                     <image>
@@ -307,7 +307,7 @@ fx:controller="com.aetherwars.model.GameWindow">
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="cardInHand3" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <Button fx:id="cardInHand3" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#onCardInHand3Click">
                                                             <graphic>
                                                                 <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                                     <image>
@@ -320,7 +320,7 @@ fx:controller="com.aetherwars.model.GameWindow">
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="cardInHand4" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <Button fx:id="cardInHand4" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#onCardInHand4Click">
                                                             <graphic>
                                                                 <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                                     <image>
@@ -333,7 +333,7 @@ fx:controller="com.aetherwars.model.GameWindow">
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="90.0" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="cardInHand5" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <Button fx:id="cardInHand5" contentDisplay="TOP" mnemonicParsing="false" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#onCardInHand5Click">
                                                             <graphic>
                                                                 <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                                     <image>
