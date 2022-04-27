@@ -17,8 +17,6 @@ public abstract class SpellCard extends Card {
     }
     
     abstract void execute(CharacterCard s);
-    // abstract void activate(CharacterCard targetCard);
-
     public int getSpellMana() {
         return mana;
     }

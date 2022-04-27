@@ -307,7 +307,7 @@ public class CharacterCard extends Card {
     }
 
     public boolean isDead() {
-        return (health == 0);
+        return (this.health == 0);
     }
 
      // buat priorityQueue of Tupple of Buff

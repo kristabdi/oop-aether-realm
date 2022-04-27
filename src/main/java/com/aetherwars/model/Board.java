@@ -58,7 +58,7 @@ public class Board {
         return this.cardBoard[index].getCard();
     }
 //masi problem
-    public void updateBoard(){
+    public void update(){
         int i;
         for(i=0;i<5;i++){
             if(this.cardBoard[i].isFilled()){

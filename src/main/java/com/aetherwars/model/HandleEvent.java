@@ -53,18 +53,22 @@ public class HandleEvent{
         System.out.println("Klik board terdeteksi. Board ke : "+index);
     }
 
-    public static void onOpponentClick(){
-        // if(gameState.getPhase()==Phase.ATTACK){
-        //     gameState.attack()
-        // }
-        System.out.println("Klik lawan terdeteksi");
+    public static void onOpponentClick(int player){
+        if(gameState.getPhase()==GameState.Phase.ATTACK && gameState.getTurn()!=player){
+            gameState.attack();
+            System.out.println("Klik lawan terdeteksi");
+        }
     }
 
     public static void onOpponentBoardClick(int index){
         // if(gameState.getPhase()==Phase.ATTACK){
-        //     gameState.attack()
+        //     gameState.attack(index);
         // }
         System.out.println("Klik board lawan terdeteksi terdeteksi. Board ke :" + index);
+    }
+
+    public static void onHover(Integer player, String loc, Integer index ){
+        gameState.setCardOnDescriptionBuffer(player,loc,index);
     }
 
 }

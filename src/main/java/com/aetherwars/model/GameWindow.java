@@ -1,18 +1,30 @@
 //ini controller dari gameWindow fxml
 package com.aetherwars.model;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class GameWindow {
     // Buat atribut yang sesuai tipe tag dan id pada fxml, terus buat method protectedvoid, terus masukin
     // nama fungsi ke dalam fxml dengan nama yang harus sama, misal <Button onAction="#onButtonClick">
+    // Buat ganti scene
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -103,6 +115,26 @@ public class GameWindow {
     private ImageView playerB_image;
     @FXML
     private Label rightDescriptionWhenHover;
+    @FXML
+    private Button generatedCard1;
+    @FXML
+    private Button generatedCard2;
+    @FXML
+    private Button generatedCard3;
+
+
+    // METHOD GANTI SCENE
+    
+    public void switchToGameWindowDraw(MouseEvent event) throws IOException {
+        System.out.print("==== ganti game window mulai ====");
+        root = FXMLLoader.load(getClass().getResource("GameWindowDraw.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 1366, 768);
+        stage.setScene(scene);
+        stage.show();
+        System.out.print("ganti game window selesai");
+    }
+
         
     protected void setWindowBasedOnGameState(){
         /* SET BOARD */
@@ -168,7 +200,9 @@ public class GameWindow {
         labelTurn.setText(String.valueOf(HandleEvent.gameState.getTurn()));
     }
 
+    
 
+    // FUNGSI UNTUK GAME WINDOW UTAMA
     @FXML
     void OnCardInHand1Hover(MouseEvent event) {
 
@@ -199,8 +233,14 @@ public class GameWindow {
         // update gameState
         HandleEvent.onInHandClick(1);
 
+        
         // update gameWindow
         setWindowBasedOnGameState();
+        try {
+            switchToGameWindowDraw(event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -234,7 +274,7 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
 
     @FXML
     void onPlayer1AvatarClick(MouseEvent event) {
-
+        HandleEvent.onOpponentClick(1);
     }
 
     @FXML
@@ -250,12 +290,12 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
 
     @FXML
     void onPlayer1_CharB(MouseEvent event) {
-
+        HandleEvent.onBoardClick(1,2);
     }
 
     @FXML
     void onPlayer1_CharBHover(MouseEvent event) {
-        HandleEvent.onBoardClick(1,2);
+        
 
     }
 
@@ -293,7 +333,7 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
 
     @FXML
     void onPlayer2AvatarClick(MouseEvent event) {
-
+        HandleEvent.onOpponentClick(2);
     }
 
     @FXML
@@ -394,7 +434,7 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
         assert playerB_image != null : "fx:id=\"playerB_image\" was not injected: check your FXML file 'GameWindow.fxml'.";
         assert rightDescriptionWhenHover != null : "fx:id=\"rightDescriptionWhenHover\" was not injected: check your FXML file 'GameWindow.fxml'.";
         System.out.println("AMAN GAME WINDOW, INI AKHIR DARI INITIALIZE");
-        setWindowBasedOnGameState();
+        this.setWindowBasedOnGameState();
     }
         
 }

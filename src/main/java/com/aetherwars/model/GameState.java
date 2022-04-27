@@ -45,6 +45,7 @@ public class GameState {
 
     // buffer. sapatau butuh
     public Card selectedCardInHand;
+    public Card cardOnDescription;
     public Card selectedCardOnBoard;
 
     public enum Phase {
@@ -172,6 +173,31 @@ public class GameState {
             return this.player2;
         }
     }
+    public Card getCardOnDescriptionBuffer(){
+        return this.cardOnDescription;
+    }
+    public void setCardOnDescriptionBuffer(Integer player, String location, Integer index){
+        // palyer bisa 1 atau 2
+        // location bisa "board" atau "cardInHand"
+        // index bisa 1 - 5
+        if(player == 1){
+            if(location == "board"){
+                this.cardOnDescription = this.player1.getCardOnBoard(index - 1);
+            }
+            else{
+                this.cardOnDescription = this.player1.getCardInHandPlayer().get(index - 1);
+            }
+        }
+        else{
+            if(location == "board"){
+                this.cardOnDescription = this.player2.getCardOnBoard(index - 1);
+            }
+            else{
+                this.cardOnDescription = this.player2.getCardInHandPlayer().get(index - 1);
+            }
+        }
+
+    }
     // HELPER SAAT PHASE DRAW
     public List<Card> getThreeCardFromDeck(Integer player){
         // ngasi 3 buah kartu dari deck player 1 ataupun player 2. sementara asumsi kalo udah di get 3 dari deck, deck langsung berkurang 3. tapi masih tergantung implementasi dari Deck
@@ -237,22 +263,33 @@ public class GameState {
     }
 
     // HELPER SAAT PHASE ATTACK
-    public void attack(Integer idxBoardAttacker){
+    public void attack(){
+        // attack langsung ke player
+        // jika lawan vulnerable, attack. jika tidak, do nothing
+        if(this.turn == 1){
+            if(this.player2.isVulnerable()){
+                this.player2.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
+            }
+        }
+        else{
+            if(this.player1.isVulnerable()){
+                this.player1.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
+            }
+        }
+    }
+    public void attack(Integer idxBoardVictim){
         // get card yg attacker sama victim
         // melakukan peng attackan berdasarkan turn saat ini, selectedCardOnBoard. jadi player pada turn saat ini, akan mengattack selectedCardOnBoard.
         if(this.turn == 1){
-            Card attacker = player2.getCardOnBoard(idxBoardAttacker);
+            Card victim = player2.getCardOnBoard(idxBoardVictim);
             // attack
-            if(player1.isVulnerable()){
-                // attack player langsung
-                player1.decreaseMyHealthBasedOnCardAttackStats((CharacterCard) attacker);
-            }
-            else{
-                // kalo board yg diklik valid(ada card disitu), dan dia belum nge attack, brarti bisa attack.
-                // kalo gk, do nothing
-            }
+            ((CharacterCard)this.selectedCardOnBoard).attack((CharacterCard)victim);
+        
         }else{
             // attack dilakukan oleh player 2
+            Card victim = player1.getCardOnBoard(idxBoardVictim);
+            // attack
+            ((CharacterCard)this.selectedCardOnBoard).attack((CharacterCard)victim);
         }
     }
     // HELPER SAAT PHASE END

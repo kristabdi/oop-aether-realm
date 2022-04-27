@@ -159,10 +159,10 @@ public class Player {
         
     // }
     public void decreaseMyHealthBasedOnCardAttackStats(CharacterCard card) {
-        this.health -= card.getFinalAttack();
+        this.health = card.attackPlayer(this.health);
     }
-    // public void updateBoard() {
-    //     // iterate board to set attack modifier, health modifier, etc
-    //     cardOnBoard.update();
-    // }
+    public void updateBoard() {
+        // iterate board to set attack modifier, health modifier, etc
+        cardOnBoard.update();
+    }
 }
