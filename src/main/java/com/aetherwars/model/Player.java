@@ -2,6 +2,8 @@ package com.aetherwars.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.xml.sax.ext.DeclHandler;
+
 public class Player {
     //atribut
     private String name;
@@ -11,7 +13,6 @@ public class Player {
     private Deck deck;
     private int selectedCardInHandIndex;
     private CardInHand cardInHand;
-    private ArrayList<CharacterCard> summonedCard;
     private Board cardOnBoard;
 
     Player() {
@@ -22,11 +23,10 @@ public class Player {
         this.deck = new Deck();
         this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
-        this.summonedCard = new ArrayList<>();
         this.cardOnBoard = new Board();
     }
 
-    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand, ArrayList<CharacterCard> summonedCard, Board cardOnBoard) {
+    Player(String name, int mana, int selectedCardInHandIndex, Deck deck, CardInHand cardInHand, Board cardOnBoard) {
         this.name = name;
         this.mana = mana;
         this.maxMana = 10;
@@ -34,7 +34,6 @@ public class Player {
         this.deck = deck;
         this.selectedCardInHandIndex = selectedCardInHandIndex;
         this.cardInHand = cardInHand;
-        this.summonedCard = summonedCard;
         this.cardOnBoard = cardOnBoard;
     }
 
