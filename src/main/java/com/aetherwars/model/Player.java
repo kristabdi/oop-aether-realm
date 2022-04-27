@@ -2,6 +2,7 @@ package com.aetherwars.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Player {
     //atribut
     private String name;
@@ -11,7 +12,6 @@ public class Player {
     private Deck deck;
     private int selectedCardInHandIndex;
     private CardInHand cardInHand;
-    private ArrayList<CharacterCard> summonedCard;
     private Board cardOnBoard;
 
     Player() {
@@ -22,19 +22,17 @@ public class Player {
         this.deck = new Deck();
         this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
-        this.summonedCard = new ArrayList<>();
         this.cardOnBoard = new Board();
     }
-
-    Player(String name, int mana, Deck deck, int selectedCardInHandIndex, CardInHand cardInHand, ArrayList<CharacterCard> summonedCard, Board cardOnBoard) {
+    
+    Player(String name, int mana, Deck deck, CardInHand cardInHand, Board cardOnBoard) {
         this.name = name;
         this.mana = mana;
         this.maxMana = 10;
         this.health = 80;
         this.deck = deck;
-        this.selectedCardInHandIndex = selectedCardInHandIndex;
+        this.selectedCardInHandIndex = -1;
         this.cardInHand = cardInHand;
-        this.summonedCard = summonedCard;
         this.cardOnBoard = cardOnBoard;
     }
 
@@ -87,7 +85,7 @@ public class Player {
 
     public Boolean isVulnerable() {
         // Method to check if player can be attacked directly
-        return (this.summonedCard.size() <= 0);
+        return (this.cardOnBoard.getFilled() <= 0);
     }
 
     public List<Card> draw(){
@@ -104,9 +102,9 @@ public class Player {
         cardInHand.removeCardFromHand(i);
     }
 
-    public void removeSummonedCard(CharacterCard card) {
-        summonedCard.remove(card);
-    }
+    // public void removeSummonedCard(CharacterCard card) {
+    //     summonedCard.remove(card);
+    // }
 
     public void addCardToBoard(Card card){
         // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck
