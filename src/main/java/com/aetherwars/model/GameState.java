@@ -144,7 +144,7 @@ public class GameState {
             this.selectedCardOnBoard = this.player2.getCardOnBoard(index);
         }
         else{
-            this.selectedCardInHand = this.player1.getCardOnBoard(index);
+            this.selectedCardOnBoard = this.player1.getCardOnBoard(index);
         }
     }
 
