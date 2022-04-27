@@ -1,93 +1,135 @@
-package com.aetherwars.model;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 
-public class GameWindow {
-    // Buat atribut yang sesuai tipe tag dan id pada fxml, terus buat method protectedvoid, terus masukin
-    // nama fungsi ke dalam fxml dengan nama yang harus sama, misal <Button onAction="#onButtonClick">
+public class PleaseProvideControllerClassName {
+
+    @FXML
+    private Button buttonNextFase;
+
+    @FXML
+    private Button cardInHand1;
+
+    @FXML
+    private Button cardInHand2;
+
+    @FXML
+    private Button cardInHand3;
+
+    @FXML
+    private Button cardInHand4;
+
+    @FXML
+    private Button cardInHand5;
+
+    @FXML
+    private ImageView imageWhenHover;
+
+    @FXML
+    private Label labelDeck;
+
+    @FXML
+    private Label labelFaseAttack;
+
+    @FXML
+    private Label labelFaseDraw;
+
+    @FXML
+    private Label labelFaseEnd;
+
+    @FXML
+    private Label labelFasePlan;
+
+    @FXML
+    private Label labelMana;
+
+    @FXML
+    private Label labelTurn;
+
+    @FXML
+    private Label leftDescriptionWhenHover;
+
+    @FXML
+    private ProgressBar player1HealthBar;
+
+    @FXML
+    private Label player1Name;
+
+    @FXML
+    private Button player1_CharA;
+
+    @FXML
+    private ImageView player1_CharA_image;
+
+    @FXML
+    private Button player1_CharB;
+
+    @FXML
+    private ImageView player1_CharB_image;
+
+    @FXML
+    private Button player1_CharC;
+
+    @FXML
+    private ImageView player1_CharC_image;
+
     @FXML
     private Button player1_CharD;
 
-//    @FXML
-//    protected void onHelloButtonClick() {
-//        welcomeText.setText("Welcome to JavaFX Application!");
-//    }
+    @FXML
+    private Button player1_CharE;
 
     @FXML
-    protected void onCardInHand1Click(){
-        HandleEvent.onInHandClick(1);
-    }
+    private ImageView player1_CharE_image;
 
     @FXML
-    protected void onCardInHand2Click(){
-        HandleEvent.onInHandClick(2);
-    }
+    private ProgressBar player2HealthBar;
 
     @FXML
-    protected void onCardInHand3Click(){
-        HandleEvent.onInHandClick(3);
-    }
+    private Button player2_CharA;
 
     @FXML
-    protected void onCardInHand4Click(){
-        HandleEvent.onInHandClick(4);
-    }
+    private ImageView player2_CharA_image;
 
     @FXML
-    protected void onCardInHand5Click(){
-        HandleEvent.onInHandClick(5);
-    }
+    private Button player2_CharB;
 
     @FXML
-    protected void onPlayer1_CharA(){
-        HandleEvent.onBoardClick(1,1);
-    }
+    private ImageView player2_CharB_image;
 
     @FXML
-    protected void onPlayer1_CharB(){
-        HandleEvent.onBoardClick(1,2);
-    }
+    private Button player2_CharC;
 
     @FXML
-    protected void onPlayer1_CharC(){
-        HandleEvent.onBoardClick(1,3);
-    }
+    private ImageView player2_CharC_image;
 
     @FXML
-    protected void onPlayer1_CharD(){
-        HandleEvent.onBoardClick(1,4);
-    }
+    private Button player2_CharD;
 
     @FXML
-    protected void onPlayer1_CharE(){
-        HandleEvent.onBoardClick(1,5);
-    }
+    private ImageView player2_CharD_image;
 
     @FXML
-    protected void onPlayer2_CharA(){
-        HandleEvent.onBoardClick(2,1);
-    }
+    private Button player2_CharE;
 
     @FXML
-    protected void onPlayer2_CharB(){
-        HandleEvent.onBoardClick(2,2);
-    }
+    private ImageView player2_CharE_image;
 
     @FXML
-    protected void onPlayer2_CharC(){
-        HandleEvent.onBoardClick(2,3);
-    }
+    private Button playerA;
 
     @FXML
-    protected void onPlayer2_CharD(){
-        HandleEvent.onBoardClick(2,4);
-    }
+    private ImageView playerA_image;
 
     @FXML
-    protected void onPlayer2_CharE(){
-        HandleEvent.onBoardClick(2,5);
-    }
+    private Button playerB;
 
-        
+    @FXML
+    private ImageView playerB_image;
+
+    @FXML
+    private Label rightDescriptionWhenHover;
+
 }
