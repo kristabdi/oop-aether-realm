@@ -62,8 +62,8 @@ public class GameState {
         d1.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         Deck d2 = new Deck();
         d2.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
-        this.player1 = new Player("Steve", 0, d1, new CardInHand(), new Board());
-        this.player1 = new Player("Alex", 0, d2, new CardInHand(), new Board());
+        this.player1 = new Player("pesatu", 0, d1, new CardInHand(), new Board());
+        this.player2 = new Player("pedua", 0, d2, new CardInHand(), new Board());
         this.characterCards = characterCards;
         this.morphSpells = morphSpells;
         this.potionSpells = potionSpells;
@@ -153,6 +153,24 @@ public class GameState {
     }
     public void clearSelectedCardOnBoardBuffer(){
         this.selectedCardOnBoard = null;
+    }
+    public Player getCurrentPlayer(){
+        if(this.turn == 1){
+            System.out.println("current player adalah player 1");
+            return this.player1;
+        }
+        else{
+            System.out.println("current player adalah player 2");
+            return this.player2;
+        }
+    }
+    public Player getPlayer(Integer idx){
+        if(idx == 1){
+            return this.player1;
+        }
+        else{
+            return this.player2;
+        }
     }
     // HELPER SAAT PHASE DRAW
     public List<Card> getThreeCardFromDeck(Integer player){

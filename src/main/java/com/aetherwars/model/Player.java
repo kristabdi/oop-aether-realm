@@ -102,10 +102,6 @@ public class Player {
         cardInHand.removeCardFromHand(i);
     }
 
-    // public void removeSummonedCard(CharacterCard card) {
-    //     summonedCard.remove(card);
-    // }
-
     public void addCardToBoard(Card card){
         // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck
         // mirip addcard inhand

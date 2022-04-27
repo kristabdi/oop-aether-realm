@@ -23,22 +23,27 @@ public class Deck {
                 //random level spell
                 int randomLevelSpell = (int) (Math.random() * levelSpells.size());
                 cardInDeck.push(levelSpells.get(randomLevelSpell));
+                // System.out.println(levelSpells.get(randomLevelSpell));
             } else if ((random % 5 == 1)) {
                 //random swap spell
                 int randomSwapSpell = (int) (Math.random() * swapSpells.size());
                 cardInDeck.push(swapSpells.get(randomSwapSpell));
+                // System.out.println(swapSpells.get(randomSwapSpell));
             } else if ((random % 5 == 2)) {
                 //random potion spell
                 int randomPotionSpell = (int) (Math.random() * potionSpells.size());
                 cardInDeck.push(potionSpells.get(randomPotionSpell));
+                // System.out.println(potionSpells.get(randomPotionSpell));
             } else if ((random % 5 == 3)) {
                 //random morph spell
                 int randomMorphSpell = (int) (Math.random() * morphSpells.size());
                 cardInDeck.push(morphSpells.get(randomMorphSpell));
+                // System.out.println(morphSpells.get(randomMorphSpell));
             } else {
                 //random character card
                 int randomCharacterCard = (int) (Math.random() * characterCards.size());
                 cardInDeck.push(characterCards.get(randomCharacterCard));
+                // System.out.println(characterCards.get(randomCharacterCard));
             }
         }
     }
@@ -66,6 +71,4 @@ public class Deck {
     public int getDeckSize() {
         return cardInDeck.size();
     }
-
-    // Kristo : butuh getSize deck biar ngecek player masih bisa main apa engga (done)
 }

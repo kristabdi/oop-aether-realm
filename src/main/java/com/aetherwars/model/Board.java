@@ -12,9 +12,12 @@ public class Board {
     public CharacterCard getCardBoardByIdx(int idx){
         // ASUMSI INDEX NYA BENER. KALO GK BENER, RUSAK SUMPAH
         // Alternatif: Kalo di board kosong, buttonnya di disable untuk indeks itu, jadi ga bakal salah
-        // if(this.fillingIndicator[idx]!=0){
-        return this.cardBoard[idx].getCard();
-        // }
+        if(!this.cardBoard[idx].isFilled()){
+            // kalo size dari card board - 1 >= idx, return yg bener. kalo gk return null
+            return null;
+        } else {
+            return this.cardBoard[idx].getCard();
+        }
     }
     public int getFilled(){
         return this.filled;
