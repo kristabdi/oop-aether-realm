@@ -13,13 +13,33 @@ public class Deck {
         cardInDeck = new Stack<Card>();
     }
 
-    public void fillDeck(List<Card> listOfPossibleCard){
+    public void fillDeck(List<CharacterCard> characterCards, List<MorphSpell> morphSpells, List<PotionSpell> potionSpells, List<SwapSpell> swapSpells, List<LevelSpell> levelSpells){
         // selama belom max capacity, insert
         while(cardInDeck.size() < MAX_STACK_SIZE){
+            // Ambil angka random
+            int random = (int) (Math.random() * 5) + 1;
             //random card
-            int randomCard = (int) (Math.random() * listOfPossibleCard.size());
-            //insert
-            this.putCardToDeck(listOfPossibleCard.get(randomCard));
+            if ((random % 5 == 0)) {
+                //random level spell
+                int randomLevelSpell = (int) (Math.random() * levelSpells.size());
+                cardInDeck.push(levelSpells.get(randomLevelSpell));
+            } else if ((random % 5 == 1)) {
+                //random swap spell
+                int randomSwapSpell = (int) (Math.random() * swapSpells.size());
+                cardInDeck.push(swapSpells.get(randomSwapSpell));
+            } else if ((random % 5 == 2)) {
+                //random potion spell
+                int randomPotionSpell = (int) (Math.random() * potionSpells.size());
+                cardInDeck.push(potionSpells.get(randomPotionSpell));
+            } else if ((random % 5 == 3)) {
+                //random morph spell
+                int randomMorphSpell = (int) (Math.random() * morphSpells.size());
+                cardInDeck.push(morphSpells.get(randomMorphSpell));
+            } else {
+                //random character card
+                int randomCharacterCard = (int) (Math.random() * characterCards.size());
+                cardInDeck.push(characterCards.get(randomCharacterCard));
+            }
         }
     }
 

@@ -30,7 +30,11 @@ import java.util.List;
 public class GameState {
     //punya catatan global yg gabakal keganti
     // list semua kartu yg mungkin
-
+    private List<CharacterCard> characterCards;
+    private List<MorphSpell> morphSpells;
+    private List<PotionSpell> potionSpells;
+    private List<SwapSpell> swapSpells;
+    private List<LevelSpell> levelSpells;
     // attribut
     private Integer turn;
     // using enum for phase
@@ -51,11 +55,17 @@ public class GameState {
     }
 
     // UMUM
-    public GameState() {
+    public GameState(List<CharacterCard> characterCards, List<MorphSpell> morphSpells, List<PotionSpell> potionSpells, List<SwapSpell> swapSpells, List<LevelSpell> levelSpells) {
         this.turn = 1;
         this.phase = Phase.DRAW;
         this.player1 = new Player();
         this.player2 = new Player();
+        this.characterCards = characterCards;
+        this.morphSpells = morphSpells;
+        this.potionSpells = potionSpells;
+        this.swapSpells = swapSpells;
+        this.levelSpells = levelSpells;
+
     }
     public int getTurn() {
         return this.turn;
