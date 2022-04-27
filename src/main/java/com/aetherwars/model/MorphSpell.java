@@ -3,7 +3,7 @@ package com.aetherwars.model;
 public class MorphSpell extends SpellCard implements Spell {
     private CharacterCard morphTarget;
 
-    MorphSpell(String name, String type, String description, CharacterCard target, int mana) {
+    public MorphSpell(String name, String type, String description, CharacterCard target, int mana) {
         
         super(name, type, description, mana, 0, 0, "");
         this.morphTarget = target;
