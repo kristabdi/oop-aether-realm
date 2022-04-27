@@ -2,7 +2,6 @@ package com.aetherwars.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.xml.sax.ext.DeclHandler;
 
 public class Player {
     //atribut
@@ -25,14 +24,14 @@ public class Player {
         this.cardInHand = new CardInHand();
         this.cardOnBoard = new Board();
     }
-
-    Player(String name, int mana, int selectedCardInHandIndex, Deck deck, CardInHand cardInHand, Board cardOnBoard) {
+    
+    Player(String name, int mana, Deck deck, CardInHand cardInHand, Board cardOnBoard) {
         this.name = name;
         this.mana = mana;
         this.maxMana = 10;
         this.health = 80;
         this.deck = deck;
-        this.selectedCardInHandIndex = selectedCardInHandIndex;
+        this.selectedCardInHandIndex = -1;
         this.cardInHand = cardInHand;
         this.cardOnBoard = cardOnBoard;
     }
@@ -86,7 +85,7 @@ public class Player {
 
     public Boolean isVulnerable() {
         // Method to check if player can be attacked directly
-        return (this.summonedCard.size() <= 0);
+        return (this.cardOnBoard.getFilled() <= 0);
     }
 
     public List<Card> draw(){
@@ -103,9 +102,9 @@ public class Player {
         cardInHand.removeCardFromHand(i);
     }
 
-    public void removeSummonedCard(CharacterCard card) {
-        summonedCard.remove(card);
-    }
+    // public void removeSummonedCard(CharacterCard card) {
+    //     summonedCard.remove(card);
+    // }
 
     public void addCardToBoard(Card card){
         // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck

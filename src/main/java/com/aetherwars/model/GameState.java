@@ -58,8 +58,12 @@ public class GameState {
     public GameState(List<CharacterCard> characterCards, List<MorphSpell> morphSpells, List<PotionSpell> potionSpells, List<SwapSpell> swapSpells, List<LevelSpell> levelSpells) {
         this.turn = 1;
         this.phase = Phase.DRAW;
-        this.player1 = new Player();
-        this.player2 = new Player();
+        Deck d1 = new Deck();
+        d1.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
+        Deck d2 = new Deck();
+        d2.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
+        this.player1 = new Player("Steve", 0, d1, new CardInHand(), new Board());
+        this.player1 = new Player("Alex", 0, d2, new CardInHand(), new Board());
         this.characterCards = characterCards;
         this.morphSpells = morphSpells;
         this.potionSpells = potionSpells;
@@ -133,16 +137,23 @@ public class GameState {
         // mengembalikan true, jika bufferSelectedCardInHand bertipe spell
         return (this.selectedCardInHand instanceof SpellCard);
     }
+    
     public void selectAttacker(int index){
     // nyimpen SelectedCardOnBoard sebagai kartu di board lawan yang dipilih
-    if(this.turn == 1){
-        this.selectedCardOnBoard = this.player2.getCardOnBoard(index);
-    }
-    else{
-        this.selectedCardInHand = this.player1.getCardOnBoard(index);
+        if(this.turn == 1){
+            this.selectedCardOnBoard = this.player2.getCardOnBoard(index);
+        }
+        else{
+            this.selectedCardInHand = this.player1.getCardOnBoard(index);
+        }
     }
 
-    } 
+    public void clearSelectedCardInHandBuffer(){
+        this.selectedCardInHand = null;
+    }
+    public void clearSelectedCardOnBoardBuffer(){
+        this.selectedCardOnBoard = null;
+    }
     // HELPER SAAT PHASE DRAW
     public List<Card> getThreeCardFromDeck(Integer player){
         // ngasi 3 buah kartu dari deck player 1 ataupun player 2. sementara asumsi kalo udah di get 3 dari deck, deck langsung berkurang 3. tapi masih tergantung implementasi dari Deck
@@ -172,13 +183,14 @@ public class GameState {
     }
 
     // HELPER SAAT PHASE PLAN
-    public void addCardToBoard(Integer idxBoard){
-        // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand
+    public void addCardToBoardAndCleanBuffer(Integer idxBoard){
+        // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand. abis itu clear buffer selected card in hand
         if(this.turn == 1){
             player1.addCardToBoard(idxBoard,this.selectedCardInHand);
         }else{
             player2.addCardToBoard(idxBoard,this.selectedCardInHand);
         }
+        this.clearSelectedCardInHandBuffer();
     }
     public void cardOnBoardGotSpelled(Integer idxBoard){
         //berdasarkan turn dan buffer selectedCardInHand
