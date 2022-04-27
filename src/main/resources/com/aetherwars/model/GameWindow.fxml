@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.model.GameWindow">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.model.GameWindow">
    <children>
       <VBox layoutX="173.0" layoutY="140.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -98,7 +98,7 @@
                                                                <graphic>
                                                                   <ImageView fx:id="playerA_image" fitHeight="141.0" fitWidth="141.0" onMouseClicked="#onPlayer1AvatarClick" pickOnBounds="true" smooth="false">
                                                                      <image>
-                                                                        <Image url="@../../../../resources/com/aetherwars/card/image/player/Steve.png" />
+                                                                        <Image url="@../../card/image/player/Steve.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                </graphic>
@@ -278,7 +278,7 @@
                                                                <graphic>
                                                                   <ImageView fx:id="playerB_image" fitHeight="141.0" fitWidth="141.0" onMouseClicked="#onPlayer2AvatarClick" pickOnBounds="true" smooth="false">
                                                                      <image>
-                                                                        <Image url="@../../../../resources/com/aetherwars/card/image/player/Alex.png" />
+                                                                        <Image url="@src/main/resources/com/aetherwars/card/image/player/Alex.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                </graphic>
@@ -304,11 +304,12 @@
                      <children>
                         <AnchorPane prefHeight="50.0" prefWidth="220.0" style="-fx-border-style: solid;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="labelFaseDraw" alignment="CENTER" contentDisplay="BOTTOM" layoutX="2.0" layoutY="12.0" prefHeight="34.0" prefWidth="218.0" text="DRAW" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                              <Label fx:id="labelFaseDraw" alignment="CENTER" prefHeight="48.0" prefWidth="220.0" text="DRAW" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
+                              <Button fx:id="openDrawWindow" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onDrawOpenWindow" text="Open" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: orange; -fx-border-style: solid;" HBox.hgrow="ALWAYS">
@@ -340,7 +341,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button fx:id="buttonNextFase" layoutX="72.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#onNextPhaseClick" prefHeight="26.0" prefWidth="101.0" text="&gt;&gt;" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="9.0" />
+                              <Button id="NextPhaseButton" fx:id="NextPhaseButton" layoutX="72.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#onNextPhaseClick" prefHeight="26.0" prefWidth="101.0" text="&gt;&gt;" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="9.0" />
                            </children>
                         </AnchorPane>
                      </children>

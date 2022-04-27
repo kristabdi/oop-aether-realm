@@ -146,6 +146,7 @@ public class Player {
     }
 
     public void addCardToBoard(Integer idx, Card card) {
+        
         this.cardOnBoard.addCardById(idx,(CharacterCard)card);
     }
 
@@ -153,7 +154,7 @@ public class Player {
         this.cardInHand.putCardToHand(card);
     }
     public void addCardToDeck(Card card){
-        
+        deck.putCardToDeck(card);
     }
     // public void attackPlayerDirectly(Player enemy, int cardAttack){
         

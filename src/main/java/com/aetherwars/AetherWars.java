@@ -27,10 +27,11 @@ import com.aetherwars.util.CSVReader;
 
 
 public class AetherWars extends Application {
-    private static final String CHARACTER_CSV_FILE_PATH = "src/main/resources/com/aetherwars/card/data/character.csv";
+  private static final String CHARACTER_CSV_FILE_PATH = "src/main/resources/com/aetherwars/card/data/character.csv";
   private static final String SPELL_MORPH_CSV_FILE_PATH = "src/main/resources/com/aetherwars/card/data/spell_morph.csv";
   private static final String SPELL_PTN_CSV_FILE_PATH = "src/main/resources/com/aetherwars/card/data/spell_ptn.csv";
   private static final String SPELL_SWAP_CSV_FILE_PATH = "src/main/resources/com/aetherwars/card/data/spell_swap.csv";
+
 
 
   public static List<CharacterCard> loadCharacterCards() throws IOException, URISyntaxException {
@@ -113,7 +114,7 @@ public class AetherWars extends Application {
 
 
         stage.getIcons().add(new Image("https://w7.pngwing.com/pngs/426/500/png-transparent-minecraft-survivalcraft-mob-creeper-skeleton-creeper-s-video-game-grass-survival.png"));
-        
+    
         stage.setTitle("Aether Realm");
         stage.setScene(scene);
         stage.show();
@@ -143,6 +144,7 @@ public class AetherWars extends Application {
         GameState gameState = new GameState(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         // masukin gameState ke dalam handleEvent
         HandleEvent.setGameState(gameState);
+
         //jalankan gameWindow
         launch();
     }

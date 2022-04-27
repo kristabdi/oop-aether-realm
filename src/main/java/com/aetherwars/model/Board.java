@@ -6,7 +6,10 @@ public class Board {
 
     public Board(){
         this.cardBoard = new BoardSlot[5];
-        this.filled =0;
+        for (int i = 0; i < 5; i++) {
+            this.cardBoard[i] = new BoardSlot();
+        }
+        this.filled = 0;
     }
 
     public CharacterCard getCardBoardByIdx(int idx){
@@ -43,9 +46,10 @@ public class Board {
     //asumsi input selalu benar
     //exception di atas
     public void addCardById(int id,CharacterCard c){
-        this.cardBoard[id].setCard(c);
+        System.out.println("ADD CARD BY ID DENGAN ID" + String.valueOf(id) + " DAN KARAKTERNYA ADALAH ");
+        System.out.println(c);
+        this.cardBoard[id] = new BoardSlot(c);
         this.filled++;
-        this.cardBoard[id].setFilling(true);
     }
 
     public CharacterCard popCard(int index){

@@ -47,6 +47,7 @@ public class GameState {
     public Card selectedCardInHand;
     public Card cardOnDescription;
     public Card selectedCardOnBoard;
+    public List<Card> bufferDrawnCards;
 
     public enum Phase {
         DRAW,
@@ -80,6 +81,10 @@ public class GameState {
     }
     public void nextPhase(){
         // ganti phase, add ngelakuin modifikasi data di game state yg dibutuhkan (misal cleaning seletedCardInHand sama OnBoard. baru kepikiran itu)
+        this.bufferDrawnCards = null;
+        this.selectedCardInHand = null;
+        this.selectedCardOnBoard = null;
+        this.cardOnDescription = null;
         switch (this.phase){
             case DRAW:
                 this.phase = Phase.PLAN;
@@ -102,7 +107,7 @@ public class GameState {
                 break;
         }
     }
-    public List<Card> getCardInHand(){
+    public List<Card> getCardInHandGameState(){
         // return card in hand
         if(this.turn == 1){
             return player1.getCardInHandPlayer();
@@ -112,9 +117,9 @@ public class GameState {
         }
 
     }
-    public Card getCardOnBoard(Integer idx){
+    public Card getPlayerCardOnBoard(Integer player, Integer idx){
         // return card on board
-        if(this.turn == 1){
+        if(player == 1){
             return player1.getCardOnBoard(idx);
         }else{
             return player2.getCardOnBoard(idx);
@@ -126,12 +131,12 @@ public class GameState {
             return true;
         }else return false;
     }
-    public void setSelectedCardInHand(Integer index){
+    public void setSelectedCardInHand(Integer cardNumber){
         if(this.turn == 1){
-            this.selectedCardInHand = player1.getCardInHandPlayer().get(index);
+            this.selectedCardInHand = player1.getCardInHandPlayer().get(cardNumber - 1);
         }
         else{
-            this.selectedCardInHand = player2.getCardInHandPlayer().get(index);
+            this.selectedCardInHand = player2.getCardInHandPlayer().get(cardNumber - 1);
         }
     }
     public Boolean spellInBuffer(){
@@ -199,13 +204,16 @@ public class GameState {
 
     }
     // HELPER SAAT PHASE DRAW
-    public List<Card> getThreeCardFromDeck(Integer player){
+    public void getThreeCardsFromDeckToBuffer(){
         // ngasi 3 buah kartu dari deck player 1 ataupun player 2. sementara asumsi kalo udah di get 3 dari deck, deck langsung berkurang 3. tapi masih tergantung implementasi dari Deck
-        if(player==1){
-            return player1.draw();
+        if(this.turn == 1){
+            this.bufferDrawnCards = player1.draw();
         }else{
-            return player2.draw();
+            this.bufferDrawnCards = player2.draw();
         }
+    }
+    public List<Card> getBufferDrawnCards(){    
+        return this.bufferDrawnCards;
     }
     public void addCardInHand(Card card){
         // add card ke hand player 1 atau player 2
@@ -227,12 +235,15 @@ public class GameState {
     }
 
     // HELPER SAAT PHASE PLAN
-    public void addCardToBoardAndCleanBuffer(Integer idxBoard){
-        // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand. abis itu clear buffer selected card in hand
+    public void addCardToBoardAndCleanBuffer(Integer boardNumber){
+        // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand. abis itu clear buffer selected card in 
+        System.out.println("AKAN MENBAMHAKN CARD KE BOARD,");
+        System.out.println("CARD YANG DITAMBAHKAN ADALAH ");
+        System.out.println(this.selectedCardInHand);
         if(this.turn == 1){
-            player1.addCardToBoard(idxBoard,this.selectedCardInHand);
+            player1.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
         }else{
-            player2.addCardToBoard(idxBoard,this.selectedCardInHand);
+            player2.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
         }
         this.clearSelectedCardInHandBuffer();
     }
@@ -249,16 +260,22 @@ public class GameState {
             player2.useSpellOnCard((CharacterCard)this.selectedCardOnBoard,(SpellCard) this.selectedCardInHand);
         }
     }
-    public void removeCardFromHand(Integer cardIdx){
+    public void removeCardFromHand(){
+        System.out.println("AKAN ME REMOVE CARD DARI CARD IN HAND");
+        System.out.println(this.selectedCardInHand);
         // remove card dari hand player 1 atau player 2
         if(this.turn == 1){
-            player1.removeCardInHand(cardIdx);
+            List<Card> cards = player1.getCardInHandPlayer();
+            Integer cardNumber = cards.indexOf(this.selectedCardInHand);
+            player1.removeCardInHand(cardNumber);
         }else{
-            player2.removeCardInHand(cardIdx);
+            List<Card> cards = player2.getCardInHandPlayer();
+            Integer cardNumber = cards.indexOf(this.selectedCardInHand);
+            player2.removeCardInHand(cardNumber);
         }
     }
 
-    public boolean haveSelected(){
+    public Boolean haveSelectedCardInHand(){
         return selectedCardInHand != null;
     }
 

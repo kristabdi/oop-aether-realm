@@ -23,8 +23,24 @@ public class GameWindowDraw {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
+    @FXML
+    private Button generatedCard1;
+    @FXML
+    private ImageView generatedCard1_image;
+    @FXML
+    private Button generatedCard2;
+    @FXML
+    private ImageView generatedCard2_image;
+    @FXML
+    private Button generatedCard3;
+    @FXML
+    private ImageView generatedCard3_image;
+
 
     public void switchToGameWindow(MouseEvent event) throws IOException {
+        System.out.println("event pas mo ganti game window");
+        System.out.println(event);
         root = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1366, 768);
@@ -35,7 +51,7 @@ public class GameWindowDraw {
     // FUNGSI UNTUK GAME WINDOW DRAW
     @FXML
     void onDrawSelectFirst(MouseEvent event){
-    
+        HandleEvent.onPilihKartuDrawClick(1);
         try{
             switchToGameWindow(event);
         }
@@ -45,6 +61,7 @@ public class GameWindowDraw {
     }
     @FXML
     void onDrawSelectSecond(MouseEvent event){
+        HandleEvent.onPilihKartuDrawClick(2);
         try{
             switchToGameWindow(event);
         }
@@ -54,6 +71,7 @@ public class GameWindowDraw {
     }
     @FXML
     void onDrawSelectThird(MouseEvent event){
+        HandleEvent.onPilihKartuDrawClick(3);
         try{
             switchToGameWindow(event);
         }
@@ -65,5 +83,24 @@ public class GameWindowDraw {
     void initialize(){
         // untuk set gambar dari 
         System.out.println("===== Berhasil Render Scene Draw =====");
+        
+        //update gameState
+        HandleEvent.onDraw();
+
+        //update gameWindowDraw. manual ae, soalnya gk banyak
+        for (int i = 0 ; i < HandleEvent.gameState.getBufferDrawnCards().size();i++){
+            Card card = HandleEvent.gameState.getBufferDrawnCards().get(i);
+            if(i == 0){
+                generatedCard1.setText(card.getName());
+            }
+            if(i == 1){
+                generatedCard2.setText(card.getName());
+            }
+            if(i == 2){
+                generatedCard3.setText(card.getName());
+            }
+        }
+
+        
     }
 }

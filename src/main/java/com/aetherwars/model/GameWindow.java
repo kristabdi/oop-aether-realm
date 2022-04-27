@@ -1,9 +1,13 @@
 //ini controller dari gameWindow fxml
 package com.aetherwars.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.List;
+
+import com.aetherwars.model.GameState.Phase;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +15,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,9 +28,11 @@ public class GameWindow {
     // Buat atribut yang sesuai tipe tag dan id pada fxml, terus buat method protectedvoid, terus masukin
     // nama fungsi ke dalam fxml dengan nama yang harus sama, misal <Button onAction="#onButtonClick">
     // Buat ganti scene
-    private Stage stage;
+    
     private Scene scene;
     private Parent root;
+    private Stage stage;
+
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -121,44 +129,148 @@ public class GameWindow {
     private Button generatedCard2;
     @FXML
     private Button generatedCard3;
+    @FXML
+    private Button openDrawWindow;
+    @FXML
+    private AnchorPane ap;
 
 
+    public static final String PATH_TO_IMAGE= "src/main/resources/com/aetherwars/card/image/";
     // METHOD GANTI SCENE
     
     public void switchToGameWindowDraw(MouseEvent event) throws IOException {
-        System.out.print("==== ganti game window mulai ====");
+        System.out.println("event pas mo ganti game window");
+        System.out.println(event);
         root = FXMLLoader.load(getClass().getResource("GameWindowDraw.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1366, 768);
         stage.setScene(scene);
         stage.show();
-        System.out.print("ganti game window selesai");
     }
-
+    
         
     protected void setWindowBasedOnGameState(){
+        System.out.println("SEKARANG TURN ORANG KE " + String.valueOf(HandleEvent.gameState.getTurn()));
         /* SET BOARD */
         // player 1
+        System.out.println("SIZE DARI BOARD PLAYER 1 SAAT INI ADALAH" + String.valueOf(HandleEvent.gameState.getPlayer(1).getPlayerDeckSize()));
         // char A
-        // player1_CharA.setText(HandleEvent.gameState.getCardOnBoard(1).getName());
+        if(HandleEvent.gameState.getPlayerCardOnBoard(1,0) != null){
+            player1_CharA.setText(HandleEvent.gameState.getPlayerCardOnBoard(1,0).getName());
+        }
+        else{
+            player1_CharA.setText("A");
+        }
         // char B
+        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 1) != null){
+            player1_CharB.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 1).getName());
+        }
+        else{
+            player1_CharB.setText("B");
+        }
         // char C
+        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 2) != null){
+            player1_CharC.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 2).getName());
+        }
+        else{
+            player1_CharC.setText("C");
+        }
         // char D
+        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 3) != null){
+            player1_CharD.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 3).getName());
+        }
+        else{
+            player1_CharD.setText("D");
+        }        
         // char E
+        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 4) != null){
+            player1_CharE.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 4).getName());
+        }
+        else{
+            player1_CharE.setText("E");
+        }
 
         // player 2
+        // char A
+        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 0) != null){
+            player2_CharA.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 0).getName());
+        }
+        else{
+            player2_CharA.setText("A");
+        }
+        // char B
+        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 1) != null){
+            player2_CharB.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 1).getName());
+        }
+        else{
+            player2_CharB.setText("B");
+        }
+        // char C
+        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 2) != null){
+            player2_CharC.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 2).getName());
+        }
+        else{
+            player2_CharC.setText("C");
+        }
+        // char D
+        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 3) != null){
+            player2_CharD.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 3).getName());
+        }
+        else{
+            player2_CharD.setText("D");
+        }        
+        // char E
+        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 4) != null){
+            player2_CharE.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 4).getName());
+        }
+        else{
+            player2_CharE.setText("E");
+        }
 
         /* SET CARD IN HAND */
-        // player 1
-        // player 2
+        // CLEAR CARD IN HAND START
+        cardInHand1.setText("");
+        cardInHand2.setText("");
+        cardInHand3.setText("");
+        cardInHand4.setText("");
+        cardInHand5.setText("");
+        // CLEAR CARD IN HAND DONE
+        // untuk player 1 dan player 2, kalo ganti turn nti ganti sendiri
+        List<Card> cardsBuffer = HandleEvent.gameState.getCardInHandGameState();
+        //print ukuran card in hand
+        Integer ukuran = cardsBuffer.size();
+        System.out.println("ukuran = " + String.valueOf(ukuran));
+        for(int i = 0; i < ukuran; i++){
+            if(i == 0){
+                //tambahin ke cardInHand1
+                cardInHand1.setText(cardsBuffer.get(i).getName());
+            } else if(i == 1){
+                //tambahin ke cardInHand2
+                cardInHand2.setText(cardsBuffer.get(i).getName());
+            } else if(i == 2){
+                //tambahin ke cardInHand3
+                cardInHand3.setText(cardsBuffer.get(i).getName());
+            } else if(i == 3){
+                //tambahin ke cardInHand4
+                cardInHand4.setText(cardsBuffer.get(i).getName());
+            } else if(i == 4){
+                //tambahin ke cardInHand5
+                cardInHand5.setText(cardsBuffer.get(i).getName());
+            }
+        }
         /* SET PLAYER */ 
         // player 1
         player1Name.setText(HandleEvent.gameState.getPlayer(1).getName());
+        File imagep1 = new File(PATH_TO_IMAGE + "player/Steve.png");
+        System.out.println(imagep1.getAbsolutePath());
+        playerA_image.setImage(new Image(imagep1.toURI().toString()));
         System.out.println("darah player 1");
         player1HealthBar.setProgress((double)HandleEvent.gameState.getPlayer(1).getHealth()/80);
         System.out.println(HandleEvent.gameState.getPlayer(1).getHealth());
         // player 2
-        player2Name.setText(HandleEvent.gameState.getPlayer(2).getName()); 
+        player2Name.setText(HandleEvent.gameState.getPlayer(2).getName());
+        File imagep2 = new File(PATH_TO_IMAGE + "player/Alex.png");
+        playerB_image.setImage(new Image(imagep2.toURI().toString()));
         System.out.println("darah player 2");
         player2HealthBar.setProgress((double)HandleEvent.gameState.getPlayer(2).getHealth()/80);
         System.out.println(HandleEvent.gameState.getPlayer(2).getHealth());
@@ -203,29 +315,41 @@ public class GameWindow {
     
 
     // FUNGSI UNTUK GAME WINDOW UTAMA
+
+    @FXML
+    protected void onDrawOpenWindow(MouseEvent event){
+        if(HandleEvent.gameState.getPhase() == Phase.DRAW){
+            try{
+                this.switchToGameWindowDraw(event);
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
     @FXML
     void OnCardInHand1Hover(MouseEvent event) {
-
+        HandleEvent.onHover(0, "inhand", 1);
     }
 
     @FXML
     void OnCardInHand2Hover(MouseEvent event) {
-
+        HandleEvent.onHover(0, "inhand", 2);
     }
 
     @FXML
     void OnCardInHand3Hover(MouseEvent event) {
-
+        HandleEvent.onHover(0, "inhand", 3);
     }
 
     @FXML
     void OnCardInHand4Hover(MouseEvent event) {
-
+        HandleEvent.onHover(0, "inhand", 4);
     }
 
     @FXML
     void OnCardInHand5Hover(MouseEvent event) {
-
+        HandleEvent.onHover(0, "inhand", 5);
     }
 
     @FXML
@@ -236,40 +360,50 @@ public class GameWindow {
         
         // update gameWindow
         setWindowBasedOnGameState();
-        try {
-            switchToGameWindowDraw(event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     void onCardInHand2Click(MouseEvent event) {
-HandleEvent.gameState.getPlayer(1).setHealth(40);
+        // update gameState
         HandleEvent.onInHandClick(2);
+         
+         // update gameWindow
+        setWindowBasedOnGameState();
     }
 
     @FXML
     void onCardInHand3Click(MouseEvent event) {
+        // update gameState
         HandleEvent.onInHandClick(3);
+         // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onCardInHand4Click(MouseEvent event) {
+       // update gameState
         HandleEvent.onInHandClick(4);
+         // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onCardInHand5Click(MouseEvent event) {
+        // update gameState
         HandleEvent.onInHandClick(5);
+         // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onNextPhaseClick(MouseEvent event) {
+        System.out.println("DI KLIK NEXT PHASE");
         HandleEvent.onNextPhaseClick();
+
+        this.setWindowBasedOnGameState();
     }
 
     @FXML
@@ -280,55 +414,64 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
     @FXML
     void onPlayer1_CharA(MouseEvent event) {
         HandleEvent.onBoardClick(1,1);
-
+        // update gameWindow
+        setWindowBasedOnGameState();
     }
 
     @FXML
     void onPlayer1_CharAHover(MouseEvent event) {
-
+        HandleEvent.onHover(1, "board", 1);
     }
 
     @FXML
     void onPlayer1_CharB(MouseEvent event) {
         HandleEvent.onBoardClick(1,2);
+        // update gameWindow
+        setWindowBasedOnGameState();
     }
 
     @FXML
     void onPlayer1_CharBHover(MouseEvent event) {
         
-
+        HandleEvent.onHover(1, "board", 2);
     }
 
     @FXML
     void onPlayer1_CharC(MouseEvent event) {
         HandleEvent.onBoardClick(1,3);
+        // update gameWindow
+        setWindowBasedOnGameState();
     }
 
     @FXML
     void onPlayer1_CharCHover(MouseEvent event) {
-
+        HandleEvent.onHover(1, "board", 3);
     }
 
     @FXML
     void onPlayer1_CharD(MouseEvent event) {
         HandleEvent.onBoardClick(1,4);
+        // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onPlayer1_CharDHover(MouseEvent event) {
-
+        HandleEvent.onHover(1, "board", 4);
     }
 
     @FXML
     void onPlayer1_CharE(MouseEvent event) {
         HandleEvent.onBoardClick(1,5);
+        // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onPlayer1_CharEHover(MouseEvent event) {
-
+        HandleEvent.onHover(1, "board", 5);
     }
 
     @FXML
@@ -339,54 +482,64 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
     @FXML
     void onPlayer2_CharA(MouseEvent event) {
         HandleEvent.onBoardClick(2,1);
+        // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onPlayer2_CharAHover(MouseEvent event) {
-
+        HandleEvent.onHover(2, "board", 1);
     }
 
     @FXML
     void onPlayer2_CharB(MouseEvent event) {
         HandleEvent.onBoardClick(2,2);
+        // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onPlayer2_CharBHover(MouseEvent event) {
-
+        HandleEvent.onHover(2, "board", 2);
     }
 
     @FXML
     void onPlayer2_CharC(MouseEvent event) {
         HandleEvent.onBoardClick(2,3);
+        // update gameWindow
+        setWindowBasedOnGameState();
     }
 
     @FXML
     void onPlayer2_CharCHover(MouseEvent event) {
-
+        HandleEvent.onHover(2, "board", 3);
     }
 
     @FXML
     void onPlayer2_CharD(MouseEvent event) {
         HandleEvent.onBoardClick(2,4);
+        // update gameWindow
+        setWindowBasedOnGameState();
 
     }
 
     @FXML
     void onPlayer2_CharDHover(MouseEvent event) {
-
+        HandleEvent.onHover(2, "board", 4);
     }
 
     @FXML
     void onPlayer2_CharE(MouseEvent event) {
         HandleEvent.onBoardClick(2,5);
+        // update gameWindow
+        setWindowBasedOnGameState();
     }
 
     @FXML
     void onPlayer2_CharEHover(MouseEvent event) {
-
+        HandleEvent.onHover(2, "board", 5);
     }
 
     @FXML
