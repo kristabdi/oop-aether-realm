@@ -40,6 +40,8 @@ public class GameWindow {
     @FXML
     private Button buttonNextFase;
     @FXML
+    private Button addExpButton;
+    @FXML
     private Button cardInHand1;
     @FXML
     private Button cardInHand2;
@@ -327,6 +329,12 @@ public class GameWindow {
             }
         }
     }
+
+    @FXML
+    void addExpClick(MouseEvent event) {
+
+    }
+    
     @FXML
     void OnCardInHand1Hover(MouseEvent event) {
         HandleEvent.onHover(0, "inhand", 1);
