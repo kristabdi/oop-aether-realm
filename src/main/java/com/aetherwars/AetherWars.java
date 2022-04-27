@@ -32,7 +32,6 @@ public class AetherWars extends Application {
 
 
   public static List<CharacterCard> loadCharacterCards() throws IOException, URISyntaxException {
-    //   List<String> idList = new ArrayList<String>();
     List<CharacterCard> characterCards = new ArrayList<CharacterCard>();
     File characterCSVFile = new File(CHARACTER_CSV_FILE_PATH);
     System.out.println("characterCSVFile: " + characterCSVFile.getAbsolutePath());
@@ -41,7 +40,6 @@ public class AetherWars extends Application {
     Reader.setSkipHeader(true);
     List<String[]> Rows = Reader.read();
     for (String[] row : Rows) {
-      // idList.add(row[1]);
       CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], Integer.valueOf(row[5]), Integer.valueOf(row[6]), Integer.valueOf(row[7]), Integer.valueOf(row[8]), Integer.valueOf(row[9]));
       System.out.println("data");
       System.out.println(c);
@@ -61,8 +59,6 @@ public class AetherWars extends Application {
       int targetId = Integer.valueOf(row[4]);
 
       CharacterCard target = characterCards.get(targetId - 1); // keknya di minus 1 ya? iya bener - 1
-      // MorphSpell(String name, String type, String description, CharacterCard target, int mana)
-        
       MorphSpell c = new MorphSpell(row[1], "Morph", row[2], target, Integer.valueOf(row[5]));
       System.out.println(c);
       morphSpells.add(c);
