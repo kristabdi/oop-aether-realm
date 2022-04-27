@@ -191,6 +191,11 @@ public class GameState {
             player2.removeCardInHand(cardIdx);
         }
     }
+
+    public boolean haveSelected(){
+        return selectedCardInHand != null;
+    }
+
     // HELPER SAAT PHASE ATTACK
     public void attack(Integer idxBoardAttacker){
         // get card yg attacker sama victim

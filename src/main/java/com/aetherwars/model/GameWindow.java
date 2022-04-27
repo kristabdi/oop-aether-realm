@@ -15,13 +15,6 @@ public class GameWindow {
 //    }
 
     @FXML
-    protected void onPlayer1CharDClick(){
-        String teks = HandleEvent.onButtonClick();
-        player1_CharD.setText(teks);
-        // player1_CharD.setText("ini yang baru");
-    }
-
-    @FXML
     protected void onCardInHand1Click(){
         HandleEvent.onInHandClick(1);
     }
@@ -46,6 +39,55 @@ public class GameWindow {
         HandleEvent.onInHandClick(5);
     }
 
+    @FXML
+    protected void onPlayer1_CharA(){
+        HandleEvent.onBoardClick(1,1);
+    }
+
+    @FXML
+    protected void onPlayer1_CharB(){
+        HandleEvent.onBoardClick(1,2);
+    }
+
+    @FXML
+    protected void onPlayer1_CharC(){
+        HandleEvent.onBoardClick(1,3);
+    }
+
+    @FXML
+    protected void onPlayer1_CharD(){
+        HandleEvent.onBoardClick(1,4);
+    }
+
+    @FXML
+    protected void onPlayer1_CharE(){
+        HandleEvent.onBoardClick(1,5);
+    }
+
+    @FXML
+    protected void onPlayer2_CharA(){
+        HandleEvent.onBoardClick(2,1);
+    }
+
+    @FXML
+    protected void onPlayer2_CharB(){
+        HandleEvent.onBoardClick(2,2);
+    }
+
+    @FXML
+    protected void onPlayer2_CharC(){
+        HandleEvent.onBoardClick(2,3);
+    }
+
+    @FXML
+    protected void onPlayer2_CharD(){
+        HandleEvent.onBoardClick(2,4);
+    }
+
+    @FXML
+    protected void onPlayer2_CharE(){
+        HandleEvent.onBoardClick(2,5);
+    }
 
         
 }
