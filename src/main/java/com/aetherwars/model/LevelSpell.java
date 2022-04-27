@@ -5,7 +5,7 @@ import java.lang.Math;
 public class LevelSpell extends SpellCard implements Spell {
     private int levelModifier;
 
-    LevelSpell(String name, String type, String description, int mana, int levelModifier) {
+    public LevelSpell(String name, String type, String description, int mana, int levelModifier) {
     // SpellCard(String name, String type, String description, int mana, int duration, int exp, String imagepath)
         super(name, type, description, mana, 0, 0, "");
         this.levelModifier = levelModifier;

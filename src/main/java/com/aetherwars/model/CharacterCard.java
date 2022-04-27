@@ -23,7 +23,7 @@ public class CharacterCard extends Card {
     private int attackBuff;
     private int healthBuff;
 
-    CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp) {
+    public CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp) {
         super(name, "Character", description);
         this.attribute = attribute;
         this.imgPath = imgPath;
