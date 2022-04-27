@@ -122,22 +122,25 @@ public class AetherWars extends Application {
     }
 
     public static void main(String[] args) {
-        File directory = new File("src/main/resources/card/data");
-        System.out.println(directory.getAbsolutePath());
+        List<CharacterCard> characterCards;
+        List<MorphSpell> morphSpells;
+        List<PotionSpell> potionSpells;
+        List<SwapSpell> swapSpells;
+        List<LevelSpell> levelSpells;
         //baca semua possible card
         try {
-            List<CharacterCard> characterCards = loadCharacterCards();
-            List<MorphSpell> morphSpells =  loadSpellMorph(characterCards);
-            List<PotionSpell> potionSpells =  loadSpellPtn();
-            List<SwapSpell> swapSpells = loadSpellSwap();
-            List<LevelSpell> levelSpells = loadSpellLevel();
+            characterCards = loadCharacterCards();
+            morphSpells =  loadSpellMorph(characterCards);
+            potionSpells =  loadSpellPtn();
+            swapSpells = loadSpellSwap();
+            levelSpells = loadSpellLevel();
           } catch (Exception e) {
             e.printStackTrace();
             System.out.println("GAGAL LOAD CARD");
 
           }
         // buat gameState
-        GameState gameState = new GameState();
+        GameState gameState = new GameState(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         // masukin gameState ke dalam handleEvent
         HandleEvent.setGameState(gameState);
         //jalankan gameWindow
