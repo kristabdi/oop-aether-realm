@@ -234,7 +234,7 @@ HandleEvent.gameState.getPlayer(1).setHealth(40);
 
     @FXML
     void onPlayer1AvatarClick(MouseEvent event) {
-        
+
     }
 
     @FXML
