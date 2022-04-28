@@ -14,6 +14,11 @@ public class Card {
     public String getImagePath(){
         return this.imagePath;
     }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public String getName() {
         return name;
     }
