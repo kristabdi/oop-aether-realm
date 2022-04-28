@@ -50,28 +50,45 @@ public class Board {
     }
 
     public void setCardInIndexAttackedToTrue(Integer idx){
+        System.out.println("dari board, setCardInIndexAttackedToTrue jalan, dengan yg diset di index: ");
+        System.out.println(idx);
         cardBoard[idx].setAttack(true);
     }
-//masi problem
+    //masi problem
     public void update(){
+        System.out.println("UPDATE BOARD!");
         int i;
+        int newFilled = this.getFilled();
         for(i=0;i<5;i++){
             if(this.cardBoard[i].isFilled()){
                 if(this.cardBoard[i].getCard().getFinalHealth()>0){
-                    this.cardBoard[i].getCard().updateSpellsEndDuration();
                     this.cardBoard[i].getCard().setAttackBuff();
                     this.cardBoard[i].getCard().setHealthBuff();
-                    this.cardBoard[i].setAttack(false);
                 }else{
+                    this.cardBoard[i].setCard(null);
                     this.cardBoard[i].setFilling(false);
+                    newFilled -= 1;
                 }
             }
         }
+        this.filled = newFilled;
     }
-    //SAMA PERSIS KAYA ISSLOTFILLED
-    // public boolean isCardBoardEmpty(int idx){
-    //     return this.cardBoard[idx].isFilled();
-    // }
+
+    public void resetAllAttackToFalse(){
+        for(int i=0;i<5;i++){
+            if(this.cardBoard[i].isFilled()){
+                this.cardBoard[i].setAttack(false);
+            }
+        }
+    }
+    public void reduceSpellOnCardOnBoardDuration(){
+        for(int i=0;i<5;i++){
+            if(this.cardBoard[i].isFilled()){
+                this.cardBoard[i].getCard().updateSpellsEndDuration();
+            }
+        }
+
+    }
 }
 
 

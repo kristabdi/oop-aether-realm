@@ -22,27 +22,66 @@ public class Deck {
             if ((random > 0 && random < 16)) {
                 //random level spell
                 int randomLevelSpell = (int) (Math.random() * levelSpells.size());
-                cardInDeck.push(levelSpells.get(randomLevelSpell));
-                // System.out.println(levelSpells.get(randomLevelSpell));
+                LevelSpell levelSpell = levelSpells.get(randomLevelSpell);
+                LevelSpell newLevelSpell = new LevelSpell(levelSpell.getName(), levelSpell.getType(), levelSpell.getDescription(), levelSpell.getMana(), levelSpell.getLevelModifier());
+                cardInDeck.push(newLevelSpell);
+                // System.out.println(levelSpell);
             } else if ((random > 15 && random < 31)) {
                 //random swap spell
                 int randomSwapSpell = (int) (Math.random() * swapSpells.size());
-                cardInDeck.push(swapSpells.get(randomSwapSpell));
-                // System.out.println(swapSpells.get(randomSwapSpell));
+                SwapSpell swapSpell = swapSpells.get(randomSwapSpell);
+                SwapSpell newSwapSpell = new SwapSpell(swapSpell.getName(), swapSpell.getType(), swapSpell.getDescription(), swapSpell.getMana(), swapSpell.getSpellDuration(), swapSpell.getEXP(), swapSpell.getImagePath());
+                cardInDeck.push(newSwapSpell);
+                // System.out.println(swapSpell);
             } else if ((random > 30 && random < 46)) {
                 //random potion spell
                 int randomPotionSpell = (int) (Math.random() * potionSpells.size());
-                cardInDeck.push(potionSpells.get(randomPotionSpell));
+
+                PotionSpell ps = potionSpells.get(randomPotionSpell);
+
+                String newName = ps.getName();
+                String newType = ps.getType();
+                String newDescription = ps.getDescription();
+                int newMana = ps.getMana();
+                int newDurasi = ps.getSpellDuration();
+                int newExp = ps.getEXP();
+                String newImagePath = ps.getImagePath();
+                int newAttackModifier = ps.getAttackModifier();
+                int newHealthModifier = ps.getHealthModifier();
+
+                
+                PotionSpell newPotionSpell = new PotionSpell(newName, newType, newDescription, newMana, newDurasi, newExp, newImagePath, newAttackModifier, newHealthModifier);
+                cardInDeck.push(newPotionSpell);
                 // System.out.println(potionSpells.get(randomPotionSpell));
             } else if ((random > 45 && random < 61)) {
                 //random morph spell
                 int randomMorphSpell = (int) (Math.random() * morphSpells.size());
-                cardInDeck.push(morphSpells.get(randomMorphSpell));
+                MorphSpell morphSpell = morphSpells.get(randomMorphSpell);
+                String newName = morphSpell.getName();
+                String newType = morphSpell.getType();
+                String newDescription = morphSpell.getDescription();
+                CharacterCard newCharacterCard = morphSpell.getMorphTarget();
+                int newMana = morphSpell.getMana();
+                String newImagePath = morphSpell.getImagePath();
+                MorphSpell newMorphSpell = new MorphSpell(newName, newType, newDescription, newCharacterCard, newMana, newImagePath);
+                cardInDeck.push(newMorphSpell);
                 // System.out.println(morphSpells.get(randomMorphSpell));
             } else {
                 //random character card
                 int randomCharacterCard = (int) (Math.random() * characterCards.size());
-                cardInDeck.push(characterCards.get(randomCharacterCard));
+                CharacterCard characterCard = characterCards.get(randomCharacterCard);
+                // String name, Type attribute, String description, String imagePath, int attack, int health, int mana, int attackUp, int healthUp
+                String newName = characterCard.getName();
+                CharacterCard.Type newType = characterCard.getAttribute();
+                String newDescription = characterCard.getDescription();
+                String newImagePath = characterCard.getImagePath();
+                int newAttack = characterCard.getAttack();
+                int newHealth = characterCard.getHealth();
+                int newMana = characterCard.getMana();
+                int newAttackUp = characterCard.getAttackUp();
+                int newHealthUp = characterCard.getHealthUp();
+                CharacterCard newCharacterCard = new CharacterCard(newName, newType, newDescription, newImagePath, newAttack, newHealth, newMana, newAttackUp, newHealthUp);
+                cardInDeck.push(newCharacterCard);
                 // System.out.println(characterCards.get(randomCharacterCard));
             }
         }

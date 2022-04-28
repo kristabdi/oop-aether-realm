@@ -2,31 +2,6 @@ package com.aetherwars.model;
 
 import java.util.List;
 
-// public class GameState {
-//     //punya catatan global yg gabakal keganti
-//     // list semua kartu yg mungkin
-
-//     // attribut
-//     private String word;
-
-//     // UMUM
-//     public GameState() {
-//         this.word = "abcdef";
-//     }
-//     public String getWord(){
-//         return this.word;
-//     }
-//     public void changeWord(){
-//         if(this.word.equals("abcdef")){
-//             this.word = "ini yg baru";
-//         }
-//         else{
-//             this.word = "abcdef";
-//         }
-//     }
-// }
-
-
 public class GameState {
     //punya catatan global yg gabakal keganti
     // list semua kartu yg mungkin
@@ -38,6 +13,7 @@ public class GameState {
     // attribut
     private Integer turn;
     private Boolean hasDrawn;
+    private Integer round; // 1 ronde terdiri atas 2 turn
     // using enum for phase
     private Phase phase;
 
@@ -60,14 +36,15 @@ public class GameState {
 
     // UMUM
     public GameState(List<CharacterCard> characterCards, List<MorphSpell> morphSpells, List<PotionSpell> potionSpells, List<SwapSpell> swapSpells, List<LevelSpell> levelSpells) {
+        this.round = 1;
         this.turn = 1;
         this.phase = Phase.DRAW;
         Deck d1 = new Deck();
         d1.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         Deck d2 = new Deck();
         d2.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
-        this.player1 = new Player("pesatu", 10, d1, new CardInHand(), new Board());
-        this.player2 = new Player("pedua", 10, d2, new CardInHand(), new Board());
+        this.player1 = new Player("pesatu", 1, d1, new CardInHand(), new Board());
+        this.player2 = new Player("pedua", 1, d2, new CardInHand(), new Board());
         this.characterCards = characterCards;
         this.morphSpells = morphSpells;
         this.potionSpells = potionSpells;
@@ -106,7 +83,14 @@ public class GameState {
                 }
                 else{
                     this.turn = 1;
+                    this.round += 1;
                 }
+                this.player1.resetMana(5*round);
+                this.player1.setAllBoardHasAttackedToFalse();
+                this.player1.reduceSpellOnCardOnPlayerBoardDuration();
+                this.player2.resetMana(5*round);
+                this.player2.setAllBoardHasAttackedToFalse();
+                this.player2.reduceSpellOnCardOnPlayerBoardDuration();
                 break;
         }
     }
@@ -209,11 +193,13 @@ public class GameState {
                 this.cardOnDescription = this.player2.getCardInHandPlayer().get(cardNumber - 1);
             }
         }
-        System.out.println("== CARD YANG SAAT INI DI DI DESCRIPTION ADALAH ====");
-        System.out.println(this.cardOnDescription);
+        // System.out.println("== CARD YANG SAAT INI DI DI DESCRIPTION ADALAH ====");
+        // System.out.println(this.cardOnDescription);
 
     }
-
+    public int getRound(){
+        return this.round;
+    }
     public Integer getCurrentPlayerMana(){
         if(this.turn == 1){
             return this.player1.getMana();
@@ -221,6 +207,12 @@ public class GameState {
         else{
             return this.player2.getMana();
         }
+    }
+
+    public void refreshBothPlayerDeck(){
+
+        this.player1.updateBoard();
+        this.player2.updateBoard();
     }
     // HELPER SAAT PHASE DRAW
     public void getThreeCardsFromDeckToBuffer(){
@@ -254,7 +246,7 @@ public class GameState {
     }
 
     // HELPER SAAT PHASE PLAN
-    public void addCardToBoardAndCleanBuffer(Integer boardNumber){
+    public void addCardToBoard(Integer boardNumber){
         // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand. abis itu clear buffer selected card in 
         System.out.println("AKAN MENBAMHAKN CARD KE BOARD,");
         System.out.println("CARD YANG DITAMBAHKAN ADALAH ");
@@ -264,20 +256,34 @@ public class GameState {
         }else{
             player2.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
         }
-        this.clearSelectedCardInHandBuffer();
     }
     
     public void cardOnBoardGotSpelled(Integer boardNumber){
         // berdasarkan current turn dan selectedCardInHand
         if(this.turn == 1){
             // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.
+            System.out.println("apakah yg di klik itu instance of charactercard");
+            System.out.println(this.player1.getCardOnBoard(boardNumber - 1) instanceof CharacterCard);
+            System.out.println("apakah yg di select di hand itu spellcard?");
+            System.out.println(this.selectedCardInHand instanceof SpellCard);
+
+
             if(this.player1.getCardOnBoard(boardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof SpellCard){
-                player1.useSpellOnCard((CharacterCard)this.selectedCardOnBoard,(SpellCard) this.selectedCardInHand);
+                // gunakan spell
+                player1.useSpellOnCard((CharacterCard)this.player1.getCardOnBoard(boardNumber - 1),(SpellCard) this.selectedCardInHand);
+                // remove selected card on hand
+                
             }
         }
         else{
+            System.out.println("apakah yg di klik itu instance of charactercard");
+            System.out.println(this.player2.getCardOnBoard(boardNumber - 1) instanceof CharacterCard);
+            System.out.println("apakah yg di select di hand itu spellcard?");
+            System.out.println(this.selectedCardInHand instanceof SpellCard);
+            System.out.println(this.selectedCardInHand);
+
             if(this.player2.getCardOnBoard(boardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof SpellCard){
-                player2.useSpellOnCard((CharacterCard)this.selectedCardOnBoard,(SpellCard) this.selectedCardInHand);
+                player2.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(boardNumber - 1),(SpellCard) this.selectedCardInHand);
             }
         }
     }
@@ -295,18 +301,56 @@ public class GameState {
             Integer cardNumber = cards.indexOf(this.selectedCardInHand);
             player2.removeCardInHand(cardNumber);
         }
+        this.clearSelectedCardInHandBuffer();
+
     }
     public Card getSelectedCardOnBoard(){
         return this.selectedCardOnBoard;
     }
+    public void setSelectedCardOnBoard(Card card){
+        this.selectedCardOnBoard = card;
+    }
     public Integer getSelectedCardOnBoardNumber(){
         return this.selectedCardOnBoardNumber;
+    }
+    public void setSelectedCardOnBoardNumber(Integer boardNumber){
+        this.selectedCardOnBoardNumber = boardNumber;
+    }
+    public void setSelectedCardOnBoardBasedOnCurrentPlayer(Integer boardNumber){
+        if(this.turn == 1){
+            this.selectedCardOnBoard = this.player1.getCardOnBoard(boardNumber - 1);
+        }
+        else{
+            this.selectedCardOnBoard = this.player2.getCardOnBoard(boardNumber - 1);
+        }
     }
 
     public Boolean haveSelectedCardInHand(){
         return selectedCardInHand != null;
     }
+    public Boolean isThereACardOnBoardXOnCurrentPlayerBoard(Integer boardNumber){
+        System.out.println("ngecek apakah board udah ada isinya!!!");
+        if(this.turn == 1){
+            if(this.player1.getCardOnBoard(boardNumber - 1) != null){
+                System.out.println("ADA ISINYAAAAAA!");
+            }
+            else {
+                System.out.println("GA ADA ISINYAAAAAA!");
+            }
+            return (this.player1.getCardOnBoard(boardNumber - 1) != null);
+        }
+        else{
+            if(this.player2.getCardOnBoard(boardNumber - 1) != null){
+                System.out.println("ADA ISINYAAAAAA!");
+            }
+            else{
+                System.out.println("GA ADA ISINYAAAAAA!");
+                
+            }
+            return (this.player2.getCardOnBoard(boardNumber - 1) != null);
+        }
 
+    }
     // HELPER SAAT PHASE ATTACK
     public void attack(){
         System.out.println("ADA YG COBA NGE ATTACK PLAYER LANGSUNG");
@@ -323,8 +367,10 @@ public class GameState {
                 System.out.println(isHaveAttacked);
                 if(this.player2.isVulnerable() && !isHaveAttacked){
                     this.player2.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
-                    // Set characterCard player opposite di Index selectedCardOnBoardNumber has Attack menjadi true
+                    // Set characterCard player attacker di Index selectedCardOnBoardNumber has Attack menjadi true
+                    System.out.println("index board player 1 yang akan di buah menjadi true adalah " + String.valueOf(this.selectedCardOnBoardNumber - 1));
                     this.player1.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
+                    // isHaveAttacked = true;
                 }
             }
             else{
@@ -333,7 +379,9 @@ public class GameState {
                 System.out.println(isHaveAttacked);
                 if(this.player1.isVulnerable() && !isHaveAttacked){
                     this.player1.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
+                    System.out.println("index board player 2 yang akan di buah menjadi true adalah " + String.valueOf(this.selectedCardOnBoardNumber - 1));
                     this.player2.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
+                    // isHaveAttacked = true;
                 }
             }
             this.clearSelectedCardOnBoardBuffer();
@@ -344,22 +392,30 @@ public class GameState {
         // melakukan peng attackan berdasarkan turn saat ini, selectedCardOnBoard. jadi player pada turn saat ini, akan mengattack selectedCardOnBoard.
         if(this.selectedCardOnBoard != null){
             if(this.turn == 1){
+                System.out.println("apakah charcter di buffer sudah pernah nge attack?");
+                Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
+                System.out.println(isHaveAttacked);
+                
                 Card victim = player2.getCardOnBoard(boardNumberVictim - 1);
-                if(victim != null){
-                    // Cek apakah boardNumber attacker hasAttacknya false
-                    if(this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1)){
-                        player1.attack(this.selectedCardOnBoardNumber - 1, (CharacterCard)victim);
-                    }
-                    // ((CharacterCard)this.selectedCardOnBoard).attack((CharacterCard)victim);
+
+                // Cek apakah boardNumber attacker hasAttacknya false
+                if(victim != null && !isHaveAttacked){
+                    player1.attack(this.selectedCardOnBoardNumber - 1, (CharacterCard)victim);
+                    this.player1.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
                 }
-                // attack
+            
             
             }else{
+                System.out.println("apakah charcter di buffer sudah pernah nge attack?");
+                Boolean isHaveAttacked = this.player2.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
+                System.out.println(isHaveAttacked);
                 // attack dilakukan oleh player 2
                 Card victim = player1.getCardOnBoard(boardNumberVictim - 1);
                 // attack
-                if(victim != null){
-                    ((CharacterCard)this.selectedCardOnBoard).attack((CharacterCard)victim);
+                if(victim != null && !isHaveAttacked){
+                    player2.attack(this.selectedCardOnBoardNumber - 1, (CharacterCard)victim);
+                    this.player2.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
+
                 }
             }
         }
