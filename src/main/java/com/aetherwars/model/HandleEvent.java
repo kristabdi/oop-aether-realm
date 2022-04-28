@@ -30,12 +30,12 @@ public class HandleEvent{
         gameState.nextPhase();
     }
 
-    public static void onInHandClick(int index){
+    public static void onInHandClick(int cardInHandNumber){
         //pindah dari in hand ke board, simpan di buffer
         // if(gameState.getPhase() == GameState.Phase.DRAW){ //KI, SEBELUMNYA KAMU DRAW. KEKNYA YG BENER PLAN GK SIH?
         if(gameState.getPhase() == GameState.Phase.PLAN){
             try{
-                gameState.setSelectedCardInHand(index); //BILANG JEP
+                gameState.setSelectedCardInHand(cardInHandNumber); //BILANG JEP
                 System.out.println("Lagi plan nih");
             }catch(Exception e){
                 System.out.println("Inhand yang diklik ga valid");
@@ -43,49 +43,63 @@ public class HandleEvent{
             
         }
         System.out.println("Klik kartu in hand terdeteksi");
-        System.out.println("In hand ke :" + index);
+        System.out.println("In hand ke :" + cardInHandNumber);
     }
 
-    public static void onBoardClick(int player,int index){
+    public static void onBoardClick(int player,int boardNumber){
+        System.out.println("BOARD dari player " + String.valueOf(player) + "di lokasi " + String.valueOf(boardNumber) + "di klik!");
         System.out.println("Turn: "+ gameState.getTurn());
         if(player == gameState.getTurn()){
-            HandleEvent.onPlayerBoardClick(index);
+            HandleEvent.onPlayerBoardClick(boardNumber);
         }else{
-            HandleEvent.onOpponentBoardClick(index);
+            HandleEvent.onOpponentBoardClick(boardNumber);
         }
     }
 
 
-    public static void onPlayerBoardClick(int index){
+    public static void onPlayerBoardClick(int boardNumber){
         //menambahkan karakter ke board kosong atau spell ke karakter
+        System.out.println("ON PLAYER BOARD CLICK!");
         System.out.println("fase saat ini");
         System.out.println(String.valueOf(gameState.getPhase()));
         System.out.println("isi dari have selected");
         System.out.println(String.valueOf(gameState.haveSelectedCardInHand()));
-
-        if(gameState.getPhase() == GameState.Phase.PLAN && gameState.haveSelectedCardInHand()){ // BILANG JEP
+        
+        // kalo phase saat ini adalah plan, sudah select kartu dari tangan dan kartu tersebut merupakan karakter card, dan mana yang dimiliki player saat ini lebih dari cost mana yg dibutuhkan buat nge deploy ke board, then deploy
+        if(gameState.getPhase() == GameState.Phase.PLAN && gameState.haveSelectedCardInHand() && gameState.getSelectedCardInHand() instanceof CharacterCard && gameState.getCurrentPlayerMana() > gameState.getSelectedCardInHand().getMana()){ // BILANG JEP
             gameState.removeCardFromHand(); //BILANG JEP, gimana kalo indeks kartu gausah dijadiin parameter ? karena udah disimpen jadi atribut gamestate
-            gameState.addCardToBoardAndCleanBuffer(index); //BILANG JEP
-        }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer()){ //BILANG JEP
-            gameState.cardOnBoardGotSpelled(index); //BILANG JEP
-        }else if(gameState.getPhase() == GameState.Phase.ATTACK){
-            gameState.selectAttacker(index); //BILANG JEP
-        }
-        System.out.println("Klik board terdeteksi. Board ke : "+index);
-    }
+            gameState.addCardToBoardAndCleanBuffer(boardNumber); //BILANG JEP
 
+            // kalo phase sekarang plan, dan yang ada di dalam buffer adalah spell, berarti dia mau nge apply spell ke card on board.
+        }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer()){ //BILANG JEP
+            gameState.cardOnBoardGotSpelled(boardNumber); //BILANG JEP
+        }else if(gameState.getPhase() == GameState.Phase.ATTACK){ //BILANG JEP
+            // Cek apakah kartu di board yang diklik udah menyerang
+            gameState.selectAttacker(boardNumber); //BILANG JEP
+        }
+        System.out.println("Klik board terdeteksi. Board ke : "+boardNumber);
+    }
+    
     public static void onOpponentClick(int player){
-        if(gameState.getPhase()==GameState.Phase.ATTACK && gameState.getTurn()!=player){
+        System.out.println("ON OPPONENT BOARD CLICK!");
+        System.out.println("selected card on board saat ini adalah");
+        System.out.println(gameState.getSelectedCardOnBoard());
+        System.out.println("dengan number");    
+        System.out.println(gameState.getSelectedCardOnBoardNumber());
+
+        if(gameState.getPhase() == GameState.Phase.ATTACK && gameState.getTurn()!=player){
             gameState.attack();
             System.out.println("Klik lawan terdeteksi");
         }
     }
 
-    public static void onOpponentBoardClick(int index){
+    public static void onOpponentBoardClick(int boardNumber){
         // if(gameState.getPhase()==Phase.ATTACK){
         //     gameState.attack(index);
         // }
-        System.out.println("Klik board lawan terdeteksi terdeteksi. Board ke :" + index);
+        System.out.println("Klik board lawan terdeteksi terdeteksi. Board ke :" + boardNumber);
+        gameState.attack(boardNumber);
+        
     }
 
     public static void onHover(Integer player, String loc, Integer cardNumber ){

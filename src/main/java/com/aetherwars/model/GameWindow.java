@@ -608,6 +608,7 @@ public class GameWindow {
 
     @FXML
     void onPlayer1AvatarClick(MouseEvent event) {
+        System.out.println("ADA YG KLIK AVATAR 1");
         try{
             // update game state
             HandleEvent.onOpponentClick(1);
@@ -754,8 +755,11 @@ public class GameWindow {
 
     @FXML
     void onPlayer2AvatarClick(MouseEvent event) {
+        System.out.println("ADA YG KLIK AVATAR 2");
+
         try{
             // update game state
+            HandleEvent.onOpponentClick(2);
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
