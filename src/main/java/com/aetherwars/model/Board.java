@@ -48,10 +48,17 @@ public class Board {
     public void addCardById(int id,CharacterCard c){
         System.out.println("ADD CARD BY ID DENGAN ID" + String.valueOf(id) + " DAN KARAKTERNYA ADALAH ");
         System.out.println(c);
-        this.cardBoard[id] = new BoardSlot(c);
-        this.filled++;
+        if(this.cardBoard[id].isFilled()){
+            System.out.println("Udah ada isinya");
+        }else{
+            this.cardBoard[id] = new BoardSlot(c);
+            this.filled++;
+        }
     }
 
+    public boolean isSlotFilled(int id){
+        return cardBoard[id].isFilled();
+    }
     public CharacterCard popCard(int index){
         //ngambil kartu dari index ke-index
         //ubah indikator index ke-index -> 0
