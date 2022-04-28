@@ -118,7 +118,15 @@ public class testCard {
     @Test
     @DisplayName("Testing execute PotionSpell")
     void testExecutePotionSpell(){
-        
+        CharacterCard s  = new CharacterCard("name", Type.END, "description", "imagePath", 1, 1, 1, 1, 1);
+        PotionSpell potionBuffAttack = new PotionSpell("ptnName", "type", "description", 0, 0, 0, "imagepath", 9, 0);
+        PotionSpell potionBuffHealth = new PotionSpell("ptnName", "type", "description", 0, 0, 0, "imagepath", 0, 9);
+        potionBuffAttack.execute(s);
+        s.setAttackBuff();
+        potionBuffHealth.execute(s);
+        s.setHealthBuff();
+        assertEquals(10,s.getFinalAttack());
+        assertEquals(10,s.getFinalHealth());
     }
     
     @Test
