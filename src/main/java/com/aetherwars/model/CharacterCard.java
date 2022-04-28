@@ -21,9 +21,13 @@ public class CharacterCard extends Card {
     private List<SpellCard> activeSpells;
     private int attackBuff;
     private int healthBuff;
+    private int baseAttack;
+    private int baseHP;
 
     public CharacterCard(String name, Type attribute, String description, String imagePath, int attack, int health, int mana, int attackUp, int healthUp) {
         super(name, "Character", description, imagePath);
+        this.baseAttack = attack;
+        this.baseHP = health;
         this.attribute = attribute;
         this.attack = attack;
         this.health = health;
@@ -54,6 +58,14 @@ public class CharacterCard extends Card {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setBaseAttack(int attack) {
+        this.baseAttack = attack;
+    }
+
+    public void setBaseHP(int health) {
+        this.baseHP = health;
     }
 
     public int getHealthUp() {
@@ -112,9 +124,6 @@ public class CharacterCard extends Card {
     public void setMaxExp(int maxExp) {
         this.maxExp = maxExp;
     }
-    public String getType() {
-        return String.valueOf(attribute);
-    }
 
     public void updateSpellsEndDuration() {
         for (int i = 0; i < activeSpells.size(); i++) {
@@ -145,32 +154,36 @@ public class CharacterCard extends Card {
 
     public void addExp(int n) {
         this.exp += n;
-        if (this.exp > this.maxExp) {
+        if (this.exp >= this.maxExp) {
             levelUp();
         }
     }
 
     public void levelUp() {
-        int temp = this.getExp();
-        int batasExp = 1;
-        for (int i = this.getLevel(); i <= 10; i++) {
-            if (i != 1) {
+        if(this.level < 10 && this.health > 0){
+            int temp = this.getExp();
+            int batasExp = 1;
+            int levelAwal = this.getLevel();
+            for (int i = levelAwal; i <= 10; i++) {
+                
                 batasExp = 2 * this.getLevel() - 1; 
+                
+
+                if (temp >= batasExp) {
+                    temp -= batasExp;
+                    this.setLevel(i+1);
+                    batasExp = 2 * this.getLevel() - 1;
+                }
+
+                if (temp < batasExp) {
+                    this.maxExp = 2 * this.getLevel() - 1;
+                }
             }
 
-            if (temp >= batasExp) {
-                temp -= batasExp;
-            }
-
-            if (temp < batasExp) {
-                this.level = i;
-                this.maxExp = 2 * this.getLevel() - 1;
-            }
+            this.exp = temp;
+            this.attack = this.baseAttack + (this.getLevel() - 1) * this.attackUp;
+            this.health = this.baseHP + (this.getLevel() - 1) * this.healthUp;
         }
-
-        this.exp = temp;
-        this.attack = this.attack + (this.getLevel() - 1) * this.attackUp;
-        this.health = this.health + (this.getLevel() - 1) * this.healthUp;
     }
 
     public double getMultiplierAttack(CharacterCard victim) {
@@ -235,6 +248,14 @@ public class CharacterCard extends Card {
 
     public void attack(CharacterCard victim) {
         // trus kurangin health dari victim sebanyak finalAttack
+        System.out.println("AKU SEBUAH CHARACTERCARD YANG MAU ATTACK");
+        System.out.println(this.getName());
+        System.out.println("exp awal");
+        System.out.println(this.exp);
+
+        System.out.println("level awal");
+        System.out.println(this.level);
+        
         if (victim.getFinalHealth() - getFinalAttack() <= 0) {
             // Karakter musuh mati, dapat EXp
             victim.decreaseHealth(this.getFinalAttack());
@@ -244,11 +265,19 @@ public class CharacterCard extends Card {
             this.decreaseHealth(victim.getFinalAttack());
             int thisHealth = this.getFinalHealth();
             if (thisHealth <= 0) {
-                victim.addExp(this.getLevel());
+                // victim.addExp(this.getLevel());
             }
         } else {
             victim.decreaseHealth(this.getFinalAttack());
         }
+
+
+        System.out.println("exp akhir");
+        System.out.println(this.exp);
+
+        System.out.println("level akhir");
+        System.out.println(this.level);
+        System.out.println("ATTACK SELESAI");
     }
 
     public Integer attackPlayer(Integer otherHealth) {

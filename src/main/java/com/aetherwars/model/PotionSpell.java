@@ -28,6 +28,8 @@ public class PotionSpell extends SpellCard implements Spell, Potion {
     }
 
     public void execute(CharacterCard s){
+        System.out.println("EXECUTE POTION SPELL TERHADAP CARD");
+        System.out.println(s);
         s.getActiveSpells().add(this);       
         // Nanti akan menambah attackFromSpell dan healthFromSpell
         // Ketika di attack, maka akan mengurangi remaining Health terlebih dahulu

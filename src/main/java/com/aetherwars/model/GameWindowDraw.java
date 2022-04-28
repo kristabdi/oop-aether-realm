@@ -108,7 +108,49 @@ public class GameWindowDraw {
                 buttonToBeEdited = generatedCard3;
                 imageViewToBeEdited = generatedCard3_image;
             }
-            buttonToBeEdited.setText(card.getName());
+            String desc = "";
+            if(card instanceof CharacterCard){
+                CharacterCard cCard = (CharacterCard) card;
+                desc = cCard.getName() + "\n Mana:" + cCard.getMana() +" \n "+ "ATK:" + cCard.getAttack() + "/" + "HP:" + cCard.getHealth() + " \n " + cCard.getExp() + "/" + cCard.getMaxExp() + " [" + cCard.getLevel() + "]";
+                buttonToBeEdited.setText(desc);
+            }
+            else if(card instanceof PotionSpell){
+                PotionSpell pCard = (PotionSpell) card;
+                
+                desc = pCard.getName() + "(Potion Spell)\n Mana:" + pCard.getMana();
+                if(pCard.getAttackModifier() > 0){
+                    desc += "\nATK +" + pCard.getAttackModifier();
+                }
+                else{
+                     desc += "\nATK " + pCard.getAttackModifier();
+                }
+                if(pCard.getHealthModifier() > 0){
+                    desc += "\nHP +" + pCard.getHealthModifier();
+                }
+                else{
+                    desc += "\nHP " + pCard.getHealthModifier();
+                }
+                
+            } 
+            else if (card instanceof MorphSpell) {
+                MorphSpell mCard = (MorphSpell) card;
+                desc = card.getName() + "(Morph Spell)\n Mana:"  + mCard.getMana() + " \n " + mCard.getMorphTarget().getName();
+            }
+            else if (card instanceof LevelSpell){
+                LevelSpell lCard = (LevelSpell) card;
+                desc = lCard.getName() + "(Level Spell)\n Mana:" + lCard.getMana();
+                if (lCard.getLevelModifier() > 0){
+                    desc += " \nLevel + " + lCard.getLevelModifier();
+                }
+                else{
+                    desc += " \nLevel " + lCard.getLevelModifier();
+                }
+            }
+            else if(card instanceof SwapSpell){
+                SwapSpell sCard = (SwapSpell) card;
+                desc = sCard.getName() + "(Swap Spell)\n Mana:" + sCard.getMana();
+            }
+            buttonToBeEdited.setText(desc);
             File cardImage = new File(PATH_TO_IMAGE + card.getImagePath());
             imageViewToBeEdited.setImage(new Image(cardImage.toURI().toString()));
         }

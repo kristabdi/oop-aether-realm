@@ -5,6 +5,8 @@ public class SwapSpell extends SpellCard implements Spell {
     }
 
     public void execute(CharacterCard card){
+        System.out.println("EXECUTE SWAP SPELL TERHADAP CARD");
+        System.out.println(card);
         // Cek apakah card sudah punya SwapSpell
         boolean found = false;
         int i = 0;

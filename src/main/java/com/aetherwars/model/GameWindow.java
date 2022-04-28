@@ -233,7 +233,9 @@ public class GameWindow {
                     defaultBoardText = "E";
                 }
                 if(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i) != null){
-                    buttonToBeEdited.setText(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getName());
+                    CharacterCard card = (CharacterCard)HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i);
+                    String desc = card.getName() + " | " + "ATK:" + card.getFinalAttack() + "/" + "HP:" + card.getFinalHealth() + " | " + card.getExp() + "/" + card.getMaxExp() + " [" + card.getLevel() + "]";
+                    buttonToBeEdited.setText(desc);
                     File imageBoard = new File(PATH_TO_IMAGE + HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getImagePath());
                     if(imageViewToBeEdited != null){
                         imageViewToBeEdited.setImage(new Image(imageBoard.toURI().toString()));
@@ -350,7 +352,7 @@ public class GameWindow {
                 break;
         }
         // SET LABEL TURN
-        labelTurn.setText(String.valueOf(HandleEvent.gameState.getTurn()));
+        labelTurn.setText("Round: " + String.valueOf(HandleEvent.gameState.getRound()) + "\nTurn: "+ String.valueOf(HandleEvent.gameState.getTurn()));
         /// SET CARD DESCRIPTION ON HOVER
         if(HandleEvent.gameState.getCardOnDescriptionBuffer() != null){
             Card card = HandleEvent.gameState.getCardOnDescriptionBuffer();
@@ -358,11 +360,21 @@ public class GameWindow {
             string.append(card.getName());
             string.append("\n");
             if (card instanceof CharacterCard) {
-                string.append("Health: " + String.valueOf(((CharacterCard) card).getFinalHealth()) + "\n");
                 string.append("Attack: " + String.valueOf(((CharacterCard) card).getFinalAttack())+ "\n");
+                string.append("Health: " + String.valueOf(((CharacterCard) card).getFinalHealth()) + "\n");
                 string.append("Level: " + String.valueOf(((CharacterCard) card).getLevel())+ "\n");
                 string.append("Exp: " + String.valueOf(((CharacterCard) card).getExp()) + "/" + String.valueOf(((CharacterCard) card).getMaxExp())+ "\n");
-                string.append("Type: " + String.valueOf(((CharacterCard) card).getType())+ "\n");
+                string.append("Type: " + String.valueOf(((CharacterCard) card).getAttribute())+ "\n");
+                if (((CharacterCard) card).getActiveSpells().size() != 0){
+                    // Append active spells
+                    string.append("Active Spells: ");
+                    for (int i = 0; i < ((CharacterCard) card).getActiveSpells().size(); i++) {
+                        string.append(((CharacterCard) card).getActiveSpells().get(i).getName() + "Duration: " + String.valueOf(((CharacterCard) card).getActiveSpells().get(i).getSpellDuration()));
+                        if (i != ((CharacterCard) card).getActiveSpells().size() - 1) {
+                            string.append("\n");
+                        }
+                    }
+                }
             } else if (card instanceof SpellCard){
                 // isiin info spell
                 if (((SpellCard) card).getSpellDuration() == 0){
@@ -409,6 +421,8 @@ public class GameWindow {
     }
 
     protected void setWindowBasedOnGameState(){
+        //update game state kalo perlu
+        HandleEvent.gameState.refreshBothPlayerDeck();
         //SET BOARD
         this.setBoardOnGameWindowBasedOnGameState();
         //SET CARD IN HAND
@@ -439,6 +453,7 @@ public class GameWindow {
     void addExpClick(MouseEvent event) {
         try{
             // update game state
+            HandleEvent.addExpButtonOnClick();
             // update game window
         }catch(Exception e){
             System.out.println(" == Catched == ");
