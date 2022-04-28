@@ -89,19 +89,19 @@ public class HandleEvent{
         System.out.println("Klik board lawan terdeteksi terdeteksi. Board ke :" + index);
     }
 
-    public static void onHover(Integer player, String loc, Integer index ){
-        if(player==0){
-            player=gameState.getTurn();
-        }
-        gameState.setCardOnDescriptionBuffer(player,loc,index);
+    public static void onHover(Integer player, String loc, Integer cardNumber ){
+       System.out.print("==ADA YANG DI HOVER===");
+            if(player == 0){ // ini kasus khusus
+                player = gameState.getTurn();
+            }
+            gameState.setCardOnDescriptionBuffer(player,loc,cardNumber);  
+      
     }
     public static void onDraw(){
         //dijalankan ketika membuka window draw
         System.out.println("masuk handle event on draw");
         gameState.getThreeCardsFromDeckToBuffer();
         System.out.println("keluar handle event on draw");
-
-        
     }
 
 }

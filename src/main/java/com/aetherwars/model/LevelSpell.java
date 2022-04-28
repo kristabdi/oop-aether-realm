@@ -24,4 +24,8 @@ public class LevelSpell extends SpellCard implements Spell {
         }
         s.setExp(0);
     }
+
+    public int getLevelModifier() {
+        return levelModifier;
+    }
 }

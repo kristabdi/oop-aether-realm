@@ -64,8 +64,8 @@ public class GameState {
         d1.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         Deck d2 = new Deck();
         d2.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
-        this.player1 = new Player("pesatu", 0, d1, new CardInHand(), new Board());
-        this.player2 = new Player("pedua", 0, d2, new CardInHand(), new Board());
+        this.player1 = new Player("pesatu", 10, d1, new CardInHand(), new Board());
+        this.player2 = new Player("pedua", 10, d2, new CardInHand(), new Board());
         this.characterCards = characterCards;
         this.morphSpells = morphSpells;
         this.potionSpells = potionSpells;
@@ -181,26 +181,28 @@ public class GameState {
     public Card getCardOnDescriptionBuffer(){
         return this.cardOnDescription;
     }
-    public void setCardOnDescriptionBuffer(Integer player, String location, Integer index){
+    public void setCardOnDescriptionBuffer(Integer player, String location, Integer cardNumber){
         // palyer bisa 1 atau 2
         // location bisa "board" atau "cardInHand"
         // index bisa 1 - 5
         if(player == 1){
             if(location == "board"){
-                this.cardOnDescription = this.player1.getCardOnBoard(index - 1);
+                this.cardOnDescription = this.player1.getCardOnBoard(cardNumber - 1);
             }
             else{
-                this.cardOnDescription = this.player1.getCardInHandPlayer().get(index - 1);
+                this.cardOnDescription = this.player1.getCardInHandPlayer().get(cardNumber - 1);
             }
         }
         else{
             if(location == "board"){
-                this.cardOnDescription = this.player2.getCardOnBoard(index - 1);
+                this.cardOnDescription = this.player2.getCardOnBoard(cardNumber - 1);
             }
             else{
-                this.cardOnDescription = this.player2.getCardInHandPlayer().get(index - 1);
+                this.cardOnDescription = this.player2.getCardInHandPlayer().get(cardNumber - 1);
             }
         }
+        System.out.println("== CARD YANG SAAT INI DI DI DESCRIPTION ADALAH ====");
+        System.out.println(this.cardOnDescription);
 
     }
     // HELPER SAAT PHASE DRAW

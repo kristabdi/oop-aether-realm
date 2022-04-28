@@ -37,6 +37,7 @@ public class GameWindowDraw {
     @FXML
     private ImageView generatedCard3_image;
 
+    public static final String PATH_TO_IMAGE= "src/main/resources/com/aetherwars/";
 
     public void switchToGameWindow(MouseEvent event) throws IOException {
         System.out.println("event pas mo ganti game window");

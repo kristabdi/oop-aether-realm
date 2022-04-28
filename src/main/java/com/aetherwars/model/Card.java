@@ -4,13 +4,16 @@ public class Card {
     private String name;
     private String description;
     private String type; //character atau spell
-
-    Card(String name, String type, String description) {
+    private String imagePath;
+    Card(String name, String type, String description, String imagePath) {
         this.name = name;
         this.type = type;
         this.description = description;
+        this.imagePath = imagePath;
     };
-
+    public String getImagePath(){
+        return this.imagePath;
+    }
     public String getName() {
         return name;
     }
@@ -23,6 +26,9 @@ public class Card {
         return type;
     }
 
+    public int getMana(){
+        return 0;
+    }
     @Override
     public String toString() {
         return "Name: " + this.name + "\nDescription: " + this.description + "\nType: " + this.type;

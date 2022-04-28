@@ -44,13 +44,23 @@ public class GameWindow {
     @FXML
     private Button cardInHand1;
     @FXML
+    private ImageView cardInHand1Image;
+    @FXML
     private Button cardInHand2;
+    @FXML
+    private ImageView cardInHand2Image;
     @FXML
     private Button cardInHand3;
     @FXML
+    private ImageView cardInHand3Image;
+    @FXML
     private Button cardInHand4;
     @FXML
+    private ImageView cardInHand4Image;
+    @FXML
     private Button cardInHand5;
+    @FXML
+    private ImageView cardInHand5Image;
     @FXML
     private ImageView imageWhenHover;
     @FXML
@@ -137,7 +147,7 @@ public class GameWindow {
     private AnchorPane ap;
 
 
-    public static final String PATH_TO_IMAGE= "src/main/resources/com/aetherwars/card/image/";
+    public static final String PATH_TO_IMAGE= "src/main/resources/com/aetherwars/";
     // METHOD GANTI SCENE
     
     public void switchToGameWindowDraw(MouseEvent event) throws IOException {
@@ -150,92 +160,82 @@ public class GameWindow {
         stage.show();
     }
     
-        
     protected void setWindowBasedOnGameState(){
         System.out.println("SEKARANG TURN ORANG KE " + String.valueOf(HandleEvent.gameState.getTurn()));
         /* SET BOARD */
         // player 1
-        System.out.println("SIZE DARI BOARD PLAYER 1 SAAT INI ADALAH" + String.valueOf(HandleEvent.gameState.getPlayer(1).getPlayerDeckSize()));
-        // char A
-        if(HandleEvent.gameState.getPlayerCardOnBoard(1,0) != null){
-            player1_CharA.setText(HandleEvent.gameState.getPlayerCardOnBoard(1,0).getName());
-        }
-        else{
-            player1_CharA.setText("A");
-        }
-        // char B
-        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 1) != null){
-            player1_CharB.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 1).getName());
-        }
-        else{
-            player1_CharB.setText("B");
-        }
-        // char C
-        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 2) != null){
-            player1_CharC.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 2).getName());
-        }
-        else{
-            player1_CharC.setText("C");
-        }
-        // char D
-        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 3) != null){
-            player1_CharD.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 3).getName());
-        }
-        else{
-            player1_CharD.setText("D");
-        }        
-        // char E
-        if(HandleEvent.gameState.getPlayerCardOnBoard(1, 4) != null){
-            player1_CharE.setText(HandleEvent.gameState.getPlayerCardOnBoard(1, 4).getName());
-        }
-        else{
-            player1_CharE.setText("E");
-        }
-
-        // player 2
-        // char A
-        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 0) != null){
-            player2_CharA.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 0).getName());
-        }
-        else{
-            player2_CharA.setText("A");
-        }
-        // char B
-        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 1) != null){
-            player2_CharB.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 1).getName());
-        }
-        else{
-            player2_CharB.setText("B");
-        }
-        // char C
-        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 2) != null){
-            player2_CharC.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 2).getName());
-        }
-        else{
-            player2_CharC.setText("C");
-        }
-        // char D
-        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 3) != null){
-            player2_CharD.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 3).getName());
-        }
-        else{
-            player2_CharD.setText("D");
-        }        
-        // char E
-        if(HandleEvent.gameState.getPlayerCardOnBoard(2, 4) != null){
-            player2_CharE.setText(HandleEvent.gameState.getPlayerCardOnBoard(2, 4).getName());
-        }
-        else{
-            player2_CharE.setText("E");
+        System.out.println("SIZE DARI BOARD PLAYER 1 SAAT INI ADALAH" + String.valueOf(HandleEvent.gameState.getPlayer(1).getBoardFilled()));
+        for(int playerNumber =  1; playerNumber <= 2; playerNumber++){
+            for(int i = 0 ; i < 5 ; i++){
+                Button buttonToBeEdited = new Button();
+                String defaultBoardText = "";
+                ImageView imageViewToBeEdited = new ImageView();
+                if(i == 0){
+                    if(playerNumber == 1){
+                        buttonToBeEdited = player1_CharA;
+                    }
+                    else{
+                        buttonToBeEdited = player2_CharA;
+                    }
+                    defaultBoardText = "A";
+                }
+                if(i == 1){
+                    if(playerNumber == 1){
+                        buttonToBeEdited = player1_CharB;
+                    }
+                    else{
+                        buttonToBeEdited = player2_CharB;
+                    }
+                    defaultBoardText = "B";
+                }
+                if(i == 2){
+                    if(playerNumber == 1){
+                        buttonToBeEdited = player1_CharC;
+                    }
+                    else{
+                        buttonToBeEdited = player2_CharC;
+                    }
+                    defaultBoardText = "C";
+                }
+                if(i == 3){
+                    if(playerNumber == 1){
+                        buttonToBeEdited = player1_CharD;
+                    }
+                    else{
+                        buttonToBeEdited = player2_CharD;
+                    }
+                    defaultBoardText = "D";
+                }
+                if(i == 4){
+                    if(playerNumber == 1){
+                        buttonToBeEdited = player1_CharE;
+                    }
+                    else{
+                        buttonToBeEdited = player2_CharE;
+                    }
+                    defaultBoardText = "E";
+                }
+                if(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i) != null){
+                    buttonToBeEdited.setText(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getName());
+                }
+                else{
+                    buttonToBeEdited.setText(defaultBoardText);
+                }   
+            }
         }
 
         /* SET CARD IN HAND */
         // CLEAR CARD IN HAND START
         cardInHand1.setText("");
+        cardInHand1Image.setImage(null);
         cardInHand2.setText("");
+        cardInHand2Image.setImage(null);
         cardInHand3.setText("");
+        cardInHand3Image.setImage(null);
         cardInHand4.setText("");
+        cardInHand4Image.setImage(null);
         cardInHand5.setText("");
+        cardInHand5Image.setImage(null);
         // CLEAR CARD IN HAND DONE
         // untuk player 1 dan player 2, kalo ganti turn nti ganti sendiri
         List<Card> cardsBuffer = HandleEvent.gameState.getCardInHandGameState();
@@ -243,27 +243,33 @@ public class GameWindow {
         Integer ukuran = cardsBuffer.size();
         System.out.println("ukuran = " + String.valueOf(ukuran));
         for(int i = 0; i < ukuran; i++){
+            Button ButtonToBeEdited = new Button();
+            ImageView imageViewToBeEdited = new ImageView();
             if(i == 0){
-                //tambahin ke cardInHand1
-                cardInHand1.setText(cardsBuffer.get(i).getName());
+                ButtonToBeEdited = cardInHand1;
+                imageViewToBeEdited = cardInHand1Image;
             } else if(i == 1){
-                //tambahin ke cardInHand2
-                cardInHand2.setText(cardsBuffer.get(i).getName());
+                ButtonToBeEdited = cardInHand2;
+                imageViewToBeEdited = cardInHand2Image;
             } else if(i == 2){
-                //tambahin ke cardInHand3
-                cardInHand3.setText(cardsBuffer.get(i).getName());
+                ButtonToBeEdited = cardInHand3;
+                imageViewToBeEdited = cardInHand3Image;
             } else if(i == 3){
-                //tambahin ke cardInHand4
-                cardInHand4.setText(cardsBuffer.get(i).getName());
+                ButtonToBeEdited = cardInHand4;
+                imageViewToBeEdited = cardInHand4Image;
             } else if(i == 4){
-                //tambahin ke cardInHand5
-                cardInHand5.setText(cardsBuffer.get(i).getName());
+                ButtonToBeEdited = cardInHand5;
+                imageViewToBeEdited = cardInHand5Image;
             }
+            
+            ButtonToBeEdited.setText(cardsBuffer.get(i).getName() + "\n" + "MANA: " + String.valueOf(cardsBuffer.get(i).getMana()));
+            File imageCIH = new File(PATH_TO_IMAGE + cardsBuffer.get(i).getImagePath());
+            imageViewToBeEdited.setImage(new Image(imageCIH.toURI().toString()));
         }
         /* SET PLAYER */ 
         // player 1
         player1Name.setText(HandleEvent.gameState.getPlayer(1).getName());
-        File imagep1 = new File(PATH_TO_IMAGE + "player/Steve.png");
+        File imagep1 = new File(PATH_TO_IMAGE + "card/image/player/Steve.png");
         System.out.println(imagep1.getAbsolutePath());
         playerA_image.setImage(new Image(imagep1.toURI().toString()));
         System.out.println("darah player 1");
@@ -271,18 +277,18 @@ public class GameWindow {
         System.out.println(HandleEvent.gameState.getPlayer(1).getHealth());
         // player 2
         player2Name.setText(HandleEvent.gameState.getPlayer(2).getName());
-        File imagep2 = new File(PATH_TO_IMAGE + "player/Alex.png");
+        File imagep2 = new File(PATH_TO_IMAGE + "card/image/player/Alex.png");
         playerB_image.setImage(new Image(imagep2.toURI().toString()));
         System.out.println("darah player 2");
         player2HealthBar.setProgress((double)HandleEvent.gameState.getPlayer(2).getHealth()/80);
         System.out.println(HandleEvent.gameState.getPlayer(2).getHealth());
         /* SET KEBUTUHAN GAME UMUM */
-        // set label deck
+        // SET LABEL DECK
        labelDeck.setText("hardcode");
        labelDeck.setText("Deck: " + String.valueOf(HandleEvent.gameState.getCurrentPlayer().getPlayerDeckSize())+"/40");
-        // set label mana
+        // SET MANA LABEL
        labelMana.setText("Mana: " + String.valueOf(HandleEvent.gameState.getCurrentPlayer().getMana()));
-       // set phase color
+       // SET PHASE COLOR
         // switch case based on gamestate phase
         switch (HandleEvent.gameState.getPhase()) {
             case DRAW:
@@ -310,244 +316,540 @@ public class GameWindow {
                 labelFaseEnd.setStyle("-fx-background-color: #00ff00");
                 break;
         }
-        // label turn
+        // SET LABEL TURN
         labelTurn.setText(String.valueOf(HandleEvent.gameState.getTurn()));
+        /// SET CARD DESCRIPTION ON HOVER
+        if(HandleEvent.gameState.getCardOnDescriptionBuffer() != null){
+            Card card = HandleEvent.gameState.getCardOnDescriptionBuffer();
+            StringBuilder string = new StringBuilder();
+            string.append(card.getName());
+            string.append("\n");
+            if (card instanceof CharacterCard) {
+                string.append("Health: " + String.valueOf(((CharacterCard) card).getFinalHealth()) + "\n");
+                string.append("Attack: " + String.valueOf(((CharacterCard) card).getFinalAttack())+ "\n");
+                string.append("Level: " + String.valueOf(((CharacterCard) card).getLevel())+ "\n");
+                string.append("Exp: " + String.valueOf(((CharacterCard) card).getExp()) + "/" + String.valueOf(((CharacterCard) card).getMaxExp())+ "\n");
+                string.append("Type: " + String.valueOf(((CharacterCard) card).getType())+ "\n");
+            } else if (card instanceof SpellCard){
+                // isiin info spell
+                if (((SpellCard) card).getSpellDuration() == 0){
+                    string.append("Duration: Permanen\n");
+                } else {
+                    string.append("Duration: " + String.valueOf(((SpellCard) card).getSpellDuration())+ "\n");
+                }
+                // Kalo dia morph, level, swap, ato potion
+                if (card instanceof MorphSpell){
+                    string.append("Morph menjadi " + String.valueOf(((MorphSpell) card).getMorphTarget().getName())+ "\n");
+                } else if (card instanceof LevelSpell) {
+                    if (((LevelSpell) card).getLevelModifier() > 0){
+                        string.append("Level +" + String.valueOf(((LevelSpell) card).getLevelModifier())+ "\n");
+                    } else {
+                        string.append("Level " + String.valueOf(((LevelSpell) card).getLevelModifier())+ "\n");
+                    }
+                } else if (card instanceof PotionSpell){
+                    if (((PotionSpell) card).getAttackModifier() > 0){
+                        string.append("ATK +" + String.valueOf(((PotionSpell) card).getAttackModifier())+ "\n");
+                    } else {
+                        string.append("ATK " + String.valueOf(((PotionSpell) card).getAttackModifier())+ "\n");
+                    }
+                    if (((PotionSpell) card).getHealthModifier() > 0){
+                        string.append("HP +" + String.valueOf(((PotionSpell) card).getHealthModifier())+ "\n");
+                    } else {
+                        string.append("HP " + String.valueOf(((PotionSpell) card).getHealthModifier())+ "\n");
+                    }
+                }
+            } 
+            // Masukkan string ke description
+            leftDescriptionWhenHover.setWrapText(true);
+            rightDescriptionWhenHover.setWrapText(true);
+            leftDescriptionWhenHover.setText(string.toString());
+            rightDescriptionWhenHover.setText(card.getDescription());
+            // Masukkan gambar ke description
+            File imageForHover = new File(PATH_TO_IMAGE + card.getImagePath());
+            imageWhenHover.setImage(new Image(imageForHover.toURI().toString()));
+        }
     }
 
     
 
     // FUNGSI UNTUK GAME WINDOW UTAMA
-
     @FXML
     protected void onDrawOpenWindow(MouseEvent event){
-        if(HandleEvent.gameState.getPhase() == Phase.DRAW){
-            try{
+        try{
+            if(HandleEvent.gameState.getPhase() == Phase.DRAW){
                 this.switchToGameWindowDraw(event);
             }
-            catch(IOException e){
+        }
+        catch(IOException e){
                 e.printStackTrace();
-            }
         }
     }
 
     @FXML
     void addExpClick(MouseEvent event) {
-
+        try{
+            // update game state
+            // update game window
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
     
     @FXML
     void OnCardInHand1Hover(MouseEvent event) {
-        HandleEvent.onHover(0, "inhand", 1);
+        try{
+            //update game state
+            HandleEvent.onHover(0, "inhand", 1);
+           
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void OnCardInHand2Hover(MouseEvent event) {
-        HandleEvent.onHover(0, "inhand", 2);
+        try{
+            //update game state
+            HandleEvent.onHover(0, "inhand", 2);
+           
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void OnCardInHand3Hover(MouseEvent event) {
-        HandleEvent.onHover(0, "inhand", 3);
+        try{
+            //update game state
+            HandleEvent.onHover(0, "inhand", 3);
+           
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void OnCardInHand4Hover(MouseEvent event) {
-        HandleEvent.onHover(0, "inhand", 4);
+        try{
+            //update game state
+            HandleEvent.onHover(0, "inhand", 4);
+           
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void OnCardInHand5Hover(MouseEvent event) {
-        HandleEvent.onHover(0, "inhand", 5);
+        try{
+            //update game state
+            HandleEvent.onHover(0, "inhand", 5);
+           
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onCardInHand1Click(MouseEvent event) {
-        // update gameState
-        HandleEvent.onInHandClick(1);
-
+        try{
+            // update gameState
+            HandleEvent.onInHandClick(1);
         
-        // update gameWindow
-        setWindowBasedOnGameState();
+            // update gameWindow
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        } 
     }
 
     @FXML
     void onCardInHand2Click(MouseEvent event) {
-        // update gameState
-        HandleEvent.onInHandClick(2);
+        try{
+            // update gameState
+            HandleEvent.onInHandClick(2);
          
-         // update gameWindow
-        setWindowBasedOnGameState();
+            // update gameWindow
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
+        
     }
 
     @FXML
     void onCardInHand3Click(MouseEvent event) {
-        // update gameState
-        HandleEvent.onInHandClick(3);
-         // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update gameState
+            HandleEvent.onInHandClick(3);
+            // update gameWindow
+            this.setWindowBasedOnGameState();
+
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
 
     }
 
     @FXML
     void onCardInHand4Click(MouseEvent event) {
-       // update gameState
-        HandleEvent.onInHandClick(4);
-         // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+           // update gameState
+            HandleEvent.onInHandClick(4);
+            // update gameWindow
+            this.setWindowBasedOnGameState();
+
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
+        
 
     }
 
     @FXML
     void onCardInHand5Click(MouseEvent event) {
-        // update gameState
-        HandleEvent.onInHandClick(5);
-         // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update gameState
+            HandleEvent.onInHandClick(5);
+            // update gameWindow
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
 
     }
 
     @FXML
     void onNextPhaseClick(MouseEvent event) {
-        System.out.println("DI KLIK NEXT PHASE");
-        HandleEvent.onNextPhaseClick();
+        try{
+            //update game state
+            System.out.println("DI KLIK NEXT PHASE");
+            HandleEvent.onNextPhaseClick();
 
-        this.setWindowBasedOnGameState();
+            //update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
+        
     }
 
     @FXML
     void onPlayer1AvatarClick(MouseEvent event) {
-        HandleEvent.onOpponentClick(1);
+        try{
+            // update game state
+            HandleEvent.onOpponentClick(1);
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer1_CharA(MouseEvent event) {
-        HandleEvent.onBoardClick(1,1);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(1,1);
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer1_CharAHover(MouseEvent event) {
-        HandleEvent.onHover(1, "board", 1);
+        try{
+            //update game state
+            HandleEvent.onHover(1, "board", 1);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer1_CharB(MouseEvent event) {
         HandleEvent.onBoardClick(1,2);
         // update gameWindow
-        setWindowBasedOnGameState();
+        this.setWindowBasedOnGameState();
     }
 
     @FXML
     void onPlayer1_CharBHover(MouseEvent event) {
-        
-        HandleEvent.onHover(1, "board", 2);
+        try{
+            //update game state
+            HandleEvent.onHover(1, "board", 2);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer1_CharC(MouseEvent event) {
-        HandleEvent.onBoardClick(1,3);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(1,3);
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer1_CharCHover(MouseEvent event) {
-        HandleEvent.onHover(1, "board", 3);
+         try{
+            //update game state
+            HandleEvent.onHover(1, "board", 3);
+
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer1_CharD(MouseEvent event) {
-        HandleEvent.onBoardClick(1,4);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(1,4);
 
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer1_CharDHover(MouseEvent event) {
-        HandleEvent.onHover(1, "board", 4);
+         try{
+            //update game state
+            HandleEvent.onHover(1, "board", 4);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer1_CharE(MouseEvent event) {
-        HandleEvent.onBoardClick(1,5);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(1,5);
 
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer1_CharEHover(MouseEvent event) {
-        HandleEvent.onHover(1, "board", 5);
+        try{
+            //update game state
+            HandleEvent.onHover(1, "board", 5);
+
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer2AvatarClick(MouseEvent event) {
-        HandleEvent.onOpponentClick(2);
+        try{
+            // update game state
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer2_CharA(MouseEvent event) {
-        HandleEvent.onBoardClick(2,1);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(2,1);
+
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
 
     }
 
     @FXML
     void onPlayer2_CharAHover(MouseEvent event) {
-        HandleEvent.onHover(2, "board", 1);
+        try{
+            //update game state
+            HandleEvent.onHover(2, "board", 1);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer2_CharB(MouseEvent event) {
-        HandleEvent.onBoardClick(2,2);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(2,2);
 
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer2_CharBHover(MouseEvent event) {
-        HandleEvent.onHover(2, "board", 2);
+        try{
+            //update game state
+            HandleEvent.onHover(2, "board", 2);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer2_CharC(MouseEvent event) {
-        HandleEvent.onBoardClick(2,3);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(2,3);
+
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer2_CharCHover(MouseEvent event) {
-        HandleEvent.onHover(2, "board", 3);
+        try{
+            //update game state
+            HandleEvent.onHover(2, "board", 3);
+
+
+            //update game window
+            this.setWindowBasedOnGameState();
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer2_CharD(MouseEvent event) {
-        HandleEvent.onBoardClick(2,4);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(2,4);
+
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
 
     }
 
     @FXML
     void onPlayer2_CharDHover(MouseEvent event) {
-        HandleEvent.onHover(2, "board", 4);
+        try{
+            //update game state
+            HandleEvent.onHover(2, "board", 4);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
     void onPlayer2_CharE(MouseEvent event) {
-        HandleEvent.onBoardClick(2,5);
-        // update gameWindow
-        setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(2,5);
+
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML
     void onPlayer2_CharEHover(MouseEvent event) {
-        HandleEvent.onHover(2, "board", 5);
+        try{
+            //update game state
+            HandleEvent.onHover(2, "board", 5);
+
+            //update game window
+            this.setWindowBasedOnGameState();
+
+        }
+        catch (Exception e){
+            System.out.print("pokok e on hover error lah, natah apapun");
+        }
     }
 
     @FXML
