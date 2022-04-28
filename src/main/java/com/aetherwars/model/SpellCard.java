@@ -6,20 +6,18 @@ public abstract class SpellCard extends Card {
     private int mana;
     private int duration;
     private int exp;
-    private String imagepath;
 
-    SpellCard(String name, String type, String description, int mana, int duration, int exp, String imagepath) {
-        super(name, type, description);
+    SpellCard(String name, String type, String description, int mana, int duration, int exp, String imagePath) {
+        super(name, type, description, imagePath);
         this.mana = mana;
         this.duration = duration;
         this.exp = exp;
-        this.imagepath = imagepath;
     }
     
     abstract void execute(CharacterCard s);
-    // abstract void activate(CharacterCard targetCard);
 
-    public int getSpellMana() {
+    @Override
+    public int getMana() {
         return mana;
     }
 
@@ -41,13 +39,5 @@ public abstract class SpellCard extends Card {
 
     public void setEXP(int exp) {
         this.exp = exp;
-    }
-
-    public String getImagePath() {
-        return imagepath;
-    }
-
-    public void setImagePath(String imagepath) {
-        this.imagepath = imagepath;
     }
 }

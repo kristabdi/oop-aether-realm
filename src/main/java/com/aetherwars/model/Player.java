@@ -102,10 +102,6 @@ public class Player {
         cardInHand.removeCardFromHand(i);
     }
 
-    // public void removeSummonedCard(CharacterCard card) {
-    //     summonedCard.remove(card);
-    // }
-
     public void addCardToBoard(Card card){
         // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck
         // mirip addcard inhand
@@ -131,8 +127,8 @@ public class Player {
     }
 
     public void useSpellOnCard(CharacterCard card, SpellCard spell) {
-        if (this.mana >= spell.getSpellMana()) {
-            this.setMana(this.mana - spell.getSpellMana());
+        if (this.mana >= spell.getMana()) {
+            this.setMana(this.mana - spell.getMana());
             spell.execute(card);
         }
     }
@@ -150,6 +146,7 @@ public class Player {
     }
 
     public void addCardToBoard(Integer idx, Card card) {
+        
         this.cardOnBoard.addCardById(idx,(CharacterCard)card);
     }
 
@@ -157,16 +154,16 @@ public class Player {
         this.cardInHand.putCardToHand(card);
     }
     public void addCardToDeck(Card card){
-        
+        deck.putCardToDeck(card);
     }
     // public void attackPlayerDirectly(Player enemy, int cardAttack){
         
     // }
     public void decreaseMyHealthBasedOnCardAttackStats(CharacterCard card) {
-        this.health -= card.getFinalAttack();
+        this.health = card.attackPlayer(this.health);
     }
-    // public void updateBoard() {
-    //     // iterate board to set attack modifier, health modifier, etc
-    //     cardOnBoard.update();
-    // }
+    public void updateBoard() {
+        // iterate board to set attack modifier, health modifier, etc
+        cardOnBoard.update();
+    }
 }

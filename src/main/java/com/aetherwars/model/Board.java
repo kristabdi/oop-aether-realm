@@ -6,15 +6,21 @@ public class Board {
 
     public Board(){
         this.cardBoard = new BoardSlot[5];
-        this.filled =0;
+        for (int i = 0; i < 5; i++) {
+            this.cardBoard[i] = new BoardSlot();
+        }
+        this.filled = 0;
     }
 
     public CharacterCard getCardBoardByIdx(int idx){
         // ASUMSI INDEX NYA BENER. KALO GK BENER, RUSAK SUMPAH
         // Alternatif: Kalo di board kosong, buttonnya di disable untuk indeks itu, jadi ga bakal salah
-        // if(this.fillingIndicator[idx]!=0){
-        return this.cardBoard[idx].getCard();
-        // }
+        if(!this.cardBoard[idx].isFilled()){
+            // kalo size dari card board - 1 >= idx, return yg bener. kalo gk return null
+            return null;
+        } else {
+            return this.cardBoard[idx].getCard();
+        }
     }
     public int getFilled(){
         return this.filled;
@@ -39,12 +45,22 @@ public class Board {
 
     //asumsi input selalu benar
     //exception di atas
-    public void addCardById(int id,CharacterCard c){
-        this.cardBoard[id].setCard(c);
-        this.filled++;
-        this.cardBoard[id].setFilling(true);
+    public boolean addCardById(int id,CharacterCard c){
+        System.out.println("ADD CARD BY ID DENGAN ID" + String.valueOf(id) + " DAN KARAKTERNYA ADALAH ");
+        System.out.println(c);
+        if(this.cardBoard[id].isFilled()){
+            System.out.println("Udah ada isinya");
+            return false;
+        }else{
+            this.cardBoard[id] = new BoardSlot(c);
+            this.filled++;
+            return true;
+        }
     }
 
+    public boolean isSlotFilled(int id){
+        return cardBoard[id].isFilled();
+    }
     public CharacterCard popCard(int index){
         //ngambil kartu dari index ke-index
         //ubah indikator index ke-index -> 0
@@ -55,7 +71,7 @@ public class Board {
         return this.cardBoard[index].getCard();
     }
 //masi problem
-    public void updateBoard(){
+    public void update(){
         int i;
         for(i=0;i<5;i++){
             if(this.cardBoard[i].isFilled()){
