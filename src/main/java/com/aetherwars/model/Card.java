@@ -23,6 +23,18 @@ public class Card {
         return type;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Name: " + this.name + "\nDescription: " + this.description + "\nType: " + this.type;

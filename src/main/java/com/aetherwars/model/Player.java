@@ -10,7 +10,6 @@ public class Player {
     private int maxMana;
     private int health; // default 80
     private Deck deck;
-    private int selectedCardInHandIndex;
     private CardInHand cardInHand;
     private Board cardOnBoard;
 
@@ -20,7 +19,6 @@ public class Player {
         this.maxMana = 10;
         this.health = 80;
         this.deck = new Deck();
-        this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
         this.cardOnBoard = new Board();
     }
@@ -31,7 +29,6 @@ public class Player {
         this.maxMana = 10;
         this.health = 80;
         this.deck = deck;
-        this.selectedCardInHandIndex = -1;
         this.cardInHand = cardInHand;
         this.cardOnBoard = cardOnBoard;
     }
