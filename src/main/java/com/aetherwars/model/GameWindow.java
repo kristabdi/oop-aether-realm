@@ -99,6 +99,8 @@ public class GameWindow {
     private ImageView player1_CharC_image;
     @FXML
     private Button player1_CharD;
+      @FXML
+    private ImageView player1_CharD_image;
     @FXML
     private Button player1_CharE;
     @FXML
@@ -173,53 +175,73 @@ public class GameWindow {
                 if(i == 0){
                     if(playerNumber == 1){
                         buttonToBeEdited = player1_CharA;
+                        imageViewToBeEdited = player1_CharA_image;
                     }
                     else{
                         buttonToBeEdited = player2_CharA;
+                        imageViewToBeEdited = player2_CharA_image;
+
                     }
                     defaultBoardText = "A";
                 }
                 if(i == 1){
                     if(playerNumber == 1){
                         buttonToBeEdited = player1_CharB;
+                        imageViewToBeEdited = player1_CharB_image;
                     }
                     else{
                         buttonToBeEdited = player2_CharB;
+                        imageViewToBeEdited = player2_CharB_image;
+
                     }
                     defaultBoardText = "B";
                 }
                 if(i == 2){
                     if(playerNumber == 1){
                         buttonToBeEdited = player1_CharC;
+                        imageViewToBeEdited = player1_CharC_image;
+
                     }
                     else{
                         buttonToBeEdited = player2_CharC;
+                        imageViewToBeEdited = player2_CharC_image;
+
                     }
                     defaultBoardText = "C";
                 }
                 if(i == 3){
                     if(playerNumber == 1){
                         buttonToBeEdited = player1_CharD;
+                        imageViewToBeEdited = player1_CharD_image;
+
                     }
                     else{
                         buttonToBeEdited = player2_CharD;
+                        imageViewToBeEdited = player2_CharD_image;
+
                     }
                     defaultBoardText = "D";
                 }
                 if(i == 4){
                     if(playerNumber == 1){
                         buttonToBeEdited = player1_CharE;
+                        imageViewToBeEdited = player1_CharE_image;
                     }
                     else{
                         buttonToBeEdited = player2_CharE;
+                        imageViewToBeEdited = player2_CharE_image;
                     }
                     defaultBoardText = "E";
                 }
                 if(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i) != null){
                     buttonToBeEdited.setText(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getName());
+                    File imageBoard = new File(PATH_TO_IMAGE + HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getImagePath());
+                    imageViewToBeEdited.setImage(new Image(imageBoard.toURI().toString()));
                 }
                 else{
                     buttonToBeEdited.setText(defaultBoardText);
+                    imageViewToBeEdited.setImage(null);
+
                 }   
             }
         }

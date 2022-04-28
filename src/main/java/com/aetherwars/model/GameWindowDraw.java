@@ -38,6 +38,7 @@ public class GameWindowDraw {
     private ImageView generatedCard3_image;
 
     public static final String PATH_TO_IMAGE= "src/main/resources/com/aetherwars/";
+    
 
     public void switchToGameWindow(MouseEvent event) throws IOException {
         System.out.println("event pas mo ganti game window");
@@ -93,6 +94,7 @@ public class GameWindowDraw {
             Card card = HandleEvent.gameState.getBufferDrawnCards().get(i);
             if(i == 0){
                 generatedCard1.setText(card.getName());
+                // generatedCard1_image.setImage();
             }
             if(i == 1){
                 generatedCard2.setText(card.getName());
