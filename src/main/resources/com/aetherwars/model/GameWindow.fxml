@@ -158,7 +158,7 @@
                                                                <children>
                                                                   <Button fx:id="player1_CharD" contentDisplay="TOP" layoutX="44.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#onPlayer1_CharD" onMouseEntered="#onPlayer1_CharDHover" prefHeight="161.6" prefWidth="140.0" text="D" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <graphic>
-                                                                        <ImageView fx:id="player1_CharC_image" fitHeight="114.0" fitWidth="114.0" pickOnBounds="true">
+                                                                        <ImageView fx:id="player1_CharD_image" fitHeight="114.0" fitWidth="114.0" pickOnBounds="true">
                                                                            <image>
                                                                               <Image url="@../../../../resources/com/aetherwars/card/image/character/Ender%20Dragon.png" />
                                                                            </image>

@@ -37,6 +37,7 @@ public class GameState {
     private List<LevelSpell> levelSpells;
     // attribut
     private Integer turn;
+    private Boolean hasDrawn;
     // using enum for phase
     private Phase phase;
 
@@ -71,7 +72,7 @@ public class GameState {
         this.potionSpells = potionSpells;
         this.swapSpells = swapSpells;
         this.levelSpells = levelSpells;
-
+        this.hasDrawn = false;
     }
     public int getTurn() {
         return this.turn;
@@ -98,6 +99,7 @@ public class GameState {
             case END:
             //tambahin update board
                 this.phase = Phase.DRAW;
+                this.hasDrawn = false;
                 if(this.turn == 1){
                     this.turn = 2;
                 }
@@ -310,6 +312,14 @@ public class GameState {
             // attack
             ((CharacterCard)this.selectedCardOnBoard).attack((CharacterCard)victim);
         }
+    }
+
+    public Boolean getHasDrawn(){
+        return this.hasDrawn;
+    }
+
+    public void setHasDrawn(Boolean bool){
+        this.hasDrawn = bool;
     }
     // HELPER SAAT PHASE END
     // butuh method untuk endgame saat salah satu player mati

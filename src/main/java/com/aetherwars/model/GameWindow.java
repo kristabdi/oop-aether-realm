@@ -162,8 +162,7 @@ public class GameWindow {
         stage.show();
     }
     
-    protected void setWindowBasedOnGameState(){
-        System.out.println("SEKARANG TURN ORANG KE " + String.valueOf(HandleEvent.gameState.getTurn()));
+    protected void setBoardOnGameWindowBasedOnGameState(){
         /* SET BOARD */
         // player 1
         System.out.println("SIZE DARI BOARD PLAYER 1 SAAT INI ADALAH" + String.valueOf(HandleEvent.gameState.getPlayer(1).getBoardFilled()));
@@ -236,16 +235,22 @@ public class GameWindow {
                 if(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i) != null){
                     buttonToBeEdited.setText(HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getName());
                     File imageBoard = new File(PATH_TO_IMAGE + HandleEvent.gameState.getPlayerCardOnBoard(playerNumber,i).getImagePath());
-                    imageViewToBeEdited.setImage(new Image(imageBoard.toURI().toString()));
+                    if(imageViewToBeEdited != null){
+                        imageViewToBeEdited.setImage(new Image(imageBoard.toURI().toString()));
+                    }
                 }
                 else{
                     buttonToBeEdited.setText(defaultBoardText);
-                    imageViewToBeEdited.setImage(null);
+                    if(imageViewToBeEdited != null){
+                        imageViewToBeEdited.setImage(null);
+                    }
 
                 }   
             }
         }
-
+    }
+    
+    protected void setCardInHandOnGameWindowBasedOnGameState(){
         /* SET CARD IN HAND */
         // CLEAR CARD IN HAND START
         cardInHand1.setText("");
@@ -288,6 +293,9 @@ public class GameWindow {
             File imageCIH = new File(PATH_TO_IMAGE + cardsBuffer.get(i).getImagePath());
             imageViewToBeEdited.setImage(new Image(imageCIH.toURI().toString()));
         }
+    }
+
+    protected void setPlayerGameWindowBasedOnGameState(){
         /* SET PLAYER */ 
         // player 1
         player1Name.setText(HandleEvent.gameState.getPlayer(1).getName());
@@ -304,6 +312,9 @@ public class GameWindow {
         System.out.println("darah player 2");
         player2HealthBar.setProgress((double)HandleEvent.gameState.getPlayer(2).getHealth()/80);
         System.out.println(HandleEvent.gameState.getPlayer(2).getHealth());
+    }
+
+    protected void setGeneralGameWindowBasedOnGameState(){
         /* SET KEBUTUHAN GAME UMUM */
         // SET LABEL DECK
        labelDeck.setText("hardcode");
@@ -361,14 +372,17 @@ public class GameWindow {
                 }
                 // Kalo dia morph, level, swap, ato potion
                 if (card instanceof MorphSpell){
+                    string.append("MorphSpell\n");
                     string.append("Morph menjadi " + String.valueOf(((MorphSpell) card).getMorphTarget().getName())+ "\n");
                 } else if (card instanceof LevelSpell) {
+                    string.append("LevelSpell\n");
                     if (((LevelSpell) card).getLevelModifier() > 0){
                         string.append("Level +" + String.valueOf(((LevelSpell) card).getLevelModifier())+ "\n");
                     } else {
                         string.append("Level " + String.valueOf(((LevelSpell) card).getLevelModifier())+ "\n");
                     }
                 } else if (card instanceof PotionSpell){
+                    string.append("PotionSpell\n");
                     if (((PotionSpell) card).getAttackModifier() > 0){
                         string.append("ATK +" + String.valueOf(((PotionSpell) card).getAttackModifier())+ "\n");
                     } else {
@@ -379,6 +393,8 @@ public class GameWindow {
                     } else {
                         string.append("HP " + String.valueOf(((PotionSpell) card).getHealthModifier())+ "\n");
                     }
+                } else if (card instanceof SwapSpell){
+                    string.append("SwapSpell\n");
                 }
             } 
             // Masukkan string ke description
@@ -392,13 +408,25 @@ public class GameWindow {
         }
     }
 
+    protected void setWindowBasedOnGameState(){
+        //SET BOARD
+        this.setBoardOnGameWindowBasedOnGameState();
+        //SET CARD IN HAND
+        this.setCardInHandOnGameWindowBasedOnGameState();
+        //SET PLAYER
+        this.setPlayerGameWindowBasedOnGameState();
+        //SET UMUM 
+        this.setGeneralGameWindowBasedOnGameState();
+    }
+
     
 
     // FUNGSI UNTUK GAME WINDOW UTAMA
     @FXML
     protected void onDrawOpenWindow(MouseEvent event){
         try{
-            if(HandleEvent.gameState.getPhase() == Phase.DRAW){
+            if(HandleEvent.gameState.getPhase() == Phase.DRAW && !HandleEvent.gameState.getHasDrawn()){
+                HandleEvent.gameState.setHasDrawn(true);
                 this.switchToGameWindowDraw(event);
             }
         }
@@ -564,12 +592,14 @@ public class GameWindow {
     @FXML
     void onNextPhaseClick(MouseEvent event) {
         try{
-            //update game state
-            System.out.println("DI KLIK NEXT PHASE");
-            HandleEvent.onNextPhaseClick();
-
-            //update game window
-            this.setWindowBasedOnGameState();
+            // gaboleh di next, kalo sekarang phasenya lagi draw, dan belum ngambil kartu
+            if (!(HandleEvent.gameState.getPhase() == Phase.DRAW && !HandleEvent.gameState.getHasDrawn())){
+                 //update game state
+                System.out.println("DI KLIK NEXT PHASE");
+                HandleEvent.onNextPhaseClick();
+                //update game window
+                this.setWindowBasedOnGameState();
+            }
         }catch(Exception e){
             System.out.println(" == Catched == ");
         }

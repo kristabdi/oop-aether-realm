@@ -17,16 +17,14 @@ public class CharacterCard extends Card {
     private int exp;
     private int level;
     private int maxExp;
-    private String imgPath;
     private Type attribute;
     private List<SpellCard> activeSpells;
     private int attackBuff;
     private int healthBuff;
 
-    public CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp, String imagePath) {
+    public CharacterCard(String name, Type attribute, String description, String imagePath, int attack, int health, int mana, int attackUp, int healthUp) {
         super(name, "Character", description, imagePath);
         this.attribute = attribute;
-        this.imgPath = imgPath;
         this.attack = attack;
         this.health = health;
         this.mana = mana;
@@ -88,10 +86,6 @@ public class CharacterCard extends Card {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public String getImgPath() {
-        return imgPath;
     }
 
     public Type getAttribute() {

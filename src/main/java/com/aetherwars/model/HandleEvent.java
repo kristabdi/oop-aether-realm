@@ -27,7 +27,6 @@ public class HandleEvent{
             
             gameState.addCardToDeck(gameState.getBufferDrawnCards().remove(0));
         }
-
         gameState.nextPhase();
     }
 
@@ -102,6 +101,7 @@ public class HandleEvent{
         System.out.println("masuk handle event on draw");
         gameState.getThreeCardsFromDeckToBuffer();
         System.out.println("keluar handle event on draw");
+        
     }
 
 }

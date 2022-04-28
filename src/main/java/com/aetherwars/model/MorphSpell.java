@@ -18,6 +18,6 @@ public class MorphSpell extends SpellCard implements Spell {
     }
 
     public void execute(CharacterCard s) {
-        s = new CharacterCard(morphTarget.getName(), morphTarget.getAttribute(), morphTarget.getDescription(), morphTarget.getImgPath(), morphTarget.getAttack(), morphTarget.getHealth(), morphTarget.getMana(), morphTarget.getAttackUp(), morphTarget.getHealthUp(), morphTarget.getImagePath());
+        s = new CharacterCard(morphTarget.getName(), morphTarget.getAttribute(), morphTarget.getDescription(), morphTarget.getImagePath(), morphTarget.getAttack(), morphTarget.getHealth(), morphTarget.getMana(), morphTarget.getAttackUp(), morphTarget.getHealthUp());
     }
 }
