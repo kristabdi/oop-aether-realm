@@ -45,14 +45,16 @@ public class Board {
 
     //asumsi input selalu benar
     //exception di atas
-    public void addCardById(int id,CharacterCard c){
+    public boolean addCardById(int id,CharacterCard c){
         System.out.println("ADD CARD BY ID DENGAN ID" + String.valueOf(id) + " DAN KARAKTERNYA ADALAH ");
         System.out.println(c);
         if(this.cardBoard[id].isFilled()){
             System.out.println("Udah ada isinya");
+            return false;
         }else{
             this.cardBoard[id] = new BoardSlot(c);
             this.filled++;
+            return true;
         }
     }
 
