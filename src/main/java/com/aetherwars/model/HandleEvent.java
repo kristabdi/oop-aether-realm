@@ -45,7 +45,7 @@ public class HandleEvent{
         //menambahkan karakter ke board kosong atau spell ke karakter
         if(gameState.getPhase()==GameState.Phase.PLAN && gameState.haveSelected()){ // BILANG JEP
             gameState.removeCardFromHand(1); //BILANG JEP, gimana kalo indeks kartu gausah dijadiin parameter ? karena udah disimpen jadi atribut gamestate
-            gameState.addCardToBoard(index); //BILANG JEP
+            gameState.addCardToBoardAndCleanBuffer(index); //BILANG JEP
         }else if(gameState.getPhase()==GameState.Phase.PLAN && gameState.spellInBuffer()){ //BILANG JEP
             gameState.cardOnBoardGotSpelled(index); //BILANG JEP
         }else if(gameState.getPhase()==GameState.Phase.ATTACK){
