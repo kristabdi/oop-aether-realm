@@ -91,6 +91,11 @@ public class CharacterCard extends Card {
     public Type getAttribute() {
         return attribute;
     }
+
+    public void setAttribute(Type attribute) {
+        this.attribute = attribute;
+    }
+
     @Override
     public int getMana() {
         return mana;
@@ -104,6 +109,9 @@ public class CharacterCard extends Card {
         return maxExp;
     }
 
+    public void setMaxExp(int maxExp) {
+        this.maxExp = maxExp;
+    }
     public String getType() {
         return String.valueOf(attribute);
     }
@@ -121,6 +129,10 @@ public class CharacterCard extends Card {
 
     public List<SpellCard> getActiveSpells() {
         return this.activeSpells;
+    }
+
+    public void setActiveSpells(List<SpellCard> activeSpells) {
+        this.activeSpells = activeSpells;
     }
 
     public Boolean isHaveSpell() {
@@ -183,26 +195,6 @@ public class CharacterCard extends Card {
             return 0.5;
         }
     }
-
-    // yang dicomment untuk isolated testing swapspell
-    // public void attack(CharacterCard victim) {
-    //     // trus kurangin health dari victim sebanyak finalAttack
-    //     if (victim.getHealth() - getFinalAttack() <= 0) {
-    //         // Karakter musuh mati, dapat EXp
-    //         victim.setHealth(0);
-    //         addExp(victim.getLevel());
-    //     } else {
-    //         victim.setHealth(victim.getHealth() - getFinalAttack());
-    //     }
-    // }
-
-    // public void attackPlayer(Player player) {
-    //     //  Jika tidak ada karakter di board lawan
-    // }
-
-    // public int getFinalAttack() {
-    //     // integer finalAttack =  attackku berdasarkan attack asli + buff,
-    // }
     
     public void decreaseHealth(int attackReceived){
         // Alurnya, mengurangi remaining Health di potion spell, baru mengurangi health asli si character card
@@ -260,13 +252,6 @@ public class CharacterCard extends Card {
     }
 
     public Integer attackPlayer(Integer otherHealth) {
-        /* 
-            pada suatu hari hiduplah sebuah player. player memiliki health. Tiba-tiba, health tersebut di get oleh GameState
-            Jadi, method ini hanya menerima health player lain. Kemudian, method ini mengurangi angka tersebut (health player lain)
-            dengan finalAttack karakter ini.
-            Kemudian hasilnya direturn
-            Kemudian GameState (atau apapun itu) yang melakukan setHealth ke player lain
-        */
         Integer resOtherHealth = otherHealth - getFinalAttack();
         if (resOtherHealth >= 0) {
             return resOtherHealth;
@@ -307,8 +292,4 @@ public class CharacterCard extends Card {
     public boolean isDead() {
         return (this.health == 0);
     }
-
-     // buat priorityQueue of Tupple of Buff
-    // buff berisi, duration, hp, attack
-    // private PriorityQueue<Tupple<Integer, Integer, Integer>> buffPriorityQueue;
 }
