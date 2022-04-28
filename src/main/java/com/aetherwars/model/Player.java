@@ -10,7 +10,6 @@ public class Player {
     private int maxMana;
     private int health; // default 80
     private Deck deck;
-    private int selectedCardInHandIndex;
     private CardInHand cardInHand;
     private Board cardOnBoard;
 
@@ -20,7 +19,6 @@ public class Player {
         this.maxMana = 10;
         this.health = 80;
         this.deck = new Deck();
-        this.selectedCardInHandIndex = -1;
         this.cardInHand = new CardInHand();
         this.cardOnBoard = new Board();
     }
@@ -31,7 +29,6 @@ public class Player {
         this.maxMana = 10;
         this.health = 80;
         this.deck = deck;
-        this.selectedCardInHandIndex = -1;
         this.cardInHand = cardInHand;
         this.cardOnBoard = cardOnBoard;
     }
@@ -102,22 +99,6 @@ public class Player {
         cardInHand.removeCardFromHand(i);
     }
 
-    public void addCardToBoard(Card card){
-        // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck
-        // mirip addcard inhand
-        //  aku mau dia nambah card di index ke 'selctedCardInHand' ke board, abis itu delete card di hand di index 'selectedCardInHand', trus selectedCardInHand brubah jadi -1
-        //update GUI cardInHand sama cardOnBoard
-        //kalau spell:
-        if (cardInHand.isCardinHand(card)) {
-            if (card.getType().equals("Character")) {
-                if (this.mana >= ((CharacterCard)card).getMana()) {
-                    this.mana -= ((CharacterCard)card).getMana();
-                }
-                this.cardOnBoard.addCard((CharacterCard)card);
-            }
-        }
-    }
-
     public void useManaForExp(CharacterCard card) {
         // menambahkan exp ke card, dengan menghilangkan mana dari player
         if (this.mana > 0) {
@@ -133,8 +114,26 @@ public class Player {
         }
     }
 
-    public void attack(CharacterCard player, CharacterCard other) {
-        player.attack(other);
+    public void attack(Integer myBoardIndex, CharacterCard victim) {
+        System.out.println("ADA YANG MAU NGE ATTACK");
+
+        // apakah charactercard di my board index ada isinya,
+        if(this.cardOnBoard.isSlotFilled(myBoardIndex)){
+            //kalau iya
+            // apakah karaktercard di myboard index belum attack,
+            if(!this.cardOnBoard.hasCardInIndexAttacked(myBoardIndex)){
+                ((CharacterCard)this.getCardOnBoard(myBoardIndex)).attack(victim);
+            }
+        }
+        // else do nothing
+    }
+
+    public Boolean hasCharacterInBoardWithIndexXAttacked(Integer x){
+        return this.cardOnBoard.hasCardInIndexAttacked(x);
+    }
+
+    public void setCharacterInBoardWithIndexXAttackedToTrue(Integer x){
+        this.cardOnBoard.setCardInIndexAttackedToTrue(x);
     }
 
     public Card getCardOnBoard(int idx){
@@ -146,8 +145,12 @@ public class Player {
     }
 
     public void addCardToBoard(Integer idx, Card card) {
-        
-        this.cardOnBoard.addCardById(idx,(CharacterCard)card);
+        // cek dulu mana yg dimiliki player saat ini, harus lebih dari 'cost' mana buat nge deploy card to deck. 
+        // kalo kurang, do nothing
+        if (this.mana >= ((CharacterCard)card).getMana()) {
+            this.mana -= ((CharacterCard)card).getMana();
+            this.cardOnBoard.addCardById(idx,(CharacterCard)card);
+        }
     }
 
     public void addCardToCardInHand(Card card) {
@@ -167,3 +170,19 @@ public class Player {
         cardOnBoard.update();
     }
 }
+
+// public void addCardToBoard(Card card){
+//     // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck
+//     // mirip addcard inhand
+//     //  aku mau dia nambah card di index ke 'selctedCardInHand' ke board, abis itu delete card di hand di index 'selectedCardInHand', trus selectedCardInHand brubah jadi -1
+//     //update GUI cardInHand sama cardOnBoard
+//     //kalau spell:
+//     if (cardInHand.isCardinHand(card)) {
+//         if (card.getType().equals("Character")) {
+//             if (this.mana >= ((CharacterCard)card).getMana()) {
+//                 this.mana -= ((CharacterCard)card).getMana();
+//             }
+//             this.cardOnBoard.addCard((CharacterCard)card);
+//         }
+//     }
+// }

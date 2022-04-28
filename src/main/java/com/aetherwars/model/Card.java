@@ -14,6 +14,11 @@ public class Card {
     public String getImagePath(){
         return this.imagePath;
     }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,6 +29,18 @@ public class Card {
 
     public String getType() {
         return type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getMana(){

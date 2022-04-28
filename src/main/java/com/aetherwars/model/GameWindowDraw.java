@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
@@ -14,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -92,16 +94,23 @@ public class GameWindowDraw {
         //update gameWindowDraw. manual ae, soalnya gk banyak
         for (int i = 0 ; i < HandleEvent.gameState.getBufferDrawnCards().size();i++){
             Card card = HandleEvent.gameState.getBufferDrawnCards().get(i);
+            Button buttonToBeEdited = new Button();
+            ImageView imageViewToBeEdited = new ImageView();
             if(i == 0){
-                generatedCard1.setText(card.getName());
-                // generatedCard1_image.setImage();
+                buttonToBeEdited = generatedCard1;
+                imageViewToBeEdited = generatedCard1_image;
             }
             if(i == 1){
-                generatedCard2.setText(card.getName());
+                buttonToBeEdited = generatedCard2;
+                imageViewToBeEdited = generatedCard2_image;
             }
             if(i == 2){
-                generatedCard3.setText(card.getName());
+                buttonToBeEdited = generatedCard3;
+                imageViewToBeEdited = generatedCard3_image;
             }
+            buttonToBeEdited.setText(card.getName());
+            File cardImage = new File(PATH_TO_IMAGE + card.getImagePath());
+            imageViewToBeEdited.setImage(new Image(cardImage.toURI().toString()));
         }
 
         

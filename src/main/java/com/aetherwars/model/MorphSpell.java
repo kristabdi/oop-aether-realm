@@ -1,5 +1,7 @@
 package com.aetherwars.model;
 
+import java.util.ArrayList;
+
 public class MorphSpell extends SpellCard implements Spell {
     private CharacterCard morphTarget;
 
@@ -18,6 +20,21 @@ public class MorphSpell extends SpellCard implements Spell {
     }
 
     public void execute(CharacterCard s) {
-        s = new CharacterCard(morphTarget.getName(), morphTarget.getAttribute(), morphTarget.getDescription(), morphTarget.getImgPath(), morphTarget.getAttack(), morphTarget.getHealth(), morphTarget.getMana(), morphTarget.getAttackUp(), morphTarget.getHealthUp(), morphTarget.getImagePath());
+        // change s attribute into morphTarget attribute
+        s.setName(morphTarget.getName());
+        s.setAttribute(morphTarget.getAttribute());
+        s.setDescription(morphTarget.getDescription());
+        s.setImagePath(morphTarget.getImagePath());
+        s.setAttack(morphTarget.getAttack());
+        s.setHealth(morphTarget.getHealth());
+        s.setMana(morphTarget.getMana());
+        s.setAttackUp(morphTarget.getAttackUp());
+        s.setHealthUp(morphTarget.getHealthUp());
+        s.setLevel(1);
+        s.setExp(0);
+        s.setMaxExp(1);
+        s.setActiveSpells(new ArrayList<>());
+        s.setAttackBuff();
+        s.setHealthBuff();
     }
 }
