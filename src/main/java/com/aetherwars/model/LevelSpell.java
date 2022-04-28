@@ -21,8 +21,10 @@ public class LevelSpell extends SpellCard implements Spell {
                 newLevel = 10;
             }
             s.setLevel(newLevel);
+            s.setMaxExp(2 * s.getLevel() - 1);
         } else {
             s.setLevel(1);
+            s.setMaxExp(1);
         }
         s.setExp(0);
     }

@@ -103,6 +103,10 @@ public class HandleEvent{
             // Cek apakah kartu di board yang diklik udah menyerang
             gameState.selectAttacker(boardNumber);
         }
+        else{
+            gameState.setSelectedCardOnBoardNumber(boardNumber);
+            gameState.setSelectedCardOnBoardBasedOnCurrentPlayer(boardNumber);
+        }
         System.out.println("Klik board terdeteksi. Board ke : "+ boardNumber);
     }
     
@@ -121,11 +125,21 @@ public class HandleEvent{
     }
 
     public static void onOpponentBoardClick(int boardNumber){
-        // if(gameState.getPhase()==Phase.ATTACK){
+        if(gameState.getPhase()== GameState.Phase.ATTACK){
+            System.out.println("Klik board lawan terdeteksi terdeteksi. KAMU MAU ATTACK KARAKTER LAWAN. Board ke :" + boardNumber);
+            gameState.attack(boardNumber);
         //     gameState.attack(index);
-        // }
-        System.out.println("Klik board lawan terdeteksi terdeteksi. KAMU MAU ATTACK KARAKTER LAWAN. Board ke :" + boardNumber);
-        gameState.attack(boardNumber);
+        }
+        else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer()){
+            if(gameState.getSelectedCardInHand() instanceof MorphSpell){
+                System.out.println("ABIS INI BAKAL NGE MORPH CHARACTER CARD DI BOARD LAWAN!");
+                gameState.morphOpponentCardOnBoard(boardNumber);
+
+                gameState.setSelectedCardOnBoardNumber(boardNumber);
+                gameState.setSelectedCardOnBoardBasedOnCurrentPlayer(boardNumber);
+
+                gameState.removeCardFromHand();
+            } 
         
     }
 
@@ -145,6 +159,8 @@ public class HandleEvent{
         
     }
     public static void addExpButtonOnClick(){
+        System.out.println("ADD EXP BUTTON CLICKED!");
+        gameState.currentPlayerManaToExp();
     }
 
 }

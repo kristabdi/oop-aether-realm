@@ -114,7 +114,7 @@ public class Player {
         System.out.println("akan digunakan terhadap");
         System.out.println(card);
         if (spell instanceof LevelSpell) {
-            spell.setSpellMana((int)Math.ceil(card.getLevel()/2));
+            spell.setSpellMana((int)Math.ceil(((double)card.getLevel())/2.0));
         }
         if (this.mana >= spell.getMana()) {
             this.setMana(this.mana - spell.getMana());

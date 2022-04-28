@@ -43,8 +43,8 @@ public class GameState {
         d1.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         Deck d2 = new Deck();
         d2.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
-        this.player1 = new Player("pesatu", 1, d1, new CardInHand(), new Board());
-        this.player2 = new Player("pedua", 1, d2, new CardInHand(), new Board());
+        this.player1 = new Player("pesatu", 8, d1, new CardInHand(), new Board());
+        this.player2 = new Player("pedua", 8, d2, new CardInHand(), new Board());
         this.characterCards = characterCards;
         this.morphSpells = morphSpells;
         this.potionSpells = potionSpells;
@@ -214,6 +214,31 @@ public class GameState {
         this.player1.updateBoard();
         this.player2.updateBoard();
     }
+
+    public void currentPlayerManaToExp(){
+        if(this.phase == Phase.PLAN){
+            if(this.turn == 1){
+                System.out.println("mana player1:");
+                System.out.println(this.player1.getMana());
+                System.out.println("selected card saat ini");
+                System.out.println(this.selectedCardOnBoard);
+                if(this.player1.getMana() > 0 && this.selectedCardOnBoard != null){
+                    this.player1.setMana(this.player1.getMana() - 1);
+                    ((CharacterCard)this.selectedCardOnBoard).addExp(1);
+                }
+            }
+            else{
+                System.out.println("mana player2:");
+                System.out.println(this.player2.getMana());
+                System.out.println("selected card saat ini");
+                System.out.println(this.selectedCardOnBoard);
+                if(this.player2.getMana() > 0 && this.selectedCardOnBoard != null){
+                    this.player2.setMana(this.player2.getMana() - 1);
+                    ((CharacterCard)this.selectedCardOnBoard).addExp(1);;
+                }
+            }
+        }
+    }
     // HELPER SAAT PHASE DRAW
     public void getThreeCardsFromDeckToBuffer(){
         // ngasi 3 buah kartu dari deck player 1 ataupun player 2. sementara asumsi kalo udah di get 3 dari deck, deck langsung berkurang 3. tapi masih tergantung implementasi dari Deck
@@ -258,6 +283,35 @@ public class GameState {
         }
     }
     
+    public void morphOpponentCardOnBoard(Integer OpponentBoardNumber){
+        // berdasarkan current turn dan selectedCardInHand
+        if(this.turn == 1){
+            // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.
+            System.out.println("apakah yg di klik itu instance of charactercard");
+            System.out.println(this.player1.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard);
+            System.out.println("apakah yg di select di hand itu spellcard?");
+            System.out.println(this.selectedCardInHand instanceof SpellCard);
+
+
+            if(this.player2.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell){
+                // gunakan spell
+                player2.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
+                
+            }
+        }
+        else{
+            System.out.println("apakah yg di klik itu instance of charactercard");
+            System.out.println(this.player2.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard);
+            System.out.println("apakah yg di select di hand itu spellcard?");
+            System.out.println(this.selectedCardInHand instanceof SpellCard);
+            System.out.println(this.selectedCardInHand);
+
+            if(this.player1.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell){
+                player1.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
+            }
+        }
+    }
+
     public void cardOnBoardGotSpelled(Integer boardNumber){
         // berdasarkan current turn dan selectedCardInHand
         if(this.turn == 1){
@@ -360,7 +414,8 @@ public class GameState {
 
         // attack langsung ke player
         // jika lawan vulnerable, attack. jika tidak, do nothing
-        if(this.selectedCardOnBoard != null){
+        
+        if(this.selectedCardOnBoard != null && this.phase == Phase.ATTACK){
             if(this.turn == 1){
                 System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
@@ -386,11 +441,12 @@ public class GameState {
             }
             this.clearSelectedCardOnBoardBuffer();
         }
+        
     }
     public void attack(Integer boardNumberVictim){
         // get card yg attacker sama victim
         // melakukan peng attackan berdasarkan turn saat ini, selectedCardOnBoard. jadi player pada turn saat ini, akan mengattack selectedCardOnBoard.
-        if(this.selectedCardOnBoard != null){
+        if(this.selectedCardOnBoard != null && this.phase == Phase.ATTACK){
             if(this.turn == 1){
                 System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
@@ -427,6 +483,22 @@ public class GameState {
 
     public void setHasDrawn(Boolean bool){
         this.hasDrawn = bool;
+    }
+    public boolean isGameEnded(){
+        return (this.player1.getHealth() <= 0 || this.player2.getHealth() <= 0 || this.player1.getPlayerDeckSize() <= 0 || this.player2.getPlayerDeckSize() <= 0);
+    }
+    public Player whoIsTheWinner(){
+        if(this.isGameEnded()){
+            if(this.player2.getHealth() <= 0){
+                return this.player2;
+            }
+            else{
+                return this.player1;
+            }
+        }
+        else{
+            return null;
+        }
     }
     // HELPER SAAT PHASE END
     // butuh method untuk endgame saat salah satu player mati

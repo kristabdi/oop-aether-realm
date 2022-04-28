@@ -161,6 +161,7 @@ public class CharacterCard extends Card {
 
     public void levelUp() {
         if(this.level < 10 && this.health > 0){
+            boolean swapSpellInActiveSpells = false;
             int temp = this.getExp();
             int batasExp = 1;
             int levelAwal = this.getLevel();
@@ -181,8 +182,21 @@ public class CharacterCard extends Card {
             }
 
             this.exp = temp;
-            this.attack = this.baseAttack + (this.getLevel() - 1) * this.attackUp;
-            this.health = this.baseHP + (this.getLevel() - 1) * this.healthUp;
+            
+            for (SpellCard spell:this.getActiveSpells()){
+                if(spell instanceof SwapSpell){
+                    swapSpellInActiveSpells = true;
+                }
+            }
+            if (!swapSpellInActiveSpells) {
+                this.attack = this.baseAttack + (this.getLevel() - 1) * this.attackUp;
+                this.health = this.baseHP + (this.getLevel() - 1) * this.healthUp;
+                
+            }
+            else{
+                this.health = this.baseAttack + (this.getLevel() - 1) * this.attackUp;
+                this.attack = this.baseHP + (this.getLevel() - 1) * this.healthUp;
+            }
         }
     }
 

@@ -9,9 +9,11 @@ import java.util.List;
 
 import com.aetherwars.model.GameState.Phase;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -317,6 +319,19 @@ public class GameWindow {
     }
 
     protected void setGeneralGameWindowBasedOnGameState(){
+        //cek apakah game sudah berakhir
+        if(HandleEvent.gameState.isGameEnded()){
+            // ALERT GAME TELAH BERAKHIR
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Player winner = HandleEvent.gameState.whoIsTheWinner();
+            alert.setTitle("Game Ended");
+            alert.setHeaderText("Game has ended");
+            alert.setContentText("The game has ended\n" + winner.getName() + " is the winner!");
+            alert.showAndWait();
+            //close window
+            Platform.exit();
+        }
+
         /* SET KEBUTUHAN GAME UMUM */
         // SET LABEL DECK
        labelDeck.setText("hardcode");
@@ -455,6 +470,7 @@ public class GameWindow {
             // update game state
             HandleEvent.addExpButtonOnClick();
             // update game window
+            this.setWindowBasedOnGameState();
         }catch(Exception e){
             System.out.println(" == Catched == ");
         }

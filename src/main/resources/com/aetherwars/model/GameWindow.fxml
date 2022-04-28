@@ -321,7 +321,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS" style="-fx-border-style: solid;">
                            <children>
                               <Label fx:id="labelFaseAttack" alignment="CENTER" layoutX="96.0" layoutY="26.0" prefHeight="48.0" prefWidth="220.0" style="-fx-border-style: solid;" text="ATTACK" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
@@ -330,7 +330,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS">
+                        <AnchorPane prefHeight="50.0" prefWidth="220.0" HBox.hgrow="ALWAYS" style="-fx-border-style: solid;">
                            <children>
                               <Label fx:id="labelFaseEnd" alignment="CENTER" layoutX="96.0" layoutY="16.0" prefHeight="48.0" prefWidth="220.0" style="-fx-border-style: solid;" text="END" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
