@@ -26,6 +26,18 @@ public class Card {
         return type;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public int getMana(){
         return 0;
     }
