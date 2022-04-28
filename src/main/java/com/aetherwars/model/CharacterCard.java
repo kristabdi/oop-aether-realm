@@ -2,7 +2,7 @@ package com.aetherwars.model;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+// import java.util.PriorityQueue;
 // import com.aetherwars.model.Type;
 
 public class CharacterCard extends Card {
@@ -23,8 +23,8 @@ public class CharacterCard extends Card {
     private int attackBuff;
     private int healthBuff;
 
-    public CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp) {
-        super(name, "Character", description);
+    public CharacterCard(String name, Type attribute, String description, String imgPath, int attack, int health, int mana, int attackUp, int healthUp, String imagePath) {
+        super(name, "Character", description, imagePath);
         this.attribute = attribute;
         this.imgPath = imgPath;
         this.attack = attack;
@@ -106,6 +106,7 @@ public class CharacterCard extends Card {
         this.attribute = attribute;
     }
 
+    @Override
     public int getMana() {
         return mana;
     }
@@ -120,6 +121,8 @@ public class CharacterCard extends Card {
 
     public void setMaxExp(int maxExp) {
         this.maxExp = maxExp;
+    public String getType() {
+        return String.valueOf(attribute);
     }
 
     public void updateSpellsEndDuration() {

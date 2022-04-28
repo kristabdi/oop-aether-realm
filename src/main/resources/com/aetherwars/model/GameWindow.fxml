@@ -360,7 +360,7 @@
                                        <children>
                                           <Button fx:id="cardInHand1" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#onCardInHand1Click" onMouseEntered="#OnCardInHand1Hover" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note&#10;" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
-                                                <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="cardInHand1Image" fitHeight="110.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../../../resources/com/aetherwars/card/image/character/Creeper.png" />
                                                    </image>
@@ -373,7 +373,7 @@
                                        <children>
                                           <Button fx:id="cardInHand2" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#onCardInHand2Click" onMouseEntered="#OnCardInHand2Hover" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
-                                                <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                <ImageView fx:id="cardInHand2Image" fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../../../../resources/com/aetherwars/card/image/character/Ender%20Dragon.png" />
                                                    </image>
@@ -386,7 +386,7 @@
                                        <children>
                                           <Button fx:id="cardInHand3" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#onCardInHand3Click" onMouseEntered="#OnCardInHand3Hover" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
-                                                <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                <ImageView fx:id="cardInHand3Image" fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../../../../resources/com/aetherwars/card/image/character/Warden.png" />
                                                    </image>
@@ -399,7 +399,7 @@
                                        <children>
                                           <Button fx:id="cardInHand4" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#onCardInHand4Click" onMouseEntered="#OnCardInHand4Hover" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
-                                                <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                <ImageView fx:id="cardInHand4Image" fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../../../../resources/com/aetherwars/card/image/character/Ghast.png" />
                                                    </image>
@@ -412,7 +412,7 @@
                                        <children>
                                           <Button fx:id="cardInHand5" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#onCardInHand5Click" onMouseEntered="#OnCardInHand5Hover" prefHeight="178.4" prefWidth="90.4" text="&#10;Mana 0&#10;&#10;Note" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <graphic>
-                                                <ImageView fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
+                                                <ImageView fx:id="cardInHand5Image" fitHeight="110.0" fitWidth="70.0" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../../../../resources/com/aetherwars/card/image/character/Wither%20Skeleton.png" />
                                                    </image>

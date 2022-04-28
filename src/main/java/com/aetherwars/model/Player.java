@@ -124,8 +124,8 @@ public class Player {
     }
 
     public void useSpellOnCard(CharacterCard card, SpellCard spell) {
-        if (this.mana >= spell.getSpellMana()) {
-            this.setMana(this.mana - spell.getSpellMana());
+        if (this.mana >= spell.getMana()) {
+            this.setMana(this.mana - spell.getMana());
             spell.execute(card);
         }
     }

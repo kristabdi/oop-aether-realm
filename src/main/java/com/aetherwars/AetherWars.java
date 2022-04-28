@@ -43,7 +43,7 @@ public class AetherWars extends Application {
     Reader.setSkipHeader(true);
     List<String[]> Rows = Reader.read();
     for (String[] row : Rows) {
-      CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], Integer.valueOf(row[5]), Integer.valueOf(row[6]), Integer.valueOf(row[7]), Integer.valueOf(row[8]), Integer.valueOf(row[9]));
+      CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], Integer.valueOf(row[5]), Integer.valueOf(row[6]), Integer.valueOf(row[7]), Integer.valueOf(row[8]), Integer.valueOf(row[9]), row[4]);
       // System.out.println("data");
       // System.out.println(c);
       characterCards.add(c);
@@ -61,8 +61,8 @@ public class AetherWars extends Application {
       // convert targetId into string name of character card
       int targetId = Integer.valueOf(row[4]);
 
-      CharacterCard target = characterCards.get(targetId - 1);
-      MorphSpell c = new MorphSpell(row[1], "Morph", row[2], target, Integer.valueOf(row[5]));
+      CharacterCard target = characterCards.get(targetId - 1); // keknya di minus 1 ya? iya bener - 1
+      MorphSpell c = new MorphSpell(row[1], "Morph", row[2], target, Integer.valueOf(row[5]), row[3]);
       // System.out.println(c);
       morphSpells.add(c);
     }

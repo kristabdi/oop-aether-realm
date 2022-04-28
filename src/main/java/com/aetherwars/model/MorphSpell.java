@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class MorphSpell extends SpellCard implements Spell {
     private CharacterCard morphTarget;
 
-    public MorphSpell(String name, String type, String description, CharacterCard target, int mana) {
+    public MorphSpell(String name, String type, String description, CharacterCard target, int mana, String imagePath) {
         
-        super(name, type, description, mana, 0, 0, "");
+        super(name, type, description, mana, 0, 0, imagePath);
         this.morphTarget = target;
     }
 
