@@ -112,7 +112,6 @@ public class testPlayer {
         Card c = new CharacterCard("name",CharacterCard.Type.END,"desc","path",0,0,0,0,0,"path");
         q.addCardToCardInHand(c);
         assertTrue(Objects.deepEquals(c,q.getCardInHandPlayer().get(0)));
-        q.addCardToBoard(c);
-        assertTrue(Objects.deepEquals(c,q.getCardOnBoard(0)));
+        assertTrue(Objects.deepEquals((Card)c,q.getCardOnBoard(0)));
     }
 }

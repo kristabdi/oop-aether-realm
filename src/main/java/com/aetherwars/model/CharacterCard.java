@@ -110,9 +110,9 @@ public class CharacterCard extends Card {
         return maxExp;
     }
 
-    public String getType() {
-        return String.valueOf(attribute);
-    }
+    // public String getType() {
+    //     return String.valueOf(attribute);
+    // }
 
     public void updateSpellsEndDuration() {
         for (int i = 0; i < activeSpells.size(); i++) {
