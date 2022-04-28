@@ -106,7 +106,7 @@ public class testCard {
         morphSpell.execute(characterExample);
         assertEquals("nameMorph", characterExample.getName());
         assertEquals(Type.END, characterExample.getAttribute());
-        assertEquals("descriptionMorh", characterExample.getDescription());
+        assertEquals("descriptionMorph", characterExample.getDescription());
         assertEquals("imagePathMorph", characterExample.getImagePath());
         assertEquals(1, characterExample.getAttack());
         assertEquals(1, characterExample.getHealth());

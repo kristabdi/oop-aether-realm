@@ -109,10 +109,10 @@ public class testPlayer {
     @DisplayName("Test addCardToBoard dan add CardToCardInHand Player")
     void testaddCardToBoard(){
         Player q = new Player("new name",5,new Deck(), new CardInHand(), new Board());
-        Card c = new CharacterCard("name",CharacterCard.Type.END,"desc","path",0,0,0,0,0,"path");
+        Card c = new CharacterCard("name",CharacterCard.Type.END,"desc","path",0,0,0,0,0);
         q.addCardToCardInHand(c);
         assertTrue(Objects.deepEquals(c,q.getCardInHandPlayer().get(0)));
-        q.addCardToBoard(c);
-        assertTrue(Objects.deepEquals(c,q.getCardOnBoard(0)));
+        q.addCardToBoard(0,c);
+        assertTrue(Objects.deepEquals((Card)c,q.getCardOnBoard(0)));
     }
 }

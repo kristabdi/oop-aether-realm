@@ -89,9 +89,6 @@ public class Board {
         }
 
     }
-    public boolean isCardBoardEmpty(int idx){
-        return this.cardBoard[idx].isFilled();
-    }
 }
 
 
