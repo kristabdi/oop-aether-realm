@@ -68,10 +68,10 @@ public class Board {
             }
         }
     }
-    
-    public boolean isCardBoardEmpty(int idx){
-        return this.cardBoard[idx].isFilled();
-    }
+    //SAMA PERSIS KAYA ISSLOTFILLED
+    // public boolean isCardBoardEmpty(int idx){
+    //     return this.cardBoard[idx].isFilled();
+    // }
 }
 
 
