@@ -26,7 +26,7 @@ public class GameState {
     public Card selectedCardOnBoard;
     public Integer selectedCardOnBoardNumber;
     public List<Card> bufferDrawnCards;
-
+    public boolean hasAttackInThisTurn;
     public enum Phase {
         DRAW,
         PLAN,
@@ -43,8 +43,8 @@ public class GameState {
         d1.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
         Deck d2 = new Deck();
         d2.fillDeck(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
-        this.player1 = new Player("pesatu", 8, d1, new CardInHand(), new Board());
-        this.player2 = new Player("pedua", 8, d2, new CardInHand(), new Board());
+        this.player1 = new Player("Geprek", 1, d1, new CardInHand(), new Board());
+        this.player2 = new Player("Jones", 1, d2, new CardInHand(), new Board());
         this.characterCards = characterCards;
         this.morphSpells = morphSpells;
         this.potionSpells = potionSpells;
@@ -85,10 +85,10 @@ public class GameState {
                     this.turn = 1;
                     this.round += 1;
                 }
-                this.player1.resetMana(5*round);
+                this.player1.resetMana(round);
                 this.player1.setAllBoardHasAttackedToFalse();
                 this.player1.reduceSpellOnCardOnPlayerBoardDuration();
-                this.player2.resetMana(5*round);
+                this.player2.resetMana(round);
                 this.player2.setAllBoardHasAttackedToFalse();
                 this.player2.reduceSpellOnCardOnPlayerBoardDuration();
                 break;
@@ -490,10 +490,10 @@ public class GameState {
     public Player whoIsTheWinner(){
         if(this.isGameEnded()){
             if(this.player2.getHealth() <= 0){
-                return this.player2;
+                return this.player1;
             }
             else{
-                return this.player1;
+                return this.player2;
             }
         }
         else{

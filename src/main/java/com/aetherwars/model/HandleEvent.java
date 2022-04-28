@@ -140,7 +140,7 @@ public class HandleEvent{
 
                 gameState.removeCardFromHand();
             } 
-        
+        }
     }
 
     public static void onHover(Integer player, String loc, Integer cardNumber ){
