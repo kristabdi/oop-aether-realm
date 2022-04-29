@@ -87,8 +87,8 @@ public class HandleEvent{
             gameState.addCardToBoard(boardNumber);
             gameState.removeCardFromHand();
 
-            // kalo phase sekarang plan, dan yang ada di dalam buffer adalah spell, berarti dia mau nge apply spell ke card on board.
-        }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer()){ //BILANG JEP
+            // kalo phase sekarang plan, dan yang ada di dalam buffer adalah spell, dan ada character di boardnya, berarti dia mau nge apply spell ke card on board.
+        }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer() && gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber)){
             System.out.println("ABIS INI BAKAL NGE SPELL CHARACTER CARD DI BOARD!");
             gameState.cardOnBoardGotSpelled(boardNumber);
 

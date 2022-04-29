@@ -154,6 +154,7 @@ public class Player {
     }
 
     public int getBoardFilled(){
+        // mengembalikan jumlah kartu yang sudah diisi di board
         return cardOnBoard.getFilled();
     }
 

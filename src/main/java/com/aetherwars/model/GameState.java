@@ -70,9 +70,25 @@ public class GameState {
                 break;
             case PLAN:
                 this.phase = Phase.ATTACK;
+                //kalo gada card di boardku, has attacked jadi true
+                if(this.turn == 1){
+                    if(this.player1.getBoardFilled() == 0){
+                        this.hasAttackInThisTurn = true;
+                    }
+                }
+                else{
+                    if(this.player2.getBoardFilled() == 0){
+                        this.hasAttackInThisTurn = true;
+                    }
+                }
                 break;
             case ATTACK:
-                this.phase = Phase.END;
+                // harus sudah attack dulu
+                if(this.hasAttackInThisTurn){
+                    this.phase = Phase.END;
+                    this.hasAttackInThisTurn = false;
+                }
+                
                 break;
             case END:
             //tambahin update board
@@ -276,10 +292,12 @@ public class GameState {
         System.out.println("AKAN MENBAMHAKN CARD KE BOARD,");
         System.out.println("CARD YANG DITAMBAHKAN ADALAH ");
         System.out.println(this.selectedCardInHand);
-        if(this.turn == 1){
-            player1.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
-        }else{
-            player2.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
+        if(this.selectedCardInHand instanceof CharacterCard){
+            if(this.turn == 1){
+                player1.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
+            }else{
+                player2.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
+            }
         }
     }
     
@@ -416,6 +434,7 @@ public class GameState {
         // jika lawan vulnerable, attack. jika tidak, do nothing
         
         if(this.selectedCardOnBoard != null && this.phase == Phase.ATTACK){
+            this.hasAttackInThisTurn = true;
             if(this.turn == 1){
                 System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
@@ -447,6 +466,7 @@ public class GameState {
         // get card yg attacker sama victim
         // melakukan peng attackan berdasarkan turn saat ini, selectedCardOnBoard. jadi player pada turn saat ini, akan mengattack selectedCardOnBoard.
         if(this.selectedCardOnBoard != null && this.phase == Phase.ATTACK){
+            this.hasAttackInThisTurn = true;
             if(this.turn == 1){
                 System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
