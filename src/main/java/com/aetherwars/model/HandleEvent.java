@@ -36,21 +36,13 @@ public class HandleEvent{
         if(gameState.getPhase() == GameState.Phase.PLAN){
             try{
                 gameState.setSelectedCardInHand(cardInHandNumber); //BILANG JEP
-                System.out.println("Lagi plan nih");
             }catch(Exception e){
-                System.out.println("Inhand yang diklik ga valid");
             }
             
         }
-        System.out.println("Klik kartu in hand terdeteksi");
-        System.out.println("In hand ke :" + cardInHandNumber);
     }
 
     public static void onBoardClick(int player,int boardNumber){
-       
-
-        System.out.println("BOARD dari player " + String.valueOf(player) + "di lokasi " + String.valueOf(boardNumber) + "di klik!");
-        System.out.println("Turn: " + gameState.getTurn());
         if(player == gameState.getTurn()){
             HandleEvent.onPlayerBoardClick(boardNumber);
         }else{
@@ -60,36 +52,12 @@ public class HandleEvent{
 
 
     public static void onPlayerBoardClick(int boardNumber){
-        //menambahkan karakter ke board kosong atau spell ke karakter
-        // System.out.println("ON PLAYER BOARD CLICK!");
-        // System.out.println("fase saat ini");
-        // System.out.println(String.valueOf(gameState.getPhase()));
-        // System.out.println("isi dari have selected");
-        // System.out.println(String.valueOf(gameState.haveSelectedCardInHand()));
-        // System.out.println("apakah character card?");
-        // System.out.println(gameState.getSelectedCardInHand() instanceof CharacterCard);
-        // System.out.println("mana player saat ini");
-        // System.out.println(gameState.getCurrentPlayerMana());
-        // System.out.println("mana yg dibutuin kalo mo deploy");
-        // System.out.println(gameState.getSelectedCardInHand().getMana());
-        // System.out.println("apakah board yang diklik sudah ada isinya");
-        // System.out.println(gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber));
-        
-        /*  
-            kalo phase saat ini adalah plan,
-            sudah select kartu dari tangan dan kartu tersebut merupakan karakter card,
-            mana yang dimiliki player saat ini lebih dari cost mana yg dibutuhkan buat nge deploy ke board,
-            dan board di lokasi boardNumber belum ada isinya
-            then deploy
-        */
         if(gameState.getPhase() == GameState.Phase.PLAN && gameState.haveSelectedCardInHand() && gameState.getSelectedCardInHand() instanceof CharacterCard && gameState.getCurrentPlayerMana() >= gameState.getSelectedCardInHand().getMana() && !gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber)){ 
-            System.out.println("ABIS INI BAKAL NAMBAHIN CARD KE BOARD!");
             gameState.addCardToBoard(boardNumber);
             gameState.removeCardFromHand();
 
             // kalo phase sekarang plan, dan yang ada di dalam buffer adalah spell, dan ada character di boardnya, berarti dia mau nge apply spell ke card on board.
         }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer() && gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber)){
-            System.out.println("ABIS INI BAKAL NGE SPELL CHARACTER CARD DI BOARD!");
             gameState.cardOnBoardGotSpelled(boardNumber);
 
             gameState.setSelectedCardOnBoardNumber(boardNumber);
@@ -98,8 +66,6 @@ public class HandleEvent{
             gameState.removeCardFromHand();
 
         }else if(gameState.getPhase() == GameState.Phase.ATTACK){
-            System.out.println("ABIS INI BAKAL NAMBAHIN CARD DI BOARD YANG BAKAL NGE ATTACK KE BUFFER!");
-
             // Cek apakah kartu di board yang diklik udah menyerang
             gameState.selectAttacker(boardNumber);
         }
@@ -107,32 +73,21 @@ public class HandleEvent{
             gameState.setSelectedCardOnBoardNumber(boardNumber);
             gameState.setSelectedCardOnBoardBasedOnCurrentPlayer(boardNumber);
         }
-        System.out.println("Klik board terdeteksi. Board ke : "+ boardNumber);
     }
     
     public static void onOpponentClick(int player){
-        // ini yang avatar di klik.
-        System.out.println("ON OPPONENT BOARD CLICK!");
-        System.out.println("selected card on board saat ini adalah");
-        System.out.println(gameState.getSelectedCardOnBoard());
-        System.out.println("dengan number");    
-        System.out.println(gameState.getSelectedCardOnBoardNumber());
-        
         if(gameState.getPhase() == GameState.Phase.ATTACK && gameState.getTurn()!=player){
             gameState.attack();
-            System.out.println("Klik lawan terdeteksi");
         }
     }
 
     public static void onOpponentBoardClick(int boardNumber){
         if(gameState.getPhase()== GameState.Phase.ATTACK){
-            System.out.println("Klik board lawan terdeteksi terdeteksi. KAMU MAU ATTACK KARAKTER LAWAN. Board ke :" + boardNumber);
             gameState.attack(boardNumber);
         //     gameState.attack(index);
         }
         else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer()){
             if(gameState.getSelectedCardInHand() instanceof MorphSpell){
-                System.out.println("ABIS INI BAKAL NGE MORPH CHARACTER CARD DI BOARD LAWAN!");
                 gameState.morphOpponentCardOnBoard(boardNumber);
 
                 gameState.setSelectedCardOnBoardNumber(boardNumber);
@@ -153,13 +108,10 @@ public class HandleEvent{
     }
     public static void onDraw(){
         //dijalankan ketika membuka window draw
-        System.out.println("masuk handle event on draw");
         gameState.getThreeCardsFromDeckToBuffer();
-        System.out.println("keluar handle event on draw");
         
     }
     public static void addExpButtonOnClick(){
-        System.out.println("ADD EXP BUTTON CLICKED!");
         gameState.currentPlayerManaToExp();
     }
 

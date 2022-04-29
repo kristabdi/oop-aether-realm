@@ -155,8 +155,6 @@ public class GameWindow {
     // METHOD GANTI SCENE
     
     public void switchToGameWindowDraw(MouseEvent event) throws IOException {
-        System.out.println("event pas mo ganti game window");
-        System.out.println(event);
         root = FXMLLoader.load(getClass().getResource("GameWindowDraw.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1366, 768);
@@ -167,7 +165,6 @@ public class GameWindow {
     protected void setBoardOnGameWindowBasedOnGameState(){
         /* SET BOARD */
         // player 1
-        System.out.println("SIZE DARI BOARD PLAYER 1 SAAT INI ADALAH" + String.valueOf(HandleEvent.gameState.getPlayer(1).getBoardFilled()));
         for(int playerNumber =  1; playerNumber <= 2; playerNumber++){
             for(int i = 0 ; i < 5 ; i++){
                 Button buttonToBeEdited = new Button();
@@ -272,7 +269,6 @@ public class GameWindow {
         List<Card> cardsBuffer = HandleEvent.gameState.getCardInHandGameState();
         //print ukuran card in hand
         Integer ukuran = cardsBuffer.size();
-        System.out.println("ukuran = " + String.valueOf(ukuran));
         for(int i = 0; i < ukuran; i++){
             Button ButtonToBeEdited = new Button();
             ImageView imageViewToBeEdited = new ImageView();
@@ -304,18 +300,13 @@ public class GameWindow {
         // player 1
         player1Name.setText(HandleEvent.gameState.getPlayer(1).getName());
         File imagep1 = new File(PATH_TO_IMAGE + "card/image/player/Steve.png");
-        System.out.println(imagep1.getAbsolutePath());
         playerA_image.setImage(new Image(imagep1.toURI().toString()));
-        System.out.println("darah player 1");
         player1HealthBar.setProgress((double)HandleEvent.gameState.getPlayer(1).getHealth()/80);
-        System.out.println(HandleEvent.gameState.getPlayer(1).getHealth());
         // player 2
         player2Name.setText(HandleEvent.gameState.getPlayer(2).getName());
         File imagep2 = new File(PATH_TO_IMAGE + "card/image/player/Alex.png");
         playerB_image.setImage(new Image(imagep2.toURI().toString()));
-        System.out.println("darah player 2");
         player2HealthBar.setProgress((double)HandleEvent.gameState.getPlayer(2).getHealth()/80);
-        System.out.println(HandleEvent.gameState.getPlayer(2).getHealth());
     }
 
     protected void setGeneralGameWindowBasedOnGameState(){
@@ -472,7 +463,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
     
@@ -487,7 +477,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -502,7 +491,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -517,7 +505,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -532,7 +519,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -547,7 +533,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -560,7 +545,6 @@ public class GameWindow {
             // update gameWindow
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         } 
     }
 
@@ -573,7 +557,6 @@ public class GameWindow {
             // update gameWindow
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
         
     }
@@ -587,7 +570,6 @@ public class GameWindow {
             this.setWindowBasedOnGameState();
 
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
 
     }
@@ -601,7 +583,6 @@ public class GameWindow {
             this.setWindowBasedOnGameState();
 
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
         
 
@@ -615,7 +596,6 @@ public class GameWindow {
             // update gameWindow
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
 
     }
@@ -626,27 +606,23 @@ public class GameWindow {
             // gaboleh di next, kalo sekarang phasenya lagi draw, dan belum ngambil kartu
             if (!(HandleEvent.gameState.getPhase() == Phase.DRAW && !HandleEvent.gameState.getHasDrawn())){
                  //update game state
-                System.out.println("DI KLIK NEXT PHASE");
                 HandleEvent.onNextPhaseClick();
                 //update game window
                 this.setWindowBasedOnGameState();
             }
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
         
     }
 
     @FXML
     void onPlayer1AvatarClick(MouseEvent event) {
-        System.out.println("ADA YG KLIK AVATAR 1");
         try{
             // update game state
             HandleEvent.onOpponentClick(1);
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -658,7 +634,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -673,7 +648,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -695,7 +669,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -707,7 +680,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -723,7 +695,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -736,13 +707,12 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
     @FXML
     void onPlayer1_CharDHover(MouseEvent event) {
-         try{
+        try{
             //update game state
             HandleEvent.onHover(1, "board", 4);
 
@@ -751,7 +721,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -764,7 +733,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -780,21 +748,17 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
     @FXML
     void onPlayer2AvatarClick(MouseEvent event) {
-        System.out.println("ADA YG KLIK AVATAR 2");
-
         try{
             // update game state
             HandleEvent.onOpponentClick(2);
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -807,7 +771,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
 
     }
@@ -823,7 +786,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -836,7 +798,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -851,7 +812,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -864,7 +824,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -879,7 +838,6 @@ public class GameWindow {
             this.setWindowBasedOnGameState();
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -892,7 +850,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
 
     }
@@ -907,7 +864,6 @@ public class GameWindow {
             this.setWindowBasedOnGameState();
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -920,7 +876,6 @@ public class GameWindow {
             // update game window
             this.setWindowBasedOnGameState();
         }catch(Exception e){
-            System.out.println(" == Catched == ");
         }
     }
 
@@ -935,7 +890,6 @@ public class GameWindow {
 
         }
         catch (Exception e){
-            System.out.print("pokok e on hover error lah, natah apapun");
         }
     }
 
@@ -983,7 +937,6 @@ public class GameWindow {
         assert playerB != null : "fx:id=\"playerB\" was not injected: check your FXML file 'GameWindow.fxml'.";
         assert playerB_image != null : "fx:id=\"playerB_image\" was not injected: check your FXML file 'GameWindow.fxml'.";
         assert rightDescriptionWhenHover != null : "fx:id=\"rightDescriptionWhenHover\" was not injected: check your FXML file 'GameWindow.fxml'.";
-        System.out.println("AMAN GAME WINDOW, INI AKHIR DARI INITIALIZE");
         this.setWindowBasedOnGameState();
     }
         

@@ -5,8 +5,6 @@ public class SwapSpell extends SpellCard implements Spell {
     }
 
     public void execute(CharacterCard card){
-        System.out.println("EXECUTE SWAP SPELL TERHADAP CARD");
-        System.out.println(card);
         // Cek apakah card sudah punya SwapSpell
         boolean found = false;
         int i = 0;
@@ -15,8 +13,6 @@ public class SwapSpell extends SpellCard implements Spell {
                 // Jika sudah punya SwapSpell, maka akan menambah durasi dengan this.getSpellDuration
                 int durasiAwal = card.getActiveSpells().get(i).getSpellDuration();
                 card.getActiveSpells().get(i).setSpellDuration(durasiAwal + this.getSpellDuration());
-                // System.out.println("Durasi: " + card.getActiveSpells().get(i).getSpellDuration());
-                // System.out.println("Durasi this: " + this.getSpellDuration());
                 found = true;
             }
         }

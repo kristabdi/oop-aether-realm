@@ -29,10 +29,7 @@ public class Board {
     //asumsi input selalu benar
     //exception di atas
     public boolean addCardById(int id,CharacterCard c){
-        System.out.println("ADD CARD BY ID DENGAN ID" + String.valueOf(id) + " DAN KARAKTERNYA ADALAH ");
-        System.out.println(c);
         if(this.cardBoard[id].isFilled()){
-            System.out.println("Udah ada isinya");
             return false;
         }else{
             this.cardBoard[id] = new BoardSlot(c);
@@ -50,13 +47,10 @@ public class Board {
     }
 
     public void setCardInIndexAttackedToTrue(Integer idx){
-        System.out.println("dari board, setCardInIndexAttackedToTrue jalan, dengan yg diset di index: ");
-        System.out.println(idx);
         cardBoard[idx].setAttack(true);
     }
     //masi problem
     public void update(){
-        System.out.println("UPDATE BOARD!");
         int i;
         int newFilled = this.getFilled();
         for(i=0;i<5;i++){

@@ -70,25 +70,9 @@ public class GameState {
                 break;
             case PLAN:
                 this.phase = Phase.ATTACK;
-                //kalo gada card di boardku, has attacked jadi true
-                if(this.turn == 1){
-                    if(this.player1.getBoardFilled() == 0){
-                        this.hasAttackInThisTurn = true;
-                    }
-                }
-                else{
-                    if(this.player2.getBoardFilled() == 0){
-                        this.hasAttackInThisTurn = true;
-                    }
-                }
                 break;
             case ATTACK:
-                // harus sudah attack dulu
-                if(this.hasAttackInThisTurn){
-                    this.phase = Phase.END;
-                    this.hasAttackInThisTurn = false;
-                }
-                
+                this.phase = Phase.END;
                 break;
             case END:
             //tambahin update board
@@ -149,7 +133,6 @@ public class GameState {
     
     public void selectAttacker(int boardNumber){
     // nyimpen SelectedCardOnBoard sebagai kartu di board SENDIRI yang akan meng attack
-        System.out.println("MASUK SELECT ATTACKER!");
         if(this.turn == 1){
             this.selectedCardOnBoard = this.player1.getCardOnBoard(boardNumber  - 1);
         }
@@ -170,11 +153,9 @@ public class GameState {
     }
     public Player getCurrentPlayer(){
         if(this.turn == 1){
-            System.out.println("current player adalah player 1");
             return this.player1;
         }
         else{
-            System.out.println("current player adalah player 2");
             return this.player2;
         }
     }
@@ -209,8 +190,6 @@ public class GameState {
                 this.cardOnDescription = this.player2.getCardInHandPlayer().get(cardNumber - 1);
             }
         }
-        // System.out.println("== CARD YANG SAAT INI DI DI DESCRIPTION ADALAH ====");
-        // System.out.println(this.cardOnDescription);
 
     }
     public int getRound(){
@@ -234,20 +213,12 @@ public class GameState {
     public void currentPlayerManaToExp(){
         if(this.phase == Phase.PLAN){
             if(this.turn == 1){
-                System.out.println("mana player1:");
-                System.out.println(this.player1.getMana());
-                System.out.println("selected card saat ini");
-                System.out.println(this.selectedCardOnBoard);
                 if(this.player1.getMana() > 0 && this.selectedCardOnBoard != null){
                     this.player1.setMana(this.player1.getMana() - 1);
                     ((CharacterCard)this.selectedCardOnBoard).addExp(1);
                 }
             }
             else{
-                System.out.println("mana player2:");
-                System.out.println(this.player2.getMana());
-                System.out.println("selected card saat ini");
-                System.out.println(this.selectedCardOnBoard);
                 if(this.player2.getMana() > 0 && this.selectedCardOnBoard != null){
                     this.player2.setMana(this.player2.getMana() - 1);
                     ((CharacterCard)this.selectedCardOnBoard).addExp(1);;
@@ -289,15 +260,10 @@ public class GameState {
     // HELPER SAAT PHASE PLAN
     public void addCardToBoard(Integer boardNumber){
         // add card ke board player 1 atau player 2 berdasarkan isi dari buffer selected card in hand. abis itu clear buffer selected card in 
-        System.out.println("AKAN MENBAMHAKN CARD KE BOARD,");
-        System.out.println("CARD YANG DITAMBAHKAN ADALAH ");
-        System.out.println(this.selectedCardInHand);
-        if(this.selectedCardInHand instanceof CharacterCard){
-            if(this.turn == 1){
-                player1.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
-            }else{
-                player2.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
-            }
+        if(this.turn == 1){
+            player1.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
+        }else{
+            player2.addCardToBoard(boardNumber - 1, this.selectedCardInHand);
         }
     }
     
@@ -305,12 +271,6 @@ public class GameState {
         // berdasarkan current turn dan selectedCardInHand
         if(this.turn == 1){
             // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.
-            System.out.println("apakah yg di klik itu instance of charactercard");
-            System.out.println(this.player1.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard);
-            System.out.println("apakah yg di select di hand itu spellcard?");
-            System.out.println(this.selectedCardInHand instanceof SpellCard);
-
-
             if(this.player2.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell){
                 // gunakan spell
                 player2.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
@@ -318,12 +278,6 @@ public class GameState {
             }
         }
         else{
-            System.out.println("apakah yg di klik itu instance of charactercard");
-            System.out.println(this.player2.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard);
-            System.out.println("apakah yg di select di hand itu spellcard?");
-            System.out.println(this.selectedCardInHand instanceof SpellCard);
-            System.out.println(this.selectedCardInHand);
-
             if(this.player1.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell){
                 player1.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
             }
@@ -334,12 +288,6 @@ public class GameState {
         // berdasarkan current turn dan selectedCardInHand
         if(this.turn == 1){
             // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.
-            System.out.println("apakah yg di klik itu instance of charactercard");
-            System.out.println(this.player1.getCardOnBoard(boardNumber - 1) instanceof CharacterCard);
-            System.out.println("apakah yg di select di hand itu spellcard?");
-            System.out.println(this.selectedCardInHand instanceof SpellCard);
-
-
             if(this.player1.getCardOnBoard(boardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof SpellCard){
                 // gunakan spell
                 player1.useSpellOnCard((CharacterCard)this.player1.getCardOnBoard(boardNumber - 1),(SpellCard) this.selectedCardInHand);
@@ -348,12 +296,6 @@ public class GameState {
             }
         }
         else{
-            System.out.println("apakah yg di klik itu instance of charactercard");
-            System.out.println(this.player2.getCardOnBoard(boardNumber - 1) instanceof CharacterCard);
-            System.out.println("apakah yg di select di hand itu spellcard?");
-            System.out.println(this.selectedCardInHand instanceof SpellCard);
-            System.out.println(this.selectedCardInHand);
-
             if(this.player2.getCardOnBoard(boardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof SpellCard){
                 player2.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(boardNumber - 1),(SpellCard) this.selectedCardInHand);
             }
@@ -361,8 +303,6 @@ public class GameState {
     }
 
     public void removeCardFromHand(){
-        System.out.println("AKAN ME REMOVE CARD DARI CARD IN HAND");
-        System.out.println(this.selectedCardInHand);
         // remove card dari hand player 1 atau player 2
         if(this.turn == 1){
             List<Card> cards = player1.getCardInHandPlayer();
@@ -401,59 +341,33 @@ public class GameState {
         return selectedCardInHand != null;
     }
     public Boolean isThereACardOnBoardXOnCurrentPlayerBoard(Integer boardNumber){
-        System.out.println("ngecek apakah board udah ada isinya!!!");
         if(this.turn == 1){
-            if(this.player1.getCardOnBoard(boardNumber - 1) != null){
-                System.out.println("ADA ISINYAAAAAA!");
-            }
-            else {
-                System.out.println("GA ADA ISINYAAAAAA!");
-            }
             return (this.player1.getCardOnBoard(boardNumber - 1) != null);
         }
         else{
-            if(this.player2.getCardOnBoard(boardNumber - 1) != null){
-                System.out.println("ADA ISINYAAAAAA!");
-            }
-            else{
-                System.out.println("GA ADA ISINYAAAAAA!");
-                
-            }
             return (this.player2.getCardOnBoard(boardNumber - 1) != null);
         }
 
     }
     // HELPER SAAT PHASE ATTACK
     public void attack(){
-        System.out.println("ADA YG COBA NGE ATTACK PLAYER LANGSUNG");
-        System.out.println("attack di lakukan oleh " + String.valueOf(this.turn));
-        System.out.println("menggunakan ");
-        System.out.println(this.selectedCardOnBoard);
-
         // attack langsung ke player
         // jika lawan vulnerable, attack. jika tidak, do nothing
         
         if(this.selectedCardOnBoard != null && this.phase == Phase.ATTACK){
-            this.hasAttackInThisTurn = true;
             if(this.turn == 1){
-                System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
-                System.out.println(isHaveAttacked);
                 if(this.player2.isVulnerable() && !isHaveAttacked){
                     this.player2.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
                     // Set characterCard player attacker di Index selectedCardOnBoardNumber has Attack menjadi true
-                    System.out.println("index board player 1 yang akan di buah menjadi true adalah " + String.valueOf(this.selectedCardOnBoardNumber - 1));
                     this.player1.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
                     // isHaveAttacked = true;
                 }
             }
             else{
-                System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player2.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
-                System.out.println(isHaveAttacked);
                 if(this.player1.isVulnerable() && !isHaveAttacked){
                     this.player1.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
-                    System.out.println("index board player 2 yang akan di buah menjadi true adalah " + String.valueOf(this.selectedCardOnBoardNumber - 1));
                     this.player2.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
                     // isHaveAttacked = true;
                 }
@@ -466,11 +380,8 @@ public class GameState {
         // get card yg attacker sama victim
         // melakukan peng attackan berdasarkan turn saat ini, selectedCardOnBoard. jadi player pada turn saat ini, akan mengattack selectedCardOnBoard.
         if(this.selectedCardOnBoard != null && this.phase == Phase.ATTACK){
-            this.hasAttackInThisTurn = true;
             if(this.turn == 1){
-                System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player1.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
-                System.out.println(isHaveAttacked);
                 
                 Card victim = player2.getCardOnBoard(boardNumberVictim - 1);
 
@@ -482,9 +393,7 @@ public class GameState {
             
             
             }else{
-                System.out.println("apakah charcter di buffer sudah pernah nge attack?");
                 Boolean isHaveAttacked = this.player2.hasCharacterInBoardWithIndexXAttacked(this.selectedCardOnBoardNumber - 1);
-                System.out.println(isHaveAttacked);
                 // attack dilakukan oleh player 2
                 Card victim = player1.getCardOnBoard(boardNumberVictim - 1);
                 // attack

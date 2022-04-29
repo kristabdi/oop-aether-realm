@@ -43,8 +43,6 @@ public class GameWindowDraw {
     
 
     public void switchToGameWindow(MouseEvent event) throws IOException {
-        System.out.println("event pas mo ganti game window");
-        System.out.println(event);
         root = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1366, 768);
@@ -85,9 +83,6 @@ public class GameWindowDraw {
     }
     @FXML
     void initialize(){
-        // untuk set gambar dari 
-        System.out.println("===== Berhasil Render Scene Draw =====");
-        
         //update gameState
         HandleEvent.onDraw();
 

@@ -37,15 +37,12 @@ public class AetherWars extends Application {
   public static List<CharacterCard> loadCharacterCards() throws IOException, URISyntaxException {
     List<CharacterCard> characterCards = new ArrayList<CharacterCard>();
     File characterCSVFile = new File(CHARACTER_CSV_FILE_PATH);
-    // System.out.println("characterCSVFile: " + characterCSVFile.getAbsolutePath());
 
     CSVReader Reader = new CSVReader(characterCSVFile, "\t");
     Reader.setSkipHeader(true);
     List<String[]> Rows = Reader.read();
     for (String[] row : Rows) {
       CharacterCard c = new CharacterCard(row[1], Type.valueOf(row[2]), row[3], row[4], Integer.valueOf(row[5]), Integer.valueOf(row[6]), Integer.valueOf(row[7]), Integer.valueOf(row[8]), Integer.valueOf(row[9]));
-      // System.out.println("data");
-      // System.out.println(c);
       characterCards.add(c);
     }
     return characterCards;
@@ -63,7 +60,6 @@ public class AetherWars extends Application {
 
       CharacterCard target = characterCards.get(targetId - 1); // keknya di minus 1 ya? iya bener - 1
       MorphSpell c = new MorphSpell(row[1], "Morph", row[2], target, Integer.valueOf(row[5]), row[3]);
-      // System.out.println(c);
       morphSpells.add(c);
     }
     return morphSpells;
@@ -77,7 +73,6 @@ public class AetherWars extends Application {
     List<String[]> Rows = Reader.read();
     for (String[] row : Rows) {
       PotionSpell c = new PotionSpell(row[1], "Potion", row[2], Integer.valueOf(row[6]), Integer.valueOf(row[7]), 0, row[3], Integer.valueOf(row[4]), Integer.valueOf(row[5])); 
-      // System.out.println(c);
       potionSpells.add(c);
     }
     return potionSpells;
@@ -91,7 +86,6 @@ public class AetherWars extends Application {
     List<String[]> Rows = Reader.read();
     for (String[] row : Rows) {
       SwapSpell c = new SwapSpell(row[1], "Swap", row[2], Integer.valueOf(row[5]), Integer.valueOf(row[4]), 0, row[3]);
-      // System.out.println(c);
       swapSpells.add(c);
     }
     return swapSpells;
@@ -109,7 +103,6 @@ public class AetherWars extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
-        // FXMLLoader fxmlLoader = new FXMLLoader(AetherWars.class.getResource("GameWindow.fxml"));
         Scene scene = new Scene(root, 1366, 768);
 
 
@@ -135,10 +128,7 @@ public class AetherWars extends Application {
             levelSpells = loadSpellLevel();
         } catch (Exception e) {
           e.printStackTrace();
-          System.out.println("GAGAL LOAD CARD");
-
         } finally {
-          System.out.println("LOAD CARD");
         }
         // buat gameState
         GameState gameState = new GameState(characterCards, morphSpells, potionSpells, swapSpells, levelSpells);
