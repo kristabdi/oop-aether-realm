@@ -60,8 +60,9 @@ public class HandleEvent{
             gameState.setSelectedCardOnBoardNumber(boardNumber);
             gameState.setSelectedCardOnBoardBasedOnCurrentPlayer(boardNumber);
 
-            gameState.removeCardFromHand();
-
+            if (gameState.getCurrentPlayerMana() >= gameState.getSelectedCardInHand().getMana()) {
+                gameState.removeCardFromHand();
+            }
         }else if(gameState.getPhase() == GameState.Phase.ATTACK){
             // Cek apakah kartu di board yang diklik udah menyerang
             gameState.selectAttacker(boardNumber);

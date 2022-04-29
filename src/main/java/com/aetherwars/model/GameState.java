@@ -272,7 +272,7 @@ public class GameState {
             // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.
             if(this.player2.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell){
                 // gunakan spell
-                player2.useSpellOnCard((CharacterCard)this.player2.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
+                player2.useSpellOnCard((CharacterCard)this.player1.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
                 
             }
         }
