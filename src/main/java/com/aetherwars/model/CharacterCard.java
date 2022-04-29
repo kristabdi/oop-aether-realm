@@ -272,17 +272,18 @@ public class CharacterCard extends Card {
         
         if (victim.getFinalHealth() - getFinalAttack() <= 0) {
             // Karakter musuh mati, dapat EXp
-            victim.decreaseHealth(this.getFinalAttack());
+            victim.decreaseHealth((int)((double)this.getFinalAttack() * this.getMultiplierAttack(victim)));
             this.addExp(victim.getLevel());
 
             // Victim serang balik
-            this.decreaseHealth(victim.getFinalAttack());
+            this.decreaseHealth((int)((double)victim.getFinalAttack() * victim.getMultiplierAttack(this)));
+            
             int thisHealth = this.getFinalHealth();
             if (thisHealth <= 0) {
                 // victim.addExp(this.getLevel());
             }
         } else {
-            victim.decreaseHealth(this.getFinalAttack());
+            victim.decreaseHealth((int)((double)this.getFinalAttack() * this.getMultiplierAttack(victim)));
         }
 
 
