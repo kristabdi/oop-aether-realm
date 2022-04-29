@@ -679,9 +679,14 @@ public class GameWindow {
 
     @FXML
     void onPlayer1_CharB(MouseEvent event) {
-        HandleEvent.onBoardClick(1,2);
-        // update gameWindow
-        this.setWindowBasedOnGameState();
+        try{
+            // update game state
+            HandleEvent.onBoardClick(1,2);
+            // update game window
+            this.setWindowBasedOnGameState();
+        }catch(Exception e){
+            System.out.println(" == Catched == ");
+        }
     }
 
     @FXML

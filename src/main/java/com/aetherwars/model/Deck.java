@@ -25,14 +25,12 @@ public class Deck {
                 LevelSpell levelSpell = levelSpells.get(randomLevelSpell);
                 LevelSpell newLevelSpell = new LevelSpell(levelSpell.getName(), levelSpell.getType(), levelSpell.getDescription(), levelSpell.getMana(), levelSpell.getLevelModifier());
                 cardInDeck.push(newLevelSpell);
-                // System.out.println(levelSpell);
             } else if ((random > 15 && random < 31)) {
                 //random swap spell
                 int randomSwapSpell = (int) (Math.random() * swapSpells.size());
                 SwapSpell swapSpell = swapSpells.get(randomSwapSpell);
                 SwapSpell newSwapSpell = new SwapSpell(swapSpell.getName(), swapSpell.getType(), swapSpell.getDescription(), swapSpell.getMana(), swapSpell.getSpellDuration(), swapSpell.getEXP(), swapSpell.getImagePath());
                 cardInDeck.push(newSwapSpell);
-                // System.out.println(swapSpell);
             } else if ((random > 30 && random < 46)) {
                 //random potion spell
                 int randomPotionSpell = (int) (Math.random() * potionSpells.size());
@@ -52,7 +50,6 @@ public class Deck {
                 
                 PotionSpell newPotionSpell = new PotionSpell(newName, newType, newDescription, newMana, newDurasi, newExp, newImagePath, newAttackModifier, newHealthModifier);
                 cardInDeck.push(newPotionSpell);
-                // System.out.println(potionSpells.get(randomPotionSpell));
             } else if ((random > 45 && random < 61)) {
                 //random morph spell
                 int randomMorphSpell = (int) (Math.random() * morphSpells.size());
@@ -65,7 +62,6 @@ public class Deck {
                 String newImagePath = morphSpell.getImagePath();
                 MorphSpell newMorphSpell = new MorphSpell(newName, newType, newDescription, newCharacterCard, newMana, newImagePath);
                 cardInDeck.push(newMorphSpell);
-                // System.out.println(morphSpells.get(randomMorphSpell));
             } else {
                 //random character card
                 int randomCharacterCard = (int) (Math.random() * characterCards.size());
@@ -82,7 +78,6 @@ public class Deck {
                 int newHealthUp = characterCard.getHealthUp();
                 CharacterCard newCharacterCard = new CharacterCard(newName, newType, newDescription, newImagePath, newAttack, newHealth, newMana, newAttackUp, newHealthUp);
                 cardInDeck.push(newCharacterCard);
-                // System.out.println(characterCards.get(randomCharacterCard));
             }
         }
     }

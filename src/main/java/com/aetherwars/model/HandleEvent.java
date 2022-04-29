@@ -61,20 +61,6 @@ public class HandleEvent{
 
     public static void onPlayerBoardClick(int boardNumber){
         //menambahkan karakter ke board kosong atau spell ke karakter
-        // System.out.println("ON PLAYER BOARD CLICK!");
-        // System.out.println("fase saat ini");
-        // System.out.println(String.valueOf(gameState.getPhase()));
-        // System.out.println("isi dari have selected");
-        // System.out.println(String.valueOf(gameState.haveSelectedCardInHand()));
-        // System.out.println("apakah character card?");
-        // System.out.println(gameState.getSelectedCardInHand() instanceof CharacterCard);
-        // System.out.println("mana player saat ini");
-        // System.out.println(gameState.getCurrentPlayerMana());
-        // System.out.println("mana yg dibutuin kalo mo deploy");
-        // System.out.println(gameState.getSelectedCardInHand().getMana());
-        // System.out.println("apakah board yang diklik sudah ada isinya");
-        // System.out.println(gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber));
-        
         /*  
             kalo phase saat ini adalah plan,
             sudah select kartu dari tangan dan kartu tersebut merupakan karakter card,
@@ -88,7 +74,7 @@ public class HandleEvent{
             gameState.removeCardFromHand();
 
             // kalo phase sekarang plan, dan yang ada di dalam buffer adalah spell, dan ada character di boardnya, berarti dia mau nge apply spell ke card on board.
-        }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer() && gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber)){
+        }else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer() && gameState.isThereACardOnBoardXOnCurrentPlayerBoard(boardNumber) && gameState.getCurrentPlayerMana() >= gameState.getSelectedCardInHand().getMana()){
             System.out.println("ABIS INI BAKAL NGE SPELL CHARACTER CARD DI BOARD!");
             gameState.cardOnBoardGotSpelled(boardNumber);
 
@@ -125,12 +111,14 @@ public class HandleEvent{
     }
 
     public static void onOpponentBoardClick(int boardNumber){
+
         if(gameState.getPhase()== GameState.Phase.ATTACK){
-            System.out.println("Klik board lawan terdeteksi terdeteksi. KAMU MAU ATTACK KARAKTER LAWAN. Board ke :" + boardNumber);
             gameState.attack(boardNumber);
-        //     gameState.attack(index);
         }
-        else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer()){
+        // jika fase plan, dan yang di dalam selectedcard in hand itu spellcard
+        // dan apakah yg di select di board lawan itu ada isinya
+        // dan apakah mana itu cukup
+        else if(gameState.getPhase() == GameState.Phase.PLAN && gameState.spellInBuffer() && gameState.isThereACardOnBoardXOnOpponentBoard(boardNumber) && gameState.getCurrentPlayerMana() >= gameState.getSelectedCardInHand().getMana()){
             if(gameState.getSelectedCardInHand() instanceof MorphSpell){
                 System.out.println("ABIS INI BAKAL NGE MORPH CHARACTER CARD DI BOARD LAWAN!");
                 gameState.morphOpponentCardOnBoard(boardNumber);

@@ -96,6 +96,7 @@ public class Player {
     }
 
     public void removeCardInHand(Integer i) {
+        //cek apakah ada isinya di hand
         cardInHand.removeCardFromHand(i);
     }
 

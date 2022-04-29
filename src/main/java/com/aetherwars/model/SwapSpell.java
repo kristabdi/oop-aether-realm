@@ -15,8 +15,6 @@ public class SwapSpell extends SpellCard implements Spell {
                 // Jika sudah punya SwapSpell, maka akan menambah durasi dengan this.getSpellDuration
                 int durasiAwal = card.getActiveSpells().get(i).getSpellDuration();
                 card.getActiveSpells().get(i).setSpellDuration(durasiAwal + this.getSpellDuration());
-                // System.out.println("Durasi: " + card.getActiveSpells().get(i).getSpellDuration());
-                // System.out.println("Durasi this: " + this.getSpellDuration());
                 found = true;
             }
         }
