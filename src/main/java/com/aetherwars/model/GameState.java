@@ -72,10 +72,10 @@ public class GameState {
                     this.turn = 1;
                     this.round += 1;
                 }
-                this.player1.resetMana(10*round);
+                this.player1.resetMana(round);
                 this.player1.setAllBoardHasAttackedToFalse();
                 this.player1.reduceSpellOnCardOnPlayerBoardDuration();
-                this.player2.resetMana(10*round);
+                this.player2.resetMana(round);
                 this.player2.setAllBoardHasAttackedToFalse();
                 this.player2.reduceSpellOnCardOnPlayerBoardDuration();
                 break;

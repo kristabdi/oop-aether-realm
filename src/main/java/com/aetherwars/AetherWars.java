@@ -37,7 +37,6 @@ public class AetherWars extends Application {
   public static List<CharacterCard> loadCharacterCards() throws IOException, URISyntaxException {
     List<CharacterCard> characterCards = new ArrayList<CharacterCard>();
     File characterCSVFile = new File(CHARACTER_CSV_FILE_PATH);
-
     CSVReader Reader = new CSVReader(characterCSVFile, "\t");
     Reader.setSkipHeader(true);
     List<String[]> Rows = Reader.read();
@@ -57,7 +56,6 @@ public class AetherWars extends Application {
     for (String[] row : Rows) {
       // convert targetId into string name of character card
       int targetId = Integer.valueOf(row[4]);
-
       CharacterCard target = characterCards.get(targetId - 1); // keknya di minus 1 ya? iya bener - 1
       MorphSpell c = new MorphSpell(row[1], "Morph", row[2], target, Integer.valueOf(row[5]), row[3]);
       morphSpells.add(c);
@@ -105,10 +103,7 @@ public class AetherWars extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
         // FXMLLoader fxmlLoader = new FXMLLoader(AetherWars.class.getResource("GameWindow.fxml"));
         Scene scene = new Scene(root, 1366, 768);
-
-
         stage.getIcons().add(new Image("https://w7.pngwing.com/pngs/426/500/png-transparent-minecraft-survivalcraft-mob-creeper-skeleton-creeper-s-video-game-grass-survival.png"));
-    
         stage.setTitle("Aether Realm");
         stage.setScene(scene);
         stage.show();

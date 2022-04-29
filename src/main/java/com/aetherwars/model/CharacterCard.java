@@ -271,7 +271,6 @@ public class CharacterCard extends Card {
 
             // Victim serang balik
             this.decreaseHealth(victimFinalAttackMultiplied);
-            int thisHealth = this.getFinalHealth();
         } else {
             victim.decreaseHealth(playerFinalAttackMultiplied);
         }

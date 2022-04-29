@@ -110,6 +110,7 @@ public class Player {
 
     public void useSpellOnCard(CharacterCard card, SpellCard spell) {
         if (spell instanceof LevelSpell) {
+            // if level spell, set mana first
             spell.setSpellMana((int)Math.ceil(((double)card.getLevel())/2.0));
         }
         if (this.mana >= spell.getMana()) {
@@ -119,7 +120,6 @@ public class Player {
     }
 
     public void attack(Integer myBoardIndex, CharacterCard victim) {
-
         // apakah charactercard di my board index ada isinya,
         if(this.cardOnBoard.isSlotFilled(myBoardIndex)){
             //kalau iya
@@ -128,7 +128,6 @@ public class Player {
                 ((CharacterCard)this.getCardOnBoard(myBoardIndex)).attack(victim);
             }
         }
-        // else do nothing
     }
 
     public Boolean hasCharacterInBoardWithIndexXAttacked(Integer x){
@@ -180,19 +179,3 @@ public class Player {
         cardOnBoard.reduceSpellOnCardOnBoardDuration();
     }
 }
-
-// public void addCardToBoard(Card card){
-//     // fungsi ini pure cuman nambahin kartu ke board. gk peduli card in hand, atau deck
-//     // mirip addcard inhand
-//     //  aku mau dia nambah card di index ke 'selctedCardInHand' ke board, abis itu delete card di hand di index 'selectedCardInHand', trus selectedCardInHand brubah jadi -1
-//     //update GUI cardInHand sama cardOnBoard
-//     //kalau spell:
-//     if (cardInHand.isCardinHand(card)) {
-//         if (card.getType().equals("Character")) {
-//             if (this.mana >= ((CharacterCard)card).getMana()) {
-//                 this.mana -= ((CharacterCard)card).getMana();
-//             }
-//             this.cardOnBoard.addCard((CharacterCard)card);
-//         }
-//     }
-// }

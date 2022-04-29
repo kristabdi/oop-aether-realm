@@ -13,7 +13,6 @@ public class HandleEvent{
     }
 
     public static void onPilihKartuDrawClick(Integer nomorKartuYangDipilih){
-        //KI, KEKNYA NERIMA KARTUE DEH (ATO INDEX LAH MINIMAL)
         //pilih kartu yang diklik, kembalikan dua sisanya secara acak
         // tambahkan ke card in hands
         gameState.addCardInHand(gameState.getBufferDrawnCards().remove(nomorKartuYangDipilih - 1));
@@ -27,7 +26,6 @@ public class HandleEvent{
 
     public static void onInHandClick(int cardInHandNumber){
         //pindah dari in hand ke board, simpan di buffer
-        // if(gameState.getPhase() == GameState.Phase.DRAW){ //KI, SEBELUMNYA KAMU DRAW. KEKNYA YG BENER PLAN GK SIH?
         if(gameState.getPhase() == GameState.Phase.PLAN){
             try{
                 gameState.setSelectedCardInHand(cardInHandNumber); //BILANG JEP
@@ -38,8 +36,6 @@ public class HandleEvent{
     }
 
     public static void onBoardClick(int player,int boardNumber){
-       
-
         if(player == gameState.getTurn()){
             HandleEvent.onPlayerBoardClick(boardNumber);
         }else{
@@ -112,13 +108,14 @@ public class HandleEvent{
                 player = gameState.getTurn();
             }
             gameState.setCardOnDescriptionBuffer(player,loc,cardNumber);  
-      
     }
+
     public static void onDraw(){
         //dijalankan ketika membuka window draw
         gameState.getThreeCardsFromDeckToBuffer();
         
     }
+    
     public static void addExpButtonOnClick(){
         gameState.currentPlayerManaToExp();
     }
