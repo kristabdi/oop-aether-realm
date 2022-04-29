@@ -42,7 +42,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![ss oop](https://user-images.githubusercontent.com/69137138/165958233-d3a9e26d-b155-49b6-b462-0f8022e820f1.png)
+
 
 This is a Object Oriented Games which developed by JavaFX. The GUI was built using Gradle. This program is built to fulifill the requisites of Subject IF2210 Object Oriented Programming. 
 
