@@ -269,8 +269,8 @@ public class CharacterCard extends Card {
 
         System.out.println("level awal");
         System.out.println(this.level);
-        int playerFinalAttackMultiplied = this.getFinalAttack() * this.getMultiplierAttack(victim);
-        int victimFinalAttackMultiplied = victim.getFinalAttack() * victim.getMultiplierAttack(this);
+        int playerFinalAttackMultiplied = (int)((double)this.getFinalAttack() * this.getMultiplierAttack(victim));
+        int victimFinalAttackMultiplied = (int)((double)victim.getFinalAttack() * victim.getMultiplierAttack(this));
         if (victim.getFinalHealth() - playerFinalAttackMultiplied <= 0) {
             // Karakter musuh mati, dapat EXp
             victim.decreaseHealth(playerFinalAttackMultiplied);
