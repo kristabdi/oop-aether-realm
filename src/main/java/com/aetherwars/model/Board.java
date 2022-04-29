@@ -33,6 +33,7 @@ public class Board {
         }else{
             this.cardBoard[id] = new BoardSlot(c);
             this.filled++;
+            this.cardBoard[id].setFilling(true);
             return true;
         }
     }
