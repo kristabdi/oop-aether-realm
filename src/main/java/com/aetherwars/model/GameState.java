@@ -258,15 +258,9 @@ public class GameState {
     }
     
     public void morphOpponentCardOnBoard(Integer OpponentBoardNumber){
-        System.out.println("akan morph");
-        System.out.println(OpponentBoardNumber);
-        System.out.println(this.selectedCardInHand);
-        System.out.println(this.selectedCardInHand);
         // berdasarkan current turn dan selectedCardInHand
         if(this.turn == 1){
-            // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.
-            System.out.println(this.player2.getCardOnBoard(OpponentBoardNumber - 1));
-            
+            // pertama, cek apakah yg di board itu character card dan yang di buffer itu spell.            
             if(this.player2.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell && player1.getMana() >= this.selectedCardInHand.getMana()){
                 //SUDAH PASTI ADA ISINYA, DAN SUDAH PASTI YG DI KLIK ITU MORPH DAN MANA SUDAH PASTI CUKUP
                 // gunakan spell
@@ -277,8 +271,6 @@ public class GameState {
         }
         else{
             // dilakukan olleh player 2
-            System.out.println("isi dari player 2");
-            System.out.println(this.player1.getCardOnBoard(OpponentBoardNumber - 1));
             if(this.player1.getCardOnBoard(OpponentBoardNumber - 1) instanceof CharacterCard && this.selectedCardInHand instanceof MorphSpell && player2.getMana() >= this.selectedCardInHand.getMana()){
                 player1.useSpellOnCard((CharacterCard)this.player1.getCardOnBoard(OpponentBoardNumber - 1),(SpellCard) this.selectedCardInHand);
                 

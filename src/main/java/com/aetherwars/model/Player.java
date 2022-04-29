@@ -109,11 +109,6 @@ public class Player {
     }
 
     public void useSpellOnCard(CharacterCard card, SpellCard spell) {
-        System.out.println("USE SPELL ON CARD ACTIVATED!");
-        System.out.println("spell:");
-        System.out.println(spell);
-        System.out.println("akan digunakan terhadap");
-        System.out.println(card);
         if (spell instanceof LevelSpell) {
             spell.setSpellMana((int)Math.ceil(((double)card.getLevel())/2.0));
         }
@@ -124,18 +119,12 @@ public class Player {
     }
 
     public void attack(Integer myBoardIndex, CharacterCard victim) {
-        System.out.println("ADA YANG MAU NGE ATTACK");
-        System.out.println("victimnya adalah");
-        System.out.println(victim);
 
         // apakah charactercard di my board index ada isinya,
         if(this.cardOnBoard.isSlotFilled(myBoardIndex)){
-            System.out.println("dilakukan oleh ");
-            System.out.println(this.getCardOnBoard(myBoardIndex));
             //kalau iya
             // apakah karaktercard di myboard index belum attack,
             if(!this.cardOnBoard.hasCardInIndexAttacked(myBoardIndex)){
-                System.out.println("dia belom pernah nge attack, dia bisa nge attack");
                 ((CharacterCard)this.getCardOnBoard(myBoardIndex)).attack(victim);
             }
         }

@@ -262,13 +262,6 @@ public class CharacterCard extends Card {
 
     public void attack(CharacterCard victim) {
         // trus kurangin health dari victim sebanyak finalAttack
-        System.out.println("AKU SEBUAH CHARACTERCARD YANG MAU ATTACK");
-        System.out.println(this.getName());
-        System.out.println("exp awal");
-        System.out.println(this.exp);
-
-        System.out.println("level awal");
-        System.out.println(this.level);
         int playerFinalAttackMultiplied = (int)((double)this.getFinalAttack() * this.getMultiplierAttack(victim));
         int victimFinalAttackMultiplied = (int)((double)victim.getFinalAttack() * victim.getMultiplierAttack(this));
         if (victim.getFinalHealth() - playerFinalAttackMultiplied <= 0) {
@@ -282,14 +275,6 @@ public class CharacterCard extends Card {
         } else {
             victim.decreaseHealth(playerFinalAttackMultiplied);
         }
-
-
-        System.out.println("exp akhir");
-        System.out.println(this.exp);
-
-        System.out.println("level akhir");
-        System.out.println(this.level);
-        System.out.println("ATTACK SELESAI");
     }
 
     public Integer attackPlayer(Integer otherHealth) {
@@ -323,6 +308,9 @@ public class CharacterCard extends Card {
     }
 
     public int getFinalAttack() {
+        if (this.attack + this.attackBuff < 0) {
+            return 0;
+        }
         return this.attack + this.attackBuff;
 
     }
