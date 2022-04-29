@@ -117,7 +117,7 @@ public class GameWindowDraw {
                     desc += "\nATK +" + pCard.getAttackModifier();
                 }
                 else{
-                     desc += "\nATK " + pCard.getAttackModifier();
+                    desc += "\nATK " + pCard.getAttackModifier();
                 }
                 if(pCard.getHealthModifier() > 0){
                     desc += "\nHP +" + pCard.getHealthModifier();

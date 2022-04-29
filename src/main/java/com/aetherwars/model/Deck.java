@@ -25,18 +25,18 @@ public class Deck {
                 LevelSpell levelSpell = levelSpells.get(randomLevelSpell);
                 LevelSpell newLevelSpell = new LevelSpell(levelSpell.getName(), levelSpell.getType(), levelSpell.getDescription(), levelSpell.getMana(), levelSpell.getLevelModifier());
                 cardInDeck.push(newLevelSpell);
+                
             } else if ((random > 15 && random < 31)) {
                 //random swap spell
                 int randomSwapSpell = (int) (Math.random() * swapSpells.size());
                 SwapSpell swapSpell = swapSpells.get(randomSwapSpell);
                 SwapSpell newSwapSpell = new SwapSpell(swapSpell.getName(), swapSpell.getType(), swapSpell.getDescription(), swapSpell.getMana(), swapSpell.getSpellDuration(), swapSpell.getEXP(), swapSpell.getImagePath());
                 cardInDeck.push(newSwapSpell);
+
             } else if ((random > 30 && random < 46)) {
                 //random potion spell
                 int randomPotionSpell = (int) (Math.random() * potionSpells.size());
-
                 PotionSpell ps = potionSpells.get(randomPotionSpell);
-
                 String newName = ps.getName();
                 String newType = ps.getType();
                 String newDescription = ps.getDescription();
@@ -46,10 +46,9 @@ public class Deck {
                 String newImagePath = ps.getImagePath();
                 int newAttackModifier = ps.getAttackModifier();
                 int newHealthModifier = ps.getHealthModifier();
-
-                
                 PotionSpell newPotionSpell = new PotionSpell(newName, newType, newDescription, newMana, newDurasi, newExp, newImagePath, newAttackModifier, newHealthModifier);
                 cardInDeck.push(newPotionSpell);
+
             } else if ((random > 45 && random < 61)) {
                 //random morph spell
                 int randomMorphSpell = (int) (Math.random() * morphSpells.size());
@@ -66,7 +65,6 @@ public class Deck {
                 //random character card
                 int randomCharacterCard = (int) (Math.random() * characterCards.size());
                 CharacterCard characterCard = characterCards.get(randomCharacterCard);
-                // String name, Type attribute, String description, String imagePath, int attack, int health, int mana, int attackUp, int healthUp
                 String newName = characterCard.getName();
                 CharacterCard.Type newType = characterCard.getAttribute();
                 String newDescription = characterCard.getDescription();

@@ -20,8 +20,6 @@ public class MorphSpell extends SpellCard implements Spell {
     }
 
     public void execute(CharacterCard s) {
-        System.out.println("EXECUTE MORPH SPELL TERHADAP CARD");
-        System.out.println(s);
         // change s attribute into morphTarget attribute
         s.setName(morphTarget.getName());
         s.setAttribute(morphTarget.getAttribute());

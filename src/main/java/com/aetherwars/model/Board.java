@@ -26,8 +26,7 @@ public class Board {
         return this.filled;
     }
     
-    //asumsi input selalu benar
-    //exception di atas
+
     public boolean addCardById(int id,CharacterCard c){
         if(this.cardBoard[id].isFilled()){
             return false;
@@ -49,7 +48,7 @@ public class Board {
     public void setCardInIndexAttackedToTrue(Integer idx){
         cardBoard[idx].setAttack(true);
     }
-    //masi problem
+
     public void update(){
         int i;
         int newFilled = this.getFilled();
@@ -75,6 +74,7 @@ public class Board {
             }
         }
     }
+
     public void reduceSpellOnCardOnBoardDuration(){
         for(int i=0;i<5;i++){
             if(this.cardBoard[i].isFilled()){
@@ -84,36 +84,3 @@ public class Board {
 
     }
 }
-
-
-
-
-
-
-   // public CharacterCard popCard(int index){
-    //     //ngambil kartu dari index ke-index
-    //     //ubah indikator index ke-index -> 0
-    //     //kurangi filled -1
-    //     //return kartu pada index ke-index
-    //     this.cardBoard[index].setFilling(false);
-    //     this.filled--;
-    //     return this.cardBoard[index].getCard();
-    // }
-
-
-// public void addCard(CharacterCard c){
-//         //cek dah penuh belum
-//         //kalo belum
-//         //cari index pertama yang kosong
-//         //isi indx pertama yang kosong dengan kartu tadi
-//         //ubah array keterisian index ke-index menjadi terisi(1)
-//         //tambah jumlah kterisian
-        
-//             int i = 0;
-//             while(this.cardBoard[i].isFilled()&& i<4){
-//                 i++;
-//             }
-//             //karna sudah cek kepenuhan
-//             //mentok i di idx 4 dan pasti dapet yang indexNone
-//             addCardById(i,c);
-//     }

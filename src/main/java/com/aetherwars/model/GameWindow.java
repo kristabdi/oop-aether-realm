@@ -27,10 +27,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class GameWindow {
-    // Buat atribut yang sesuai tipe tag dan id pada fxml, terus buat method protectedvoid, terus masukin
-    // nama fungsi ke dalam fxml dengan nama yang harus sama, misal <Button onAction="#onButtonClick">
-    // Buat ganti scene
-    
     private Scene scene;
     private Parent root;
     private Stage stage;

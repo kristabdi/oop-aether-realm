@@ -50,7 +50,4 @@ public class Card {
     public String toString() {
         return "Name: " + this.name + "\nDescription: " + this.description + "\nType: " + this.type;
     }
-    // private cardOnHover(GameWindow gameWindow){
-    //     //menampilkan deskripsi card ke gameWindow
-    // }
 }

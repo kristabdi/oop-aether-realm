@@ -3,7 +3,6 @@ package com.aetherwars.model;
 import java.util.List;
 
 public class GameState {
-    //punya catatan global yg gabakal keganti
     // list semua kartu yg mungkin
     private List<CharacterCard> characterCards;
     private List<MorphSpell> morphSpells;
@@ -361,7 +360,6 @@ public class GameState {
                     this.player2.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
                     // Set characterCard player attacker di Index selectedCardOnBoardNumber has Attack menjadi true
                     this.player1.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
-                    // isHaveAttacked = true;
                 }
             }
             else{
@@ -369,7 +367,6 @@ public class GameState {
                 if(this.player1.isVulnerable() && !isHaveAttacked){
                     this.player1.decreaseMyHealthBasedOnCardAttackStats((CharacterCard)this.selectedCardOnBoard);
                     this.player2.setCharacterInBoardWithIndexXAttackedToTrue(this.selectedCardOnBoardNumber - 1);
-                    // isHaveAttacked = true;
                 }
             }
             this.clearSelectedCardOnBoardBuffer();
